@@ -16,6 +16,13 @@ public class GameManager : MonoBehaviour
     public static string carteJouée;
     public static PhotonPlayer[] list_players;
 
+    public GameObject carte1HUD;
+    public GameObject carte2HUD;
+    public GameObject carte3HUD;
+    public GameObject carte4HUD;
+    public GameObject carte5HUD;
+    public GameObject carte6HUD;
+
     public static Dictionary<int, string> mapCarte = new Dictionary<int, string>()
     {
         { 0, "25km"},
@@ -64,6 +71,15 @@ public class GameManager : MonoBehaviour
         //float randomValue = Random.Range(-1f, 1f);
 
         PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);
+
+        PhotonNetwork.Instantiate(carte1HUD.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(carte2HUD.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(carte3HUD.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(carte4HUD.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(carte5HUD.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate(carte6HUD.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);
+
+
         gameCanvas.SetActive(false);
         sceneCamera.SetActive(false);
     }

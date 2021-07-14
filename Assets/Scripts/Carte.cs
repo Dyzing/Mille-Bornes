@@ -13,8 +13,7 @@ public class Carte : HUD
     public  int id_tour_actuel;
     public int nb_players;
 
-    private int local_id_tour;
-    private int local_playerViewId;
+    public bool stopIdEquals1 = false;
 
     private void Awake()
     {
@@ -23,9 +22,10 @@ public class Carte : HUD
     void Start()
     {
         photonView.viewID = 1;
-        id_tour_actuel = 1;
-        local_playerViewId = PhotonNetwork.player.ID;
+        if (PhotonNetwork.player.isMasterClient)
+        {
         photonView.RPC("InstantiateIds", PhotonTargets.AllBuffered);
+        }
         ChangerCarte();
 /*        if (PhotonNetwork.player.isMasterClient)
         {
@@ -41,7 +41,12 @@ public class Carte : HUD
     void Update()
     {
         photonView.viewID = 1;
-        photonView.RPC("InstantiateIds", PhotonTargets.AllBuffered);
+        if (!stopIdEquals1)
+        {
+            photonView.RPC("InstantiateIds", PhotonTargets.AllBuffered);
+            stopIdEquals1 = true;
+        }
+        //photonView.RPC("InstantiateIds", PhotonTargets.AllBuffered);
     }
 
     public void ChangerCarte()
@@ -54,39 +59,26 @@ public class Carte : HUD
     [PunRPC]
     private void InstantiateIds()
     {
-        Debug.Log("Debug.Log(photonView.viewID); " + photonView.viewID);
-        if (PhotonNetwork.player.isMasterClient)
-        {
-            id_tour_actuel = 1;
-        }
-        if (photonView.isMine)
-        {
-            Debug.Log("photonView.isMine, viewid = " + local_playerViewId);
-            photonView.viewID = local_playerViewId;
-        }
-        Debug.Log("Debug.Log(photonView.viewID); " + photonView.viewID);
+        Debug.Log("***** AVANT id_tour_actuel : " + id_tour_actuel);
+        id_tour_actuel = 1;
+        Debug.Log("***** APRES id_tour_actuel : " + id_tour_actuel);
     }
 
     [PunRPC]
     private void ChangerIdTour()
     {
-        nb_players = PhotonNetwork.countOfPlayersInRooms + PhotonNetwork.countOfPlayersOnMaster;
+        nb_players = PhotonNetwork.countOfPlayersOnMaster;
+        Debug.Log("id_tour_actue : " + id_tour_actuel);
         id_tour_actuel++;
         id_tour_actuel = id_tour_actuel % (nb_players + 1);
+        Debug.Log("id_tour_actue : " + id_tour_actuel);
     }
 
-    [PunRPC]
-    private void ChangerIdCedric()
-    {
-        ServerManager.id_tour_cedric++;
-    }
 
     public void OnClickEffet()
     {
-        nb_players = PhotonNetwork.countOfPlayersInRooms + PhotonNetwork.countOfPlayersOnMaster;
-        Debug.Log("*********** AVANT ServerManager.id_tour_cedric : " + ServerManager.id_tour_cedric);
-        photonView.RPC("ChangerIdCedric", PhotonTargets.AllBuffered);
-        Debug.Log("*********** APRES ServerManager.id_tour_cedric : " + ServerManager.id_tour_cedric);
+        nb_players = PhotonNetwork.countOfPlayersOnMaster;
+
         if (PhotonNetwork.player.ID == id_tour_actuel)
         {
             switch (effetCarteId)
@@ -109,7 +101,7 @@ public class Carte : HUD
                 default:
                     break;
             }
-            photonView.RPC("ChangerIdTour", PhotonTargets.AllBuffered);
+            photonView.RPC("ChangerIdTour", PhotonTargets.AllBufferedViaServer);
             ChangerCarte();
         }
     }
