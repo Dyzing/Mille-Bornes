@@ -2,31 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Carte : HUD
 {
     public int effetCarteId;
-    [SerializeField]
-    //public int mainCarteId;
     public GameObject carte_i;
     public PhotonView photonView;
-    public  int id_tour_actuel;
+    public int id_tour_actuel;
     public int nb_players;
 
     public bool stopIdEquals1 = false;
 
     private void Awake()
     {
-
+        if (PhotonNetwork.player.isMasterClient)
+        {
+            photonView.RPC("InstantiateIds", PhotonTargets.AllBuffered);
+        }
     }
     void Start()
     {
-        photonView.viewID = 1;
+        photonView.viewID = PhotonNetwork.player.ID;
         if (PhotonNetwork.player.isMasterClient)
         {
-        photonView.RPC("InstantiateIds", PhotonTargets.AllBuffered);
+            photonView.RPC("InstantiateIds", PhotonTargets.AllBuffered);
         }
         ChangerCarte();
+        GameManager.tour_joueur_i.text = "Tour au joueur " + 1;
 /*        if (PhotonNetwork.player.isMasterClient)
         {
             local_id_tour = 1;
@@ -40,7 +43,7 @@ public class Carte : HUD
 
     void Update()
     {
-        photonView.viewID = 1;
+        photonView.viewID = PhotonNetwork.player.ID;
         if (!stopIdEquals1)
         {
             photonView.RPC("InstantiateIds", PhotonTargets.AllBuffered);
@@ -72,12 +75,18 @@ public class Carte : HUD
         id_tour_actuel++;
         id_tour_actuel = id_tour_actuel % (nb_players + 1);
         Debug.Log("id_tour_actue : " + id_tour_actuel);
+        if(id_tour_actuel == 0)
+        {
+            id_tour_actuel = 1;
+        }
+        GameManager.tour_joueur_i.text = "Tour au joueur " + id_tour_actuel;
     }
 
 
     public void OnClickEffet()
     {
         nb_players = PhotonNetwork.countOfPlayersOnMaster;
+        photonView.viewID = PhotonNetwork.player.ID;
 
         if (PhotonNetwork.player.ID == id_tour_actuel)
         {

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject sceneCamera;
     public GameObject spawn;
     public TextMeshProUGUI pingText;
+    public static TextMeshProUGUI tour_joueur_i;
 
     public static int KM_1;
     public static string carteJouée;
@@ -55,7 +56,7 @@ public class GameManager : MonoBehaviour
     {
         KM_1 = 0;
         carteJouée = "";
-
+        tour_joueur_i = GameObject.Find("TourJoueurText").GetComponent <TextMeshProUGUI>();
     }
 
     void Update()

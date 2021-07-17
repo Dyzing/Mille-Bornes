@@ -174,8 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effetCarteId: 0
   carte_i: {fileID: 7790232549814645271}
-  photonView: {fileID: 7037350684973322829, guid: 112292f319d617948ac349533359763a,
-    type: 3}
+  photonView: {fileID: 3327364674073679660}
   id_tour_actuel: 0
   nb_players: 0
   stopIdEquals1: 0
@@ -219,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PositionModel:
-    SynchronizeEnabled: 1
+    SynchronizeEnabled: 0
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
     InterpolateOption: 2

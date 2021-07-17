@@ -30,7 +30,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6861933644411930610}
-  m_LocalRotation: {x: -0, y: -0, z: 0.057805423, w: 0.99832785}
+  m_LocalRotation: {x: 0, y: 0, z: 0.05780793, w: 0.99832773}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -174,10 +174,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effetCarteId: 2
   carte_i: {fileID: 6861933644411930610}
-  photonView: {fileID: 7037350684973322829, guid: 112292f319d617948ac349533359763a,
-    type: 3}
+  photonView: {fileID: -3834673823975285300}
   id_tour_actuel: 0
   nb_players: 0
+  stopIdEquals1: 0
 --- !u!114 &-3834673823975285300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PositionModel:
-    SynchronizeEnabled: 1
+    SynchronizeEnabled: 0
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
     InterpolateOption: 2
