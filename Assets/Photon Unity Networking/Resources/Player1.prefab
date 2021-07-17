@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 185977339221370609}
   - component: {fileID: 8989505421186868594}
   - component: {fileID: 9201540808701753844}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: GamerTag Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 679366694703923580}
   - component: {fileID: 4678195147247468586}
   - component: {fileID: 2337155101449117630}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 7972580415500289276}
   - component: {fileID: 9022495054816567049}
   - component: {fileID: 3943704727187467969}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GamerTag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 6205560605159518556}
   - component: {fileID: 6205560605159518558}
   - component: {fileID: 6205560605159518559}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -586,6 +586,30 @@ PrefabInstance:
     - target: {fileID: 1394608552899700, guid: 90e108cbfc66c414fb4f2c46d36eaa89, type: 3}
       propertyPath: m_Name
       value: Voiture1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1394608552899700, guid: 90e108cbfc66c414fb4f2c46d36eaa89, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1458839023593554, guid: 90e108cbfc66c414fb4f2c46d36eaa89, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1461625182463956, guid: 90e108cbfc66c414fb4f2c46d36eaa89, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1599551422376852, guid: 90e108cbfc66c414fb4f2c46d36eaa89, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1768454346439488, guid: 90e108cbfc66c414fb4f2c46d36eaa89, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1925317744076760, guid: 90e108cbfc66c414fb4f2c46d36eaa89, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4476237092564900, guid: 90e108cbfc66c414fb4f2c46d36eaa89, type: 3}
       propertyPath: m_RootOrder

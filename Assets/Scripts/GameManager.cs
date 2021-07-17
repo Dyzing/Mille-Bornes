@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject spawn;
     public TextMeshProUGUI pingText;
     public static TextMeshProUGUI tour_joueur_i;
+    public static int id_tour_actuel;
 
     public static int KM_1;
     public static string carteJouée;
@@ -50,13 +51,10 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         gameCanvas.SetActive(true);
-    }
-
-    void Start()
-    {
         KM_1 = 0;
+        id_tour_actuel = 1;
         carteJouée = "";
-        tour_joueur_i = GameObject.Find("TourJoueurText").GetComponent <TextMeshProUGUI>();
+        tour_joueur_i = GameObject.Find("TourJoueurText").GetComponent<TextMeshProUGUI>();
     }
 
     void Update()

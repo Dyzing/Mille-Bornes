@@ -34,6 +34,7 @@ MonoBehaviour:
   - DestroyRpc
   - DoJump
   - Flash
+  - InstantiateIds
   - InstantiateRpc
   - Marco
   - PickupItemInit
@@ -45,5 +46,4 @@ MonoBehaviour:
   - RequestForPickupTimes
   - TaggedPlayer
   - VoitureNewPos
-  - InstantiateIds
   DisableAutoOpenWizard: 1
