@@ -43,7 +43,7 @@ public class Carte : HUD
 
     public void ChangerCarte(int effetCarte)
     {
-        effetCarteId = UnityEngine.Random.Range(4, 9);
+        effetCarteId = UnityEngine.Random.Range(2, 9);
         Sprite spriteLoaded = Resources.Load<Sprite>("Cartes/" + GameManager.mapCarte[effetCarteId]);
         carte_i.GetComponent<Image>().sprite = spriteLoaded;
         photonView.RPC("UpdateSliders", PhotonTargets.AllBufferedViaServer,effetCarte);
@@ -56,93 +56,105 @@ public class Carte : HUD
         switch (GameManager.id_tour_actuel)
         {
             case 1:
-                switch (effetCarte)
+                if (GameManager.move_yes_no1)
                 {
-                    case 0:
-                        GameManager.KmP1 += 25;
-                        break;
-                    case 1:
-                        GameManager.KmP1 += 50;
-                        break;
-                    case 2:
-                        GameManager.KmP1 += 75;
-                        break;
-                    case 3:
-                        GameManager.KmP1 += 100;
-                        break;
-                    case 4:
-                        GameManager.KmP1 += 200;
-                        break;
-                    default:
-                        break;
+                    switch (effetCarte)
+                    {
+                        case 0:
+                            GameManager.KmP1 += 25;
+                            break;
+                        case 1:
+                            GameManager.KmP1 += 50;
+                            break;
+                        case 2:
+                            GameManager.KmP1 += 75;
+                            break;
+                        case 3:
+                            GameManager.KmP1 += 100;
+                            break;
+                        case 4:
+                            GameManager.KmP1 += 200;
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 break;
 
             case 2:
-                switch (effetCarte)
+                if (GameManager.move_yes_no2)
                 {
-                    case 0:
-                        GameManager.KmP2 += 25;
-                        break;
-                    case 1:
-                        GameManager.KmP2 += 50;
-                        break;
-                    case 2:
-                        GameManager.KmP2 += 75;
-                        break;
-                    case 3:
-                        GameManager.KmP2 += 100;
-                        break;
-                    case 4:
-                        GameManager.KmP2 += 200;
-                        break;
-                    default:
-                        break;
+                    switch (effetCarte)
+                    {
+                        case 0:
+                            GameManager.KmP2 += 25;
+                            break;
+                        case 1:
+                            GameManager.KmP2 += 50;
+                            break;
+                        case 2:
+                            GameManager.KmP2 += 75;
+                            break;
+                        case 3:
+                            GameManager.KmP2 += 100;
+                            break;
+                        case 4:
+                            GameManager.KmP2 += 200;
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 break;
             case 3:
-                switch (effetCarte)
+                if (GameManager.move_yes_no3)
                 {
-                    case 0:
-                        GameManager.KmP3 += 25;
-                        break;
-                    case 1:
-                        GameManager.KmP3 += 50;
-                        break;
-                    case 2:
-                        GameManager.KmP3 += 75;
-                        break;
-                    case 3:
-                        GameManager.KmP3 += 100;
-                        break;
-                    case 4:
-                        GameManager.KmP3 += 200;
-                        break;
-                    default:
-                        break;
+                    switch (effetCarte)
+                    {
+                        case 0:
+                            GameManager.KmP3 += 25;
+                            break;
+                        case 1:
+                            GameManager.KmP3 += 50;
+                            break;
+                        case 2:
+                            GameManager.KmP3 += 75;
+                            break;
+                        case 3:
+                            GameManager.KmP3 += 100;
+                            break;
+                        case 4:
+                            GameManager.KmP3 += 200;
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 break;
 
             case 4:
-                switch (effetCarte)
+                if (GameManager.move_yes_no4)
                 {
-                    case 0:
-                        GameManager.KmP4 += 25;
-                        break;
-                    case 1:
-                        GameManager.KmP4 += 50;
-                        break;
-                    case 2:
-                        GameManager.KmP4 += 75;
-                        break;
-                    case 3:
-                        GameManager.KmP4 += 100;
-                        break;
-                    case 4:
-                        GameManager.KmP4 += 200;
-                        break;
-                    default:
-                        break;
+                    switch (effetCarte)
+                    {
+                        case 0:
+                            GameManager.KmP4 += 25;
+                            break;
+                        case 1:
+                            GameManager.KmP4 += 50;
+                            break;
+                        case 2:
+                            GameManager.KmP4 += 75;
+                            break;
+                        case 3:
+                            GameManager.KmP4 += 100;
+                            break;
+                        case 4:
+                            GameManager.KmP4 += 200;
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 break;
             default:
@@ -163,11 +175,11 @@ public class Carte : HUD
             }
             if (i == 2)
             {
-                GameManager.KmPlayerP2.text = "P" + (i + 1) + " :" + Math.Min(GameManager.KmP3, 1000) + " Km";
+                GameManager.KmPlayerP3.text = "P" + (i + 1) + " :" + Math.Min(GameManager.KmP3, 1000) + " Km";
             }
             if (i == 3)
             {
-                GameManager.KmPlayerP2.text = "P" + (i + 1) + " :" + Math.Min(GameManager.KmP4, 1000) + " Km";
+                GameManager.KmPlayerP4.text = "P" + (i + 1) + " :" + Math.Min(GameManager.KmP4, 1000) + " Km";
             }
 
         }
@@ -412,8 +424,8 @@ public class Carte : HUD
                 default:
                     break;
             }
+            ChangerCarte(effetCarteId);
             photonView.RPC("ChangerIdTour", PhotonTargets.AllViaServer);
-            ChangerCarte();
         }
     }
 
