@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Photon.MonoBehaviour
 {
     public GameObject playerPrefab;
     public GameObject gameCanvas;
@@ -17,6 +17,17 @@ public class GameManager : MonoBehaviour
     public static int KM_1;
     public static string carteJouée;
     public static PhotonPlayer[] list_players;
+
+    public static TextMeshProUGUI KmPlayerP1;
+    public static TextMeshProUGUI KmPlayerP2;
+    public static TextMeshProUGUI KmPlayerP3;
+    public static TextMeshProUGUI KmPlayerP4;
+
+    public static int KmP1;
+    public static int KmP2;
+    public static int KmP3;
+    public static int KmP4;
+    
 
     public GameObject carte1HUD;
     public GameObject carte2HUD;
@@ -68,11 +79,16 @@ public class GameManager : MonoBehaviour
         { 17, "asduvolant"},
         { 18, "vehiculeprioritaire"}
     };
-    
+
     private void Awake()
     {
         gameCanvas.SetActive(true);
+        
         KM_1 = 0;
+        KmP1 = 0;
+        KmP2 = 0;
+        KmP3 = 0;
+        KmP4 = 0;
         id_tour_actuel = 1;
         carteJouée = "";
         tour_joueur_i = GameObject.Find("TourJoueurText").GetComponent<TextMeshProUGUI>();
@@ -89,6 +105,10 @@ public class GameManager : MonoBehaviour
         peutRouler4 = true;
 
         joueurSelectionne = 0;
+        KmPlayerP1 = GameObject.Find("KmtextP1").GetComponent<TextMeshProUGUI>();
+        KmPlayerP2 = GameObject.Find("KmtextP2").GetComponent<TextMeshProUGUI>();
+        KmPlayerP3 = GameObject.Find("KmtextP3").GetComponent<TextMeshProUGUI>();
+        KmPlayerP4 = GameObject.Find("KmtextP4").GetComponent<TextMeshProUGUI>();
     }
 
     void Update()
@@ -118,6 +138,7 @@ public class GameManager : MonoBehaviour
         PhotonNetwork.Instantiate(selectionJ3HUD.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);
         PhotonNetwork.Instantiate(selectionJ4HUD.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);*/
 
+        //photonView.RPC("UpdateSliders", PhotonTargets.AllBufferedViaServer);
         gameCanvas.SetActive(false);
         sceneCamera.SetActive(false);
     }
