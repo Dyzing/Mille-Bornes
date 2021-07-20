@@ -36,6 +36,12 @@ public class GameManager : MonoBehaviour
     public static bool move_yes_no2;
     public static bool peutRouler2;
 
+    public static bool move_yes_no3;
+    public static bool peutRouler3;
+
+    public static bool move_yes_no4;
+    public static bool peutRouler4;
+
     public static int joueurSelectionne;
 
     public static GameObject selectionJoueursPanel;
@@ -77,6 +83,10 @@ public class GameManager : MonoBehaviour
         peutRouler1 = true;
         move_yes_no2 = true;
         peutRouler2 = true;
+        move_yes_no3 = true;
+        peutRouler3 = true;
+        move_yes_no4 = true;
+        peutRouler4 = true;
 
         joueurSelectionne = 0;
     }

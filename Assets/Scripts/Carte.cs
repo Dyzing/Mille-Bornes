@@ -163,6 +163,90 @@ public class Carte : HUD
                         }
                     }
                     break;
+                case 3:
+                    if (GameManager.move_yes_no3) //en route
+                    {
+                        switch (effetCarteId)
+                        {
+                            case 0:
+                                Selection25();
+                                break;
+                            case 1:
+                                Selection50();
+                                break;
+                            case 2:
+                                Selection75();
+                                break;
+                            case 3:
+                                Selection100();
+                                break;
+                            case 4:
+                                Selection200();
+                                break;
+                            case 6:
+                                AfficherJoueursSelectionStop();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else // a l'arrêt
+                    {
+                        switch (effetCarteId)
+                        {
+                            case 5:
+                                Roulez();
+                                break;
+                            case 6:
+                                AfficherJoueursSelectionStop();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    break;
+                case 4:
+                    if (GameManager.move_yes_no4) //en route
+                    {
+                        switch (effetCarteId)
+                        {
+                            case 0:
+                                Selection25();
+                                break;
+                            case 1:
+                                Selection50();
+                                break;
+                            case 2:
+                                Selection75();
+                                break;
+                            case 3:
+                                Selection100();
+                                break;
+                            case 4:
+                                Selection200();
+                                break;
+                            case 6:
+                                AfficherJoueursSelectionStop();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else // a l'arrêt
+                    {
+                        switch (effetCarteId)
+                        {
+                            case 5:
+                                Roulez();
+                                break;
+                            case 6:
+                                AfficherJoueursSelectionStop();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    break;
                 default:
                     break;
             }
@@ -233,6 +317,20 @@ public class Carte : HUD
                 {
                     GameManager.peutRouler2 = true;
                     GameManager.move_yes_no2 = true;
+                }
+                break;
+            case 3:
+                if (!GameManager.peutRouler3)
+                {
+                    GameManager.peutRouler3 = true;
+                    GameManager.move_yes_no3 = true;
+                }
+                break;
+            case 4:
+                if (!GameManager.peutRouler4)
+                {
+                    GameManager.peutRouler4 = true;
+                    GameManager.move_yes_no4 = true;
                 }
                 break;
             default:

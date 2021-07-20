@@ -55,34 +55,23 @@ public class SelectionJoueurs : MonoBehaviour
 
     public void OnClickMalus()
     {
-        /*        if (photonView.isMine)
-                {*/
-        Debug.Log("***AVANT peutRouler2 : " + GameManager.peutRouler1);
-        Debug.Log("***AVANT move_yes_no2 : " + GameManager.peutRouler1);
         switch (GameManager.carteJouée)
-            {
-                case "Stop":
-                    photonView.RPC("Stop", PhotonTargets.AllBufferedViaServer);
-                    Debug.Log("***APRES peutRouler2 : " + GameManager.peutRouler1);
-                    Debug.Log("***APRES move_yes_no2 : " + GameManager.peutRouler1);
+        {
+            case "Stop":
+                photonView.RPC("Stop", PhotonTargets.AllBufferedViaServer);
                 break;
-                default:
-                    break;
-            }
-            GameManager.carteJouée = "";
-            GameManager.joueurSelectionne = 0;
-            GameManager.selectionJoueursPanel.SetActive(false);
-        //}
+            default:
+                break;
+        }
+        GameManager.carteJouée = "";
+        GameManager.joueurSelectionne = 0;
+        GameManager.selectionJoueursPanel.SetActive(false);
     }
 
 
     [PunRPC]
     private void Stop()
     {
-        Debug.Log("***STOP AVANT peutRouler2 : " + GameManager.peutRouler1);
-        Debug.Log("***STOP AVANT move_yes_no2 : " + GameManager.peutRouler1);
-        Debug.Log("GameManager.joueurSelectionne : " + GameManager.joueurSelectionne);
-        Debug.Log("PhotonNetwork.room.PlayerCount : " + PhotonNetwork.room.PlayerCount);
         if (GameManager.joueurSelectionne <= PhotonNetwork.room.PlayerCount)
         {
             switch (GameManager.joueurSelectionne)
@@ -90,7 +79,6 @@ public class SelectionJoueurs : MonoBehaviour
                 case 1:
                     if (GameManager.move_yes_no1)
                     {
-                        Debug.Log("case 1");
                         GameManager.peutRouler1 = false;
                         GameManager.move_yes_no1 = false;
                     }
@@ -98,16 +86,27 @@ public class SelectionJoueurs : MonoBehaviour
                 case 2:
                     if (GameManager.move_yes_no2)
                     {
-                        Debug.Log("case 2");
                         GameManager.peutRouler2 = false;
                         GameManager.move_yes_no2 = false;
+                    }
+                    break;
+                case 3:
+                    if (GameManager.move_yes_no3)
+                    {
+                        GameManager.peutRouler3 = false;
+                        GameManager.move_yes_no3 = false;
+                    }
+                    break;
+                case 4:
+                    if (GameManager.move_yes_no4)
+                    {
+                        GameManager.peutRouler4 = false;
+                        GameManager.move_yes_no4 = false;
                     }
                     break;
                 default:
                     break;
             }
         }
-        Debug.Log("***STOP APRES peutRouler2 : " + GameManager.peutRouler1);
-        Debug.Log("***STOP APRES move_yes_no2 : " + GameManager.peutRouler1);
     }
 }
