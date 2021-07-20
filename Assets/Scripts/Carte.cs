@@ -18,7 +18,7 @@ public class Carte : HUD
     {
         if (PhotonNetwork.isMasterClient)
         {
-            photonView.RPC("InstantiateIds", PhotonTargets.AllBuffered);
+            photonView.RPC("InstantiateIds", PhotonTargets.AllViaServer);
         }
     }
     void Start()
@@ -26,7 +26,7 @@ public class Carte : HUD
         
         if (PhotonNetwork.isMasterClient)
         {
-            photonView.RPC("InstantiateIds", PhotonTargets.AllBuffered);
+            photonView.RPC("InstantiateIds", PhotonTargets.AllViaServer);
         }
         ChangerCarte();
         GameManager.tour_joueur_i.text = "Tour au joueur " + 1;
@@ -36,14 +36,14 @@ public class Carte : HUD
     {
         if (!stopIdEquals1)
         {
-            photonView.RPC("InstantiateIds", PhotonTargets.AllBuffered);
+            photonView.RPC("InstantiateIds", PhotonTargets.AllViaServer);
             stopIdEquals1 = true;
         }
     }
 
     public void ChangerCarte()
     {
-        effetCarteId = UnityEngine.Random.Range(0, 7);
+        effetCarteId = UnityEngine.Random.Range(4, 9);
         Sprite spriteLoaded = Resources.Load<Sprite>("Cartes/" + GameManager.mapCarte[effetCarteId]);
         carte_i.GetComponent<Image>().sprite = spriteLoaded;
     }
@@ -102,6 +102,9 @@ public class Carte : HUD
                             case 6:
                                 AfficherJoueursSelectionStop();
                                 break;
+                            case 7:
+                                AfficherJoueursSelectionAccident();
+                                break;
                             default:
                                 break;
                         }
@@ -115,6 +118,12 @@ public class Carte : HUD
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
+                                break;
+                            case 7:
+                                AfficherJoueursSelectionAccident();
+                                break;
+                            case 8:
+                                Reparations();
                                 break;
                             default:
                                 break;
@@ -144,6 +153,9 @@ public class Carte : HUD
                             case 6:
                                 AfficherJoueursSelectionStop();
                                 break;
+                            case 7:
+                                AfficherJoueursSelectionAccident();
+                                break;
                             default:
                                 break;
                         }
@@ -157,6 +169,12 @@ public class Carte : HUD
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
+                                break;
+                            case 7:
+                                AfficherJoueursSelectionAccident();
+                                break;
+                            case 8:
+                                Reparations();
                                 break;
                             default:
                                 break;
@@ -186,6 +204,9 @@ public class Carte : HUD
                             case 6:
                                 AfficherJoueursSelectionStop();
                                 break;
+                            case 7:
+                                AfficherJoueursSelectionAccident();
+                                break;
                             default:
                                 break;
                         }
@@ -199,6 +220,12 @@ public class Carte : HUD
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
+                                break;
+                            case 7:
+                                AfficherJoueursSelectionAccident();
+                                break;
+                            case 8:
+                                Reparations();
                                 break;
                             default:
                                 break;
@@ -228,6 +255,9 @@ public class Carte : HUD
                             case 6:
                                 AfficherJoueursSelectionStop();
                                 break;
+                            case 7:
+                                AfficherJoueursSelectionAccident();
+                                break;
                             default:
                                 break;
                         }
@@ -242,6 +272,12 @@ public class Carte : HUD
                             case 6:
                                 AfficherJoueursSelectionStop();
                                 break;
+                            case 7:
+                                AfficherJoueursSelectionAccident();
+                                break;
+                            case 8:
+                                Reparations();
+                                break;
                             default:
                                 break;
                         }
@@ -250,7 +286,7 @@ public class Carte : HUD
                 default:
                     break;
             }
-            photonView.RPC("ChangerIdTour", PhotonTargets.AllBufferedViaServer);
+            photonView.RPC("ChangerIdTour", PhotonTargets.AllViaServer);
             ChangerCarte();
         }
     }
@@ -301,6 +337,43 @@ public class Carte : HUD
         UpdateEachRound();
     }
 
+
+    [PunRPC]
+    private void ChangerEtatBonJoueur1()
+    {
+        GameManager.peutRouler1 = true;
+        GameManager.move_yes_no1 = true;
+        GameManager.hasNotAccident1 = true;
+        GameManager.etatJoueur1.text = "Joueur 1 ";
+    }
+
+    [PunRPC]
+    private void ChangerEtatBonJoueur2()
+    {
+        GameManager.peutRouler2 = true;
+        GameManager.move_yes_no2 = true;
+        GameManager.hasNotAccident2 = true;
+        GameManager.etatJoueur2.text = "Joueur 2 ";
+    }
+
+    [PunRPC]
+    private void ChangerEtatBonJoueur3()
+    {
+        GameManager.peutRouler3 = true;
+        GameManager.move_yes_no3 = true;
+        GameManager.hasNotAccident3 = true;
+        GameManager.etatJoueur3.text = "Joueur 3 ";
+    }
+
+    [PunRPC]
+    private void ChangerEtatBonJoueur4()
+    {
+        GameManager.peutRouler4 = true;
+        GameManager.move_yes_no4 = true;
+        GameManager.hasNotAccident4 = true;
+        GameManager.etatJoueur4.text = "Joueur 4 ";
+    }
+
     public void Roulez()
     {
         switch (PhotonNetwork.player.ID)
@@ -308,29 +381,58 @@ public class Carte : HUD
             case 1:
                 if (!GameManager.peutRouler1)
                 {
-                    GameManager.peutRouler1 = true;
-                    GameManager.move_yes_no1 = true;
+                    photonView.RPC("ChangerEtatBonJoueur1", PhotonTargets.AllViaServer);
                 }
                 break;
             case 2:
                 if (!GameManager.peutRouler2)
                 {
-                    GameManager.peutRouler2 = true;
-                    GameManager.move_yes_no2 = true;
+                    photonView.RPC("ChangerEtatBonJoueur2", PhotonTargets.AllViaServer);
                 }
                 break;
             case 3:
                 if (!GameManager.peutRouler3)
                 {
-                    GameManager.peutRouler3 = true;
-                    GameManager.move_yes_no3 = true;
+                    photonView.RPC("ChangerEtatBonJoueur3", PhotonTargets.AllViaServer);
                 }
                 break;
             case 4:
                 if (!GameManager.peutRouler4)
                 {
-                    GameManager.peutRouler4 = true;
-                    GameManager.move_yes_no4 = true;
+                    photonView.RPC("ChangerEtatBonJoueur4", PhotonTargets.AllViaServer);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void Reparations()
+    {
+        switch (PhotonNetwork.player.ID)
+        {
+            case 1:
+                if (!GameManager.hasNotAccident1)
+                {
+                    photonView.RPC("ChangerEtatBonJoueur1", PhotonTargets.AllViaServer);
+                }
+                break;
+            case 2:
+                if (!GameManager.hasNotAccident2)
+                {
+                    photonView.RPC("ChangerEtatBonJoueur2", PhotonTargets.AllViaServer);
+                }
+                break;
+            case 3:
+                if (!GameManager.hasNotAccident3)
+                {
+                    photonView.RPC("ChangerEtatBonJoueur3", PhotonTargets.AllViaServer);
+                }
+                break;
+            case 4:
+                if (!GameManager.hasNotAccident4)
+                {
+                    photonView.RPC("ChangerEtatBonJoueur4", PhotonTargets.AllViaServer);
                 }
                 break;
             default:
@@ -344,6 +446,11 @@ public class Carte : HUD
         GameManager.carteJouée = "Stop";
     }
 
+    public void AfficherJoueursSelectionAccident()
+    {
+        GameManager.selectionJoueursPanel.SetActive(true);
+        GameManager.carteJouée = "Accident";
+    }
 
 
 }

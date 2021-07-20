@@ -53,4 +53,25 @@ MonoBehaviour:
   - ChangerJoueurSelectionneJ2
   - ChangerJoueurSelectionneJ3
   - ChangerJoueurSelectionneJ4
+  - Accident
+  - ChangerEtatBonJoueur1
+  - ChangerEtatBonJoueur2
+  - ChangerEtatBonJoueur3
+  - ChangerEtatBonJoueur4
+  - Reparations
+  - ChangerCarteJoueeAccident
+  - ChangerCarteJoueeStop
+  - OnClickMalus
+  - ChangerEtatMauvaisJoueur1
+  - ChangerEtatMauvaisJoueur2
+  - ChangerEtatMauvaisJoueur3
+  - ChangerEtatMauvaisJoueur4
+  - ChangerEtatStopMauvaisJoueur1
+  - ChangerEtatStopMauvaisJoueur2
+  - ChangerEtatStopMauvaisJoueur3
+  - ChangerEtatStopMauvaisJoueur4
+  - ChangerEtatAccidentMauvaisJoueur1
+  - ChangerEtatAccidentMauvaisJoueur2
+  - ChangerEtatAccidentMauvaisJoueur3
+  - ChangerEtatAccidentMauvaisJoueur4
   DisableAutoOpenWizard: 1
