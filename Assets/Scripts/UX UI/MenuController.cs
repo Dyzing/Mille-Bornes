@@ -32,7 +32,7 @@ public class MenuController : MonoBehaviour
 
     public void ChangeUserNameInput()
     {
-        if(usernameInput.text.Length >= 3)
+        if(usernameInput.text.Length >= 1)
         {
             startButton.SetActive(true);
         }

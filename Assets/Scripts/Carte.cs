@@ -16,7 +16,6 @@ public class Carte : HUD
 
     private void Awake()
     {
-        //photonView.viewID = 5;
         if (PhotonNetwork.isMasterClient)
         {
             photonView.RPC("InstantiateIds", PhotonTargets.AllBuffered);
@@ -31,31 +30,20 @@ public class Carte : HUD
         }
         ChangerCarte();
         GameManager.tour_joueur_i.text = "Tour au joueur " + 1;
-/*        if (PhotonNetwork.player.isMasterClient)
-        {
-            local_id_tour = 1;
-            if(photonView.isMine)
-            {
-                local_playerViewId = PhotonNetwork.player.ID;
-            }
-        }
-        photonView.viewID = local_playerViewId;*/
     }
 
     void Update()
     {
-        //photonView.viewID = PhotonNetwork.player.ID;
         if (!stopIdEquals1)
         {
             photonView.RPC("InstantiateIds", PhotonTargets.AllBuffered);
             stopIdEquals1 = true;
         }
-        //photonView.RPC("InstantiateIds", PhotonTargets.AllBuffered);
     }
 
     public void ChangerCarte()
     {
-        effetCarteId = UnityEngine.Random.Range(0, 4);
+        effetCarteId = UnityEngine.Random.Range(0, 7);
         Sprite spriteLoaded = Resources.Load<Sprite>("Cartes/" + GameManager.mapCarte[effetCarteId]);
         carte_i.GetComponent<Image>().sprite = spriteLoaded;
     }
@@ -63,19 +51,19 @@ public class Carte : HUD
     [PunRPC]
     private void InstantiateIds()
     {
-        Debug.Log("***** AVANT id_tour_actuel : " + GameManager.id_tour_actuel);
+        //Debug.Log("***** AVANT id_tour_actuel : " + GameManager.id_tour_actuel);
         GameManager.id_tour_actuel = 1;
-        Debug.Log("***** APRES id_tour_actuel : " + GameManager.id_tour_actuel);
+        //Debug.Log("***** APRES id_tour_actuel : " + GameManager.id_tour_actuel);
     }
 
     [PunRPC]
     private void ChangerIdTour()
     {
         nb_players = PhotonNetwork.playerList.Length;
-        Debug.Log("id_tour_actuel : " + GameManager.id_tour_actuel);
+        //Debug.Log("id_tour_actuel : " + GameManager.id_tour_actuel);
         GameManager.id_tour_actuel++;
         GameManager.id_tour_actuel = GameManager.id_tour_actuel % (nb_players + 1);
-        Debug.Log("id_tour_actuel : " + GameManager.id_tour_actuel);
+        //Debug.Log("id_tour_actuel : " + GameManager.id_tour_actuel);
         if(GameManager.id_tour_actuel == 0)
         {
             GameManager.id_tour_actuel = 1;
@@ -87,25 +75,93 @@ public class Carte : HUD
     public void OnClickEffet()
     {
         nb_players = PhotonNetwork.playerList.Length;
-        //photonView.viewID = PhotonNetwork.player.ID;
         if (PhotonNetwork.player.ID == GameManager.id_tour_actuel)
         {
-            switch (effetCarteId)
+            switch(PhotonNetwork.player.ID)
             {
-                case 0:
-                    Selection25();
-                    break;
                 case 1:
-                    Selection50();
+                    if (GameManager.move_yes_no1) //en route
+                    {
+                        switch (effetCarteId)
+                        {
+                            case 0:
+                                Selection25();
+                                break;
+                            case 1:
+                                Selection50();
+                                break;
+                            case 2:
+                                Selection75();
+                                break;
+                            case 3:
+                                Selection100();
+                                break;
+                            case 4:
+                                Selection200();
+                                break;
+                            case 6:
+                                AfficherJoueursSelectionStop();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else // a l'arrêt
+                    {
+                        switch (effetCarteId)
+                        {
+                            case 5:
+                                Roulez();
+                                break;
+                            case 6:
+                                AfficherJoueursSelectionStop();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                     break;
                 case 2:
-                    Selection75();
-                    break;
-                case 3:
-                    Selection100();
-                    break;
-                case 4:
-                    Selection200();
+                    if (GameManager.move_yes_no2) //en route
+                    {
+                        switch (effetCarteId)
+                        {
+                            case 0:
+                                Selection25();
+                                break;
+                            case 1:
+                                Selection50();
+                                break;
+                            case 2:
+                                Selection75();
+                                break;
+                            case 3:
+                                Selection100();
+                                break;
+                            case 4:
+                                Selection200();
+                                break;
+                            case 6:
+                                AfficherJoueursSelectionStop();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else // a l'arrêt
+                    {
+                        switch (effetCarteId)
+                        {
+                            case 5:
+                                Roulez();
+                                break;
+                            case 6:
+                                AfficherJoueursSelectionStop();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                     break;
                 default:
                     break;
@@ -115,6 +171,7 @@ public class Carte : HUD
         }
     }
 
+    
     public void Selection25()
     {
         GameManager.KM_1 += 1;
@@ -159,5 +216,36 @@ public class Carte : HUD
         GameManager.carteJouée = "KM";
         UpdateEachRound();
     }
+
+    public void Roulez()
+    {
+        switch (PhotonNetwork.player.ID)
+        {
+            case 1:
+                if (!GameManager.peutRouler1)
+                {
+                    GameManager.peutRouler1 = true;
+                    GameManager.move_yes_no1 = true;
+                }
+                break;
+            case 2:
+                if (!GameManager.peutRouler2)
+                {
+                    GameManager.peutRouler2 = true;
+                    GameManager.move_yes_no2 = true;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void AfficherJoueursSelectionStop()
+    {
+        GameManager.selectionJoueursPanel.SetActive(true);
+        GameManager.carteJouée = "Stop";
+    }
+
+
 
 }

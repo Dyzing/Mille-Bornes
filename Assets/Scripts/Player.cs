@@ -4,15 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Player : Photon.MonoBehaviour
+public class Player : MonoBehaviour
 {
     public GameObject playerPrefab;
 
-    public Rigidbody rb;
     public GameObject playerCamera;
     public PhotonView photonView;
     public TextMeshProUGUI playerNameText;
-
 
     public bool isGrounded = false;
     public bool isFinished = false;
@@ -70,7 +68,7 @@ public class Player : Photon.MonoBehaviour
             destination = GameObject.Find("Node40").transform.position;
         }
         voiturepos = destination;
-        voiturepos.y += 2f;
+        voiturepos.y += 4f;
 
         photonView.RPC("VoitureNewPos", PhotonTargets.AllBuffered);
 

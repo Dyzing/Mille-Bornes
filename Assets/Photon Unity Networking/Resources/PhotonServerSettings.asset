@@ -44,6 +44,13 @@ MonoBehaviour:
   - PunRespawn
   - RequestForPickupItems
   - RequestForPickupTimes
+  - Roulez
+  - Stop
   - TaggedPlayer
   - VoitureNewPos
+  - AfficherJoueursSelectionStop
+  - ChangerJoueurSelectionneJ1
+  - ChangerJoueurSelectionneJ2
+  - ChangerJoueurSelectionneJ3
+  - ChangerJoueurSelectionneJ4
   DisableAutoOpenWizard: 1
