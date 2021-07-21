@@ -8,8 +8,9 @@ public class SelectionJoueurs : MonoBehaviour
     public PhotonView photonView;
     public void SelectionJ1()
     {
-        photonView.RPC("ChangerJoueurSelectionneJ1", PhotonTargets.AllViaServer);
-        OnClickMalus();
+        //photonView.RPC("ChangerJoueurSelectionneJ1", PhotonTargets.AllBufferedViaServer);
+        GameManager.joueurSelectionne = 1;
+        OnClickMalus(GameManager.joueurSelectionne);
     }
 
     [PunRPC]
@@ -20,8 +21,9 @@ public class SelectionJoueurs : MonoBehaviour
 
     public void SelectionJ2()
     {
-        photonView.RPC("ChangerJoueurSelectionneJ2", PhotonTargets.AllViaServer);
-        OnClickMalus();
+        //photonView.RPC("ChangerJoueurSelectionneJ2", PhotonTargets.AllBufferedViaServer);
+        GameManager.joueurSelectionne = 2;
+        OnClickMalus(GameManager.joueurSelectionne);
     }
 
     [PunRPC]
@@ -32,8 +34,9 @@ public class SelectionJoueurs : MonoBehaviour
 
     public void SelectionJ3()
     {
-        photonView.RPC("ChangerJoueurSelectionneJ3", PhotonTargets.AllViaServer);
-        OnClickMalus();
+        //photonView.RPC("ChangerJoueurSelectionneJ3", PhotonTargets.AllBufferedViaServer);
+        GameManager.joueurSelectionne = 3;
+        OnClickMalus(GameManager.joueurSelectionne);
     }
 
     [PunRPC]
@@ -44,8 +47,9 @@ public class SelectionJoueurs : MonoBehaviour
 
     public void SelectionJ4()
     {
-        photonView.RPC("ChangerJoueurSelectionneJ4", PhotonTargets.AllViaServer);
-        OnClickMalus();
+        //photonView.RPC("ChangerJoueurSelectionneJ4", PhotonTargets.AllBufferedViaServer);
+        GameManager.joueurSelectionne = 4;
+        OnClickMalus(GameManager.joueurSelectionne);
     }
 
     [PunRPC]
@@ -54,15 +58,15 @@ public class SelectionJoueurs : MonoBehaviour
         GameManager.joueurSelectionne = 4;
     }
 
-    public void OnClickMalus()
+    public void OnClickMalus(int joueurSelect)
     {
         switch (GameManager.carteJouée)
         {
             case "Stop":
-                photonView.RPC("Stop", PhotonTargets.AllViaServer);
+                photonView.RPC("Stop", PhotonTargets.AllBufferedViaServer,joueurSelect);
                 break;
             case "Accident":
-                photonView.RPC("Accident", PhotonTargets.AllViaServer);
+                photonView.RPC("Accident", PhotonTargets.AllBufferedViaServer,joueurSelect);
                 break;
             default:
                 break;
@@ -74,11 +78,11 @@ public class SelectionJoueurs : MonoBehaviour
 
 
     [PunRPC]
-    private void Stop()
+    private void Stop(int joueurSelect)
     {
-        if (GameManager.joueurSelectionne <= PhotonNetwork.room.PlayerCount)
+        if (joueurSelect <= PhotonNetwork.room.PlayerCount)
         {
-            switch (GameManager.joueurSelectionne)
+            switch (joueurSelect)
             {
                 case 1:
                     if (GameManager.move_yes_no1)
@@ -119,11 +123,11 @@ public class SelectionJoueurs : MonoBehaviour
     }
 
     [PunRPC]
-    private void Accident()
+    private void Accident(int joueurSelect)
     {
-        if (GameManager.joueurSelectionne <= PhotonNetwork.room.PlayerCount)
+        if (joueurSelect <= PhotonNetwork.room.PlayerCount)
         {
-            switch (GameManager.joueurSelectionne)
+            switch (joueurSelect)
             {
                 case 1:
                     if (GameManager.move_yes_no1)
