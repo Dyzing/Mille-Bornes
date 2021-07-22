@@ -9,158 +9,59 @@ public class SelectionJoueurs : MonoBehaviour
     public void SelectionJ1()
     {
         photonView.RPC("ChangerJoueurSelectionneJ1", PhotonTargets.AllViaServer);
-        OnClickMalus();
+        GameManager.selectionJoueursPanel.SetActive(false);
+
+        //OnClickMalus();
     }
 
     [PunRPC]
     private void ChangerJoueurSelectionneJ1()
     {
-        GameManager.joueurSelectionne = 1;
+        Player.joueurSelectionne = 1;
     }
 
     public void SelectionJ2()
     {
         photonView.RPC("ChangerJoueurSelectionneJ2", PhotonTargets.AllViaServer);
-        OnClickMalus();
+        GameManager.selectionJoueursPanel.SetActive(false);
+
+        //OnClickMalus();
     }
 
     [PunRPC]
     private void ChangerJoueurSelectionneJ2()
     {
-        GameManager.joueurSelectionne = 2;
+        Player.joueurSelectionne = 2;
     }
 
     public void SelectionJ3()
     {
         photonView.RPC("ChangerJoueurSelectionneJ3", PhotonTargets.AllViaServer);
-        OnClickMalus();
+        GameManager.selectionJoueursPanel.SetActive(false);
+
+        //OnClickMalus();
     }
 
     [PunRPC]
     private void ChangerJoueurSelectionneJ3()
     {
-        GameManager.joueurSelectionne = 3;
+        Player.joueurSelectionne = 3;
     }
 
     public void SelectionJ4()
     {
         photonView.RPC("ChangerJoueurSelectionneJ4", PhotonTargets.AllViaServer);
-        OnClickMalus();
+        GameManager.selectionJoueursPanel.SetActive(false);
+
+        //OnClickMalus();
     }
 
     [PunRPC]
     private void ChangerJoueurSelectionneJ4()
     {
-        GameManager.joueurSelectionne = 4;
+        Player.joueurSelectionne = 4;
     }
 
-    public void OnClickMalus()
-    {
-        switch (GameManager.carteJouée)
-        {
-            case "Stop":
-                photonView.RPC("Stop", PhotonTargets.AllViaServer);
-                break;
-            case "Accident":
-                photonView.RPC("Accident", PhotonTargets.AllViaServer);
-                break;
-            default:
-                break;
-        }
-        GameManager.carteJouée = "";
-        GameManager.selectionJoueursPanel.SetActive(false);
-        GameManager.joueurSelectionne = 0;
-    }
-
-
-    [PunRPC]
-    private void Stop()
-    {
-        if (GameManager.joueurSelectionne <= PhotonNetwork.room.PlayerCount)
-        {
-            switch (GameManager.joueurSelectionne)
-            {
-                case 1:
-                    if (GameManager.move_yes_no1)
-                    {
-                        GameManager.peutRouler1 = false;
-                        GameManager.move_yes_no1 = false;
-                        GameManager.etatJoueur1.text = "Joueur 1 Stop";
-                    }
-                    break;
-                case 2:
-                    if (GameManager.move_yes_no2)
-                    {
-                        GameManager.peutRouler2 = false;
-                        GameManager.move_yes_no2 = false;
-                        GameManager.etatJoueur2.text = "Joueur 2 Stop";
-                    }
-                    break;
-                case 3:
-                    if (GameManager.move_yes_no3)
-                    {
-                        GameManager.peutRouler3 = false;
-                        GameManager.move_yes_no3 = false;
-                        GameManager.etatJoueur3.text = "Joueur 3 Stop";
-                    }
-                    break;
-                case 4:
-                    if (GameManager.move_yes_no4)
-                    {
-                        GameManager.peutRouler4 = false;
-                        GameManager.move_yes_no4 = false;
-                        GameManager.etatJoueur4.text = "Joueur 4 Stop";
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-
-    [PunRPC]
-    private void Accident()
-    {
-        if (GameManager.joueurSelectionne <= PhotonNetwork.room.PlayerCount)
-        {
-            switch (GameManager.joueurSelectionne)
-            {
-                case 1:
-                    if (GameManager.move_yes_no1)
-                    {
-                        GameManager.hasNotAccident1 = false;
-                        GameManager.move_yes_no1 = false;
-                        GameManager.etatJoueur1.text = "Joueur 1 Accident";
-                    }
-                    break;
-                case 2:
-                    if (GameManager.move_yes_no2)
-                    {
-                        GameManager.hasNotAccident2 = false;
-                        GameManager.move_yes_no2 = false;
-                        GameManager.etatJoueur2.text = "Joueur 2 Accident";
-                    }
-                    break;
-                case 3:
-                    if (GameManager.move_yes_no3)
-                    {
-                        GameManager.hasNotAccident3 = false;
-                        GameManager.move_yes_no3 = false;
-                        GameManager.etatJoueur3.text = "Joueur 3 Accident";
-                    }
-                    break;
-                case 4:
-                    if (GameManager.move_yes_no4)
-                    {
-                        GameManager.hasNotAccident4 = false;
-                        GameManager.move_yes_no4 = false;
-                        GameManager.etatJoueur4.text = "Joueur 4 Accident";
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
+    
 }
     

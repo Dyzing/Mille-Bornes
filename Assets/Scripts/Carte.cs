@@ -14,6 +14,7 @@ public class Carte : HUD
 
     public bool stopIdEquals1 = false;
 
+
     private void Awake()
     {
         if (PhotonNetwork.isMasterClient)
@@ -43,7 +44,7 @@ public class Carte : HUD
 
     public void ChangerCarte()
     {
-        effetCarteId = UnityEngine.Random.Range(4, 9);
+        effetCarteId = UnityEngine.Random.Range(2, 9);
         Sprite spriteLoaded = Resources.Load<Sprite>("Cartes/" + GameManager.mapCarte[effetCarteId]);
         carte_i.GetComponent<Image>().sprite = spriteLoaded;
     }
@@ -80,7 +81,7 @@ public class Carte : HUD
             switch(PhotonNetwork.player.ID)
             {
                 case 1:
-                    if (GameManager.move_yes_no1) //en route
+                    if (Player.move_yes_no1) //en route
                     {
                         switch (effetCarteId)
                         {
@@ -114,7 +115,7 @@ public class Carte : HUD
                         switch (effetCarteId)
                         {
                             case 5:
-                                Roulez();
+                                ChangerCarteJouee("Roulez");
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
@@ -123,7 +124,7 @@ public class Carte : HUD
                                 AfficherJoueursSelectionAccident();
                                 break;
                             case 8:
-                                Reparations();
+                                ChangerCarteJouee("Reparations");
                                 break;
                             default:
                                 break;
@@ -131,7 +132,7 @@ public class Carte : HUD
                     }
                     break;
                 case 2:
-                    if (GameManager.move_yes_no2) //en route
+                    if (Player.move_yes_no2) //en route
                     {
                         switch (effetCarteId)
                         {
@@ -165,7 +166,7 @@ public class Carte : HUD
                         switch (effetCarteId)
                         {
                             case 5:
-                                Roulez();
+                                ChangerCarteJouee("Roulez");
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
@@ -174,7 +175,7 @@ public class Carte : HUD
                                 AfficherJoueursSelectionAccident();
                                 break;
                             case 8:
-                                Reparations();
+                                ChangerCarteJouee("Reparations");
                                 break;
                             default:
                                 break;
@@ -182,7 +183,7 @@ public class Carte : HUD
                     }
                     break;
                 case 3:
-                    if (GameManager.move_yes_no3) //en route
+                    if (Player.move_yes_no3) //en route
                     {
                         switch (effetCarteId)
                         {
@@ -216,7 +217,7 @@ public class Carte : HUD
                         switch (effetCarteId)
                         {
                             case 5:
-                                Roulez();
+                                ChangerCarteJouee("Roulez");
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
@@ -225,7 +226,7 @@ public class Carte : HUD
                                 AfficherJoueursSelectionAccident();
                                 break;
                             case 8:
-                                Reparations();
+                                ChangerCarteJouee("Reparations");
                                 break;
                             default:
                                 break;
@@ -233,7 +234,7 @@ public class Carte : HUD
                     }
                     break;
                 case 4:
-                    if (GameManager.move_yes_no4) //en route
+                    if (Player.move_yes_no4) //en route
                     {
                         switch (effetCarteId)
                         {
@@ -267,7 +268,7 @@ public class Carte : HUD
                         switch (effetCarteId)
                         {
                             case 5:
-                                Roulez();
+                                ChangerCarteJouee("Roulez");
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
@@ -276,7 +277,7 @@ public class Carte : HUD
                                 AfficherJoueursSelectionAccident();
                                 break;
                             case 8:
-                                Reparations();
+                                ChangerCarteJouee("Reparations");
                                 break;
                             default:
                                 break;
@@ -338,108 +339,6 @@ public class Carte : HUD
     }
 
 
-    [PunRPC]
-    private void ChangerEtatBonJoueur1()
-    {
-        GameManager.peutRouler1 = true;
-        GameManager.move_yes_no1 = true;
-        GameManager.hasNotAccident1 = true;
-        GameManager.etatJoueur1.text = "Joueur 1 ";
-    }
-
-    [PunRPC]
-    private void ChangerEtatBonJoueur2()
-    {
-        GameManager.peutRouler2 = true;
-        GameManager.move_yes_no2 = true;
-        GameManager.hasNotAccident2 = true;
-        GameManager.etatJoueur2.text = "Joueur 2 ";
-    }
-
-    [PunRPC]
-    private void ChangerEtatBonJoueur3()
-    {
-        GameManager.peutRouler3 = true;
-        GameManager.move_yes_no3 = true;
-        GameManager.hasNotAccident3 = true;
-        GameManager.etatJoueur3.text = "Joueur 3 ";
-    }
-
-    [PunRPC]
-    private void ChangerEtatBonJoueur4()
-    {
-        GameManager.peutRouler4 = true;
-        GameManager.move_yes_no4 = true;
-        GameManager.hasNotAccident4 = true;
-        GameManager.etatJoueur4.text = "Joueur 4 ";
-    }
-
-    public void Roulez()
-    {
-        switch (PhotonNetwork.player.ID)
-        {
-            case 1:
-                if (!GameManager.peutRouler1)
-                {
-                    photonView.RPC("ChangerEtatBonJoueur1", PhotonTargets.AllViaServer);
-                }
-                break;
-            case 2:
-                if (!GameManager.peutRouler2)
-                {
-                    photonView.RPC("ChangerEtatBonJoueur2", PhotonTargets.AllViaServer);
-                }
-                break;
-            case 3:
-                if (!GameManager.peutRouler3)
-                {
-                    photonView.RPC("ChangerEtatBonJoueur3", PhotonTargets.AllViaServer);
-                }
-                break;
-            case 4:
-                if (!GameManager.peutRouler4)
-                {
-                    photonView.RPC("ChangerEtatBonJoueur4", PhotonTargets.AllViaServer);
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void Reparations()
-    {
-        switch (PhotonNetwork.player.ID)
-        {
-            case 1:
-                if (!GameManager.hasNotAccident1)
-                {
-                    photonView.RPC("ChangerEtatBonJoueur1", PhotonTargets.AllViaServer);
-                }
-                break;
-            case 2:
-                if (!GameManager.hasNotAccident2)
-                {
-                    photonView.RPC("ChangerEtatBonJoueur2", PhotonTargets.AllViaServer);
-                }
-                break;
-            case 3:
-                if (!GameManager.hasNotAccident3)
-                {
-                    photonView.RPC("ChangerEtatBonJoueur3", PhotonTargets.AllViaServer);
-                }
-                break;
-            case 4:
-                if (!GameManager.hasNotAccident4)
-                {
-                    photonView.RPC("ChangerEtatBonJoueur4", PhotonTargets.AllViaServer);
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
     public void AfficherJoueursSelectionStop()
     {
         GameManager.selectionJoueursPanel.SetActive(true);
@@ -452,5 +351,8 @@ public class Carte : HUD
         GameManager.carteJouée = "Accident";
     }
 
-
+    public void ChangerCarteJouee(string cartejouee)
+    {
+        GameManager.carteJouée = cartejouee;
+    }
 }

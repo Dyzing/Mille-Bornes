@@ -323,18 +323,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6205560604422095994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6204377118839848583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8862286ed566d07499ed675880461a7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6205560603325259223
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,12 +370,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 6205560603325259223}
-  rb: {fileID: 0}
   playerCamera: {fileID: 6205560605159518557}
   photonView: {fileID: 7037350684973322829}
   playerNameText: {fileID: 3943704727187467969}
-  isGrounded: 0
-  isFinished: 0
+  etatJoueur1: {fileID: 1676444877889968624, guid: e22a03615425d4f4f96824cb18fc9b33,
+    type: 3}
+  etatJoueur2: {fileID: 1530678250486200909, guid: 9547ee81bf8f3464dbbfa88ffbd7f30f,
+    type: 3}
+  etatJoueur3: {fileID: 7206060796511430145, guid: e7c70fc9ef72f78438c768f89f316bf9,
+    type: 3}
+  etatJoueur4: {fileID: 8251851306647211555, guid: 4f8858459b19be848bb6236ade597a30,
+    type: 3}
 --- !u!114 &7037350684973322829
 MonoBehaviour:
   m_ObjectHideFlags: 0
