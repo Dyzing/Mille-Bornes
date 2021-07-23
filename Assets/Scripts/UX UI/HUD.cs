@@ -10,13 +10,11 @@ public class HUD : MonoBehaviour
     public static TextMeshProUGUI KM_Text;
 
     public static GameObject victoire_Canvas;
-    public static GameObject victoire_Text;
 
 
     void Start()
     {
         KM_Text = GameObject.Find("KM Text").GetComponent<TextMeshProUGUI>();
-        victoire_Text = GameObject.Find("Victoire Text");
         victoire_Canvas = GameObject.Find("Victoire Canvas");
 
         victoire_Canvas.SetActive(false);
@@ -59,7 +57,6 @@ public class HUD : MonoBehaviour
         if (GameManager.KM_1 >= 40)
         {
             victoire_Canvas.SetActive(true);
-            victoire_Text.SetActive(true);
         }
     }
 

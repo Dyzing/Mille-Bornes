@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
 
     public static GameObject selectionJoueursPanel;
 
+    public static GameObject aToiDeJouerPanel;
+
 
 
     public static Dictionary<int, string> mapCarte = new Dictionary<int, string>()
@@ -79,6 +81,8 @@ public class GameManager : MonoBehaviour
         KmPlayerP2 = GameObject.Find("KmtextP2").GetComponent<TextMeshProUGUI>();
         KmPlayerP3 = GameObject.Find("KmtextP3").GetComponent<TextMeshProUGUI>();
         KmPlayerP4 = GameObject.Find("KmtextP4").GetComponent<TextMeshProUGUI>();
+        aToiDeJouerPanel = GameObject.Find("AToideJouerPanel");
+        aToiDeJouerPanel.SetActive(false);
     }
 
     void Update()

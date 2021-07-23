@@ -44,7 +44,7 @@ public class Carte : HUD
 
     public void ChangerCarte(int effetCarte)
     {
-        effetCarteId = UnityEngine.Random.Range(2, 9);
+        effetCarteId = UnityEngine.Random.Range(0, 9);
         Sprite spriteLoaded = Resources.Load<Sprite>("Cartes/" + GameManager.mapCarte[effetCarteId]);
         carte_i.GetComponent<Image>().sprite = spriteLoaded;
         photonView.RPC("UpdateSliders", PhotonTargets.AllBufferedViaServer, effetCarte);
@@ -210,8 +210,23 @@ public class Carte : HUD
             GameManager.id_tour_actuel = 1;
         }
         GameManager.tour_joueur_i.text = "Tour au joueur " + GameManager.id_tour_actuel;
+        AfficherPanelAToiDeJouer();
     }
 
+    public void AfficherPanelAToiDeJouer()
+    {
+        if (PhotonNetwork.player.ID == GameManager.id_tour_actuel)
+        {
+            StartCoroutine(CoroutineAToiDeJouer());
+        }
+    }
+
+    private IEnumerator CoroutineAToiDeJouer()
+    {
+        GameManager.aToiDeJouerPanel.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        GameManager.aToiDeJouerPanel.SetActive(false);
+    }
 
     public void OnClickEffet()
     {
