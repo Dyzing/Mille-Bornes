@@ -175,9 +175,16 @@ MonoBehaviour:
   effetCarteId: 0
   carte_i: {fileID: 7790232549814645271}
   photonView: {fileID: 3327364674073679660}
-  id_tour_actuel: 0
   nb_players: 0
   stopIdEquals1: 0
+  etatJoueur1: {fileID: 1676444877889968624, guid: e22a03615425d4f4f96824cb18fc9b33,
+    type: 3}
+  etatJoueur2: {fileID: 1530678250486200909, guid: 9547ee81bf8f3464dbbfa88ffbd7f30f,
+    type: 3}
+  etatJoueur3: {fileID: 7206060796511430145, guid: e7c70fc9ef72f78438c768f89f316bf9,
+    type: 3}
+  etatJoueur4: {fileID: 8251851306647211555, guid: 4f8858459b19be848bb6236ade597a30,
+    type: 3}
 --- !u!114 &3327364674073679660
 MonoBehaviour:
   m_ObjectHideFlags: 0

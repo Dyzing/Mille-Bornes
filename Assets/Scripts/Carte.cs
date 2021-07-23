@@ -14,6 +14,7 @@ public class Carte : HUD
 
     public bool stopIdEquals1 = false;
 
+
     private void Awake()
     {
         if (PhotonNetwork.isMasterClient)
@@ -43,7 +44,7 @@ public class Carte : HUD
 
     public void ChangerCarte()
     {
-        effetCarteId = UnityEngine.Random.Range(0, 7);
+        effetCarteId = UnityEngine.Random.Range(2, 9);
         Sprite spriteLoaded = Resources.Load<Sprite>("Cartes/" + GameManager.mapCarte[effetCarteId]);
         carte_i.GetComponent<Image>().sprite = spriteLoaded;
     }
@@ -80,7 +81,7 @@ public class Carte : HUD
             switch(PhotonNetwork.player.ID)
             {
                 case 1:
-                    if (GameManager.move_yes_no1) //en route
+                    if (Player.move_yes_no1) //en route
                     {
                         switch (effetCarteId)
                         {
@@ -111,10 +112,16 @@ public class Carte : HUD
                         switch (effetCarteId)
                         {
                             case 5:
-                                Roulez();
+                                ChangerCarteJouee("Roulez");
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
+                                break;
+                            case 7:
+                                AfficherJoueursSelectionAccident();
+                                break;
+                            case 8:
+                                ChangerCarteJouee("Reparations");
                                 break;
                             default:
                                 break;
@@ -122,7 +129,7 @@ public class Carte : HUD
                     }
                     break;
                 case 2:
-                    if (GameManager.move_yes_no2) //en route
+                    if (Player.move_yes_no2) //en route
                     {
                         switch (effetCarteId)
                         {
@@ -153,10 +160,16 @@ public class Carte : HUD
                         switch (effetCarteId)
                         {
                             case 5:
-                                Roulez();
+                                ChangerCarteJouee("Roulez");
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
+                                break;
+                            case 7:
+                                AfficherJoueursSelectionAccident();
+                                break;
+                            case 8:
+                                ChangerCarteJouee("Reparations");
                                 break;
                             default:
                                 break;
@@ -164,7 +177,7 @@ public class Carte : HUD
                     }
                     break;
                 case 3:
-                    if (GameManager.move_yes_no3) //en route
+                    if (Player.move_yes_no3) //en route
                     {
                         switch (effetCarteId)
                         {
@@ -195,10 +208,16 @@ public class Carte : HUD
                         switch (effetCarteId)
                         {
                             case 5:
-                                Roulez();
+                                ChangerCarteJouee("Roulez");
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
+                                break;
+                            case 7:
+                                AfficherJoueursSelectionAccident();
+                                break;
+                            case 8:
+                                ChangerCarteJouee("Reparations");
                                 break;
                             default:
                                 break;
@@ -206,7 +225,7 @@ public class Carte : HUD
                     }
                     break;
                 case 4:
-                    if (GameManager.move_yes_no4) //en route
+                    if (Player.move_yes_no4) //en route
                     {
                         switch (effetCarteId)
                         {
@@ -237,10 +256,16 @@ public class Carte : HUD
                         switch (effetCarteId)
                         {
                             case 5:
-                                Roulez();
+                                ChangerCarteJouee("Roulez");
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
+                                break;
+                            case 7:
+                                AfficherJoueursSelectionAccident();
+                                break;
+                            case 8:
+                                ChangerCarteJouee("Reparations");
                                 break;
                             default:
                                 break;
@@ -301,42 +326,6 @@ public class Carte : HUD
         UpdateEachRound();
     }
 
-    public void Roulez()
-    {
-        switch (PhotonNetwork.player.ID)
-        {
-            case 1:
-                if (!GameManager.peutRouler1)
-                {
-                    GameManager.peutRouler1 = true;
-                    GameManager.move_yes_no1 = true;
-                }
-                break;
-            case 2:
-                if (!GameManager.peutRouler2)
-                {
-                    GameManager.peutRouler2 = true;
-                    GameManager.move_yes_no2 = true;
-                }
-                break;
-            case 3:
-                if (!GameManager.peutRouler3)
-                {
-                    GameManager.peutRouler3 = true;
-                    GameManager.move_yes_no3 = true;
-                }
-                break;
-            case 4:
-                if (!GameManager.peutRouler4)
-                {
-                    GameManager.peutRouler4 = true;
-                    GameManager.move_yes_no4 = true;
-                }
-                break;
-            default:
-                break;
-        }
-    }
 
     public void AfficherJoueursSelectionStop()
     {
@@ -345,5 +334,8 @@ public class Carte : HUD
     }
 
 
-
+    public void ChangerCarteJouee(string cartejouee)
+    {
+        GameManager.carteJouée = cartejouee;
+    }
 }

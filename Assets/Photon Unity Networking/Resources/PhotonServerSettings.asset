@@ -28,9 +28,19 @@ MonoBehaviour:
   NetworkLogging: 1
   RunInBackground: 1
   RpcList:
+  - Accident
+  - ChangerEtatBonJoueur1
+  - ChangerEtatBonJoueur2
+  - ChangerEtatBonJoueur3
+  - ChangerEtatBonJoueur4
   - ChangerIdTour
+  - ChangerJoueurSelectionneJ1
+  - ChangerJoueurSelectionneJ2
+  - ChangerJoueurSelectionneJ3
+  - ChangerJoueurSelectionneJ4
   - Chat
   - ColorRpc
+  - DeselectJoueur
   - DestroyRpc
   - DoJump
   - Flash
@@ -44,7 +54,6 @@ MonoBehaviour:
   - PunRespawn
   - RequestForPickupItems
   - RequestForPickupTimes
-  - Roulez
   - Stop
   - TaggedPlayer
   - VoitureNewPos
@@ -53,4 +62,7 @@ MonoBehaviour:
   - ChangerJoueurSelectionneJ2
   - ChangerJoueurSelectionneJ3
   - ChangerJoueurSelectionneJ4
+  - ResetEtatStart
+  - ChangeStateMasterAccident
+  - ChangeStateMasterStop
   DisableAutoOpenWizard: 1

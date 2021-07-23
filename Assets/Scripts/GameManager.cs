@@ -25,26 +25,9 @@ public class GameManager : MonoBehaviour
     public GameObject carte5HUD;
     public GameObject carte6HUD;
 
-    public GameObject selectionJ1HUD;
-    public GameObject selectionJ2HUD;
-    public GameObject selectionJ3HUD;
-    public GameObject selectionJ4HUD;
-
-    public static bool move_yes_no1;
-    public static bool peutRouler1;
-
-    public static bool move_yes_no2;
-    public static bool peutRouler2;
-
-    public static bool move_yes_no3;
-    public static bool peutRouler3;
-
-    public static bool move_yes_no4;
-    public static bool peutRouler4;
-
-    public static int joueurSelectionne;
-
     public static GameObject selectionJoueursPanel;
+
+
 
     public static Dictionary<int, string> mapCarte = new Dictionary<int, string>()
     {
@@ -78,17 +61,6 @@ public class GameManager : MonoBehaviour
         tour_joueur_i = GameObject.Find("TourJoueurText").GetComponent<TextMeshProUGUI>();
         selectionJoueursPanel = GameObject.Find("SelectionJoueursPanel");
         selectionJoueursPanel.SetActive(false);
-
-        move_yes_no1 = true;
-        peutRouler1 = true;
-        move_yes_no2 = true;
-        peutRouler2 = true;
-        move_yes_no3 = true;
-        peutRouler3 = true;
-        move_yes_no4 = true;
-        peutRouler4 = true;
-
-        joueurSelectionne = 0;
     }
 
     void Update()
@@ -113,10 +85,6 @@ public class GameManager : MonoBehaviour
         PhotonNetwork.Instantiate(carte6HUD.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);
 
 
-        /*PhotonNetwork.Instantiate(selectionJ1HUD.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);
-        PhotonNetwork.Instantiate(selectionJ2HUD.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);
-        PhotonNetwork.Instantiate(selectionJ3HUD.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);
-        PhotonNetwork.Instantiate(selectionJ4HUD.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);*/
 
         gameCanvas.SetActive(false);
         sceneCamera.SetActive(false);
