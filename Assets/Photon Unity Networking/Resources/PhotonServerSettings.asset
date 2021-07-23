@@ -34,7 +34,6 @@ MonoBehaviour:
   - DestroyRpc
   - DoJump
   - Flash
-  - getSliders
   - InstantiateIds
   - InstantiateRpc
   - Marco
@@ -48,7 +47,6 @@ MonoBehaviour:
   - Roulez
   - Stop
   - TaggedPlayer
-  - UpdateSliders
   - VoitureNewPos
   - AfficherJoueursSelectionStop
   - ChangerJoueurSelectionneJ1
@@ -76,5 +74,4 @@ MonoBehaviour:
   - ChangerEtatAccidentMauvaisJoueur2
   - ChangerEtatAccidentMauvaisJoueur3
   - ChangerEtatAccidentMauvaisJoueur4
-  - InstantiateSliders
   DisableAutoOpenWizard: 1
