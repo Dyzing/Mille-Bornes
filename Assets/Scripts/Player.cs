@@ -18,18 +18,22 @@ public class Player : MonoBehaviour
     public static bool move_yes_no1;
     public static bool peutRouler1;
     public static bool hasNotAccident1;
+    public static bool hasEssence1;
 
     public static bool move_yes_no2;
     public static bool peutRouler2;
     public static bool hasNotAccident2;
+    public static bool hasEssence2;
 
     public static bool move_yes_no3;
     public static bool peutRouler3;
     public static bool hasNotAccident3;
+    public static bool hasEssence3;
 
     public static bool move_yes_no4;
     public static bool peutRouler4;
     public static bool hasNotAccident4;
+    public static bool hasEssence4;
 
     public static int joueurSelectionne;
 
@@ -65,18 +69,22 @@ public class Player : MonoBehaviour
         move_yes_no1 = true;
         peutRouler1 = true;
         hasNotAccident1 = true;
+        hasEssence1 = true;
 
         move_yes_no2 = true;
         peutRouler2 = true;
         hasNotAccident2 = true;
+        hasEssence2 = true;
 
         move_yes_no3 = true;
         peutRouler3 = true;
         hasNotAccident3 = true;
+        hasEssence3 = true;
 
         move_yes_no4 = true;
         peutRouler4 = true;
         hasNotAccident4 = true;
+        hasEssence4 = true;
 
         photonView.RPC("ResetEtatStart", PhotonTargets.AllBufferedViaServer);
 
@@ -88,10 +96,10 @@ public class Player : MonoBehaviour
     [PunRPC]
     private void ResetEtatStart()
     {
-        etatJoueur1.text = "Player 1";
-        etatJoueur2.text = "Player 2";
-        etatJoueur3.text = "Player 3";
-        etatJoueur4.text = "Player 4";
+        etatJoueur1.text = "Joueur 1";
+        etatJoueur2.text = "Joueur 2";
+        etatJoueur3.text = "Joueur 3";
+        etatJoueur4.text = "Joueur 4";
     }
 
 
@@ -121,11 +129,22 @@ public class Player : MonoBehaviour
                         photonView.RPC("DeselectJoueur", PhotonTargets.AllBuffered);
                     }
                     break;
+                case "PanneEssence":
+                    if (joueurSelectionne != 0)
+                    {
+                        PanneEssence();
+                        GameManager.carteJouée = "";
+                        photonView.RPC("DeselectJoueur", PhotonTargets.AllBuffered);
+                    }
+                    break;
                 case "Roulez":
                     Roulez();
                     break;
                 case "Reparations":
                     Reparations();
+                    break;
+                case "Essence":
+                    Essence();
                     break;
                 default:
                     break;
@@ -196,16 +215,6 @@ public class Player : MonoBehaviour
 
     public void Stop()
     {
-        Debug.Log("*** Stop AVANT ***");
-        Debug.Log("*** peutRouler1 : " + peutRouler1);
-        Debug.Log("*** peutRouler2 : " + peutRouler2);
-        Debug.Log("*** peutRouler3 : " + peutRouler3);
-        Debug.Log("*** peutRouler4 : " + peutRouler4);
-
-        Debug.Log("*** etatJoueur1 : " + etatJoueur1.text);
-        Debug.Log("*** etatJoueur2 : " + etatJoueur2.text);
-        Debug.Log("*** etatJoueur3 : " + etatJoueur3.text);
-        Debug.Log("*** etatJoueur4 : " + etatJoueur4.text);
 
         if (joueurSelectionne <= PhotonNetwork.room.PlayerCount)
         {
@@ -214,25 +223,25 @@ public class Player : MonoBehaviour
                 case 1:
                     if (move_yes_no1)
                     {
-                        photonView.RPC("ChangeStateMasterStop", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Stop");
+                        photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Stop");
                     }
                     break;
                 case 2:
                     if (move_yes_no2)
                     {
-                        photonView.RPC("ChangeStateMasterStop", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Stop");
+                        photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Stop");
                     }
                     break;
                 case 3:
                     if (move_yes_no3)
                     {
-                        photonView.RPC("ChangeStateMasterStop", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Stop");
+                        photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Stop");
                     }
                     break;
                 case 4:
                     if (move_yes_no4)
                     {
-                        photonView.RPC("ChangeStateMasterStop", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Stop");
+                        photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Stop");
                     }
                     break;
                 default:
@@ -240,20 +249,10 @@ public class Player : MonoBehaviour
             }
         }
 
-        Debug.Log("*** Stop APRES ***");
-        Debug.Log("*** peutRouler1 : " + peutRouler1);
-        Debug.Log("*** peutRouler2 : " + peutRouler2);
-        Debug.Log("*** peutRouler3 : " + peutRouler3);
-        Debug.Log("*** peutRouler4 : " + peutRouler4);
-
-        Debug.Log("*** etatJoueur1 : " + etatJoueur1.text);
-        Debug.Log("*** etatJoueur2 : " + etatJoueur2.text);
-        Debug.Log("*** etatJoueur3 : " + etatJoueur3.text);
-        Debug.Log("*** etatJoueur4 : " + etatJoueur4.text);
     }
 
     [PunRPC]
-    private void ChangeStateMasterStop(int joueur, bool peutRouler, bool moveYesNo, string text)
+    private void ChangeStateStop(int joueur, bool peutRouler, bool moveYesNo, string text)
     {
         switch (joueur)
         {
@@ -284,17 +283,6 @@ public class Player : MonoBehaviour
 
     public void Accident()
     {
-        Debug.Log("*** Accident AVANT ***");
-        Debug.Log("*** hasNotAccident1 : " + hasNotAccident1);
-        Debug.Log("*** hasNotAccident2 : " + hasNotAccident2);
-        Debug.Log("*** hasNotAccident3 : " + hasNotAccident3);
-        Debug.Log("*** hasNotAccident4 : " + hasNotAccident4);
-
-        Debug.Log("*** etatJoueur1 : " + etatJoueur1.text);
-        Debug.Log("*** etatJoueur2 : " + etatJoueur2.text);
-        Debug.Log("*** etatJoueur3 : " + etatJoueur3.text);
-        Debug.Log("*** etatJoueur4 : " + etatJoueur4.text);
-
         if (joueurSelectionne <= PhotonNetwork.room.PlayerCount)
         {
             switch (joueurSelectionne)
@@ -302,46 +290,36 @@ public class Player : MonoBehaviour
                 case 1:
                     if (move_yes_no1)
                     {
-                        photonView.RPC("ChangeStateMasterAccident", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Accident");
+                        photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Accident");
                     }
                     break;
                 case 2:
                     if (move_yes_no2)
                     {
-                        photonView.RPC("ChangeStateMasterAccident", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Accident");
+                        photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Accident");
                     }
                     break;
                 case 3:
                     if (move_yes_no3)
                     {
-                        photonView.RPC("ChangeStateMasterAccident", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Accident");
+                        photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Accident");
                     }
                     break;
                 case 4:
                     if (move_yes_no4)
                     {
-                        photonView.RPC("ChangeStateMasterAccident", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Accident");
+                        photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Accident");
                     }
                     break;
                 default:
                     break;
             }
         }
-
-        Debug.Log("*** Accident APRES ***");
-        Debug.Log("*** hasNotAccident1 : " + hasNotAccident1);
-        Debug.Log("*** hasNotAccident2 : " + hasNotAccident2);
-        Debug.Log("*** hasNotAccident3 : " + hasNotAccident3);
-        Debug.Log("*** hasNotAccident4 : " + hasNotAccident4);
-
-        Debug.Log("*** etatJoueur1 : " + etatJoueur1.text);
-        Debug.Log("*** etatJoueur2 : " + etatJoueur2.text);
-        Debug.Log("*** etatJoueur3 : " + etatJoueur3.text);
-        Debug.Log("*** etatJoueur4 : " + etatJoueur4.text);
     }
 
+
     [PunRPC]
-    private void ChangeStateMasterAccident(int joueur, bool hasNotAccident, bool moveYesNo, string text)
+    private void ChangeStateAccident(int joueur, bool hasNotAccident, bool moveYesNo, string text)
     {
         switch (joueur)
         {
@@ -369,12 +347,79 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    public void PanneEssence()
+    {
+        if (joueurSelectionne <= PhotonNetwork.room.PlayerCount)
+        {
+            switch (joueurSelectionne)
+            {
+                case 1:
+                    if (move_yes_no1)
+                    {
+                        photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Panne d'essence");
+                    }
+                    break;
+                case 2:
+                    if (move_yes_no2)
+                    {
+                        photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Panne d'essence");
+                    }
+                    break;
+                case 3:
+                    if (move_yes_no3)
+                    {
+                        photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Panne d'essence");
+                    }
+                    break;
+                case 4:
+                    if (move_yes_no4)
+                    {
+                        photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Panne d'essence");
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    [PunRPC]
+    private void ChangeStateEssence(int joueur, bool newStatusMalus, bool moveYesNo, string text)
+    {
+        switch (joueur)
+        {
+            case 1:
+                hasEssence1 = newStatusMalus;
+                move_yes_no1 = moveYesNo;
+                etatJoueur1.text = text;
+                break;
+            case 2:
+                hasEssence2 = newStatusMalus;
+                move_yes_no2 = moveYesNo;
+                etatJoueur2.text = text;
+                break;
+            case 3:
+                hasEssence3 = newStatusMalus;
+                move_yes_no3 = moveYesNo;
+                etatJoueur3.text = text;
+                break;
+            case 4:
+                hasEssence4 = newStatusMalus;
+                move_yes_no4 = moveYesNo;
+                etatJoueur4.text = text;
+                break;
+
+        }
+    }
+
     [PunRPC]
     private void ChangerEtatBonJoueur1()
     {
         peutRouler1 = true;
         move_yes_no1 = true;
         hasNotAccident1 = true;
+        hasEssence1 = true;
         etatJoueur1.text = "Joueur 1 ";
     }
 
@@ -384,6 +429,7 @@ public class Player : MonoBehaviour
         peutRouler2 = true;
         move_yes_no2 = true;
         hasNotAccident2 = true;
+        hasEssence2 = true;
         etatJoueur2.text = "Joueur 2 ";
     }
 
@@ -393,6 +439,7 @@ public class Player : MonoBehaviour
         peutRouler3 = true;
         move_yes_no3 = true;
         hasNotAccident3 = true;
+        hasEssence3 = true;
         etatJoueur3.text = "Joueur 3 ";
     }
 
@@ -402,6 +449,7 @@ public class Player : MonoBehaviour
         peutRouler4 = true;
         move_yes_no4 = true;
         hasNotAccident4 = true;
+        hasEssence4 = true;
         etatJoueur4.text = "Joueur 4 ";
     }
 
@@ -462,6 +510,39 @@ public class Player : MonoBehaviour
                 break;
             case 4:
                 if (!hasNotAccident4)
+                {
+                    photonView.RPC("ChangerEtatBonJoueur4", PhotonTargets.AllViaServer);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void Essence()
+    {
+        switch (PhotonNetwork.player.ID)
+        {
+            case 1:
+                if (!hasEssence1)
+                {
+                    photonView.RPC("ChangerEtatBonJoueur1", PhotonTargets.AllViaServer);
+                }
+                break;
+            case 2:
+                if (!hasEssence2)
+                {
+                    photonView.RPC("ChangerEtatBonJoueur2", PhotonTargets.AllViaServer);
+                }
+                break;
+            case 3:
+                if (!hasEssence3)
+                {
+                    photonView.RPC("ChangerEtatBonJoueur3", PhotonTargets.AllViaServer);
+                }
+                break;
+            case 4:
+                if (!hasEssence4)
                 {
                     photonView.RPC("ChangerEtatBonJoueur4", PhotonTargets.AllViaServer);
                 }

@@ -66,4 +66,8 @@ MonoBehaviour:
   - ChangeStateMasterAccident
   - ChangeStateMasterStop
   - UpdateSliders
+  - ChangeStateMalus
+  - ChangeStateEssence
+  - ChangeStateAccident
+  - ChangeStateStop
   DisableAutoOpenWizard: 1

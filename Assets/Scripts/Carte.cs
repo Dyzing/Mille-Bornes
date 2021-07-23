@@ -44,7 +44,7 @@ public class Carte : HUD
 
     public void ChangerCarte(int effetCarte)
     {
-        effetCarteId = UnityEngine.Random.Range(0, 9);
+        effetCarteId = UnityEngine.Random.Range(0, 11);
         Sprite spriteLoaded = Resources.Load<Sprite>("Cartes/" + GameManager.mapCarte[effetCarteId]);
         carte_i.GetComponent<Image>().sprite = spriteLoaded;
         photonView.RPC("UpdateSliders", PhotonTargets.AllBufferedViaServer, effetCarte);
@@ -224,7 +224,7 @@ public class Carte : HUD
     private IEnumerator CoroutineAToiDeJouer()
     {
         GameManager.aToiDeJouerPanel.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         GameManager.aToiDeJouerPanel.SetActive(false);
     }
 
@@ -261,6 +261,9 @@ public class Carte : HUD
                             case 7:
                                 AfficherJoueursSelectionAccident();
                                 break;
+                            case 9:
+                                AfficherJoueursSelectionPanneEssence();
+                                break;
                             default:
                                 break;
                         }
@@ -280,6 +283,12 @@ public class Carte : HUD
                                 break;
                             case 8:
                                 ChangerCarteJouee("Reparations");
+                                break;
+                            case 9:
+                                AfficherJoueursSelectionPanneEssence();
+                                break;
+                            case 10:
+                                ChangerCarteJouee("Essence");
                                 break;
                             default:
                                 break;
@@ -312,6 +321,9 @@ public class Carte : HUD
                             case 7:
                                 AfficherJoueursSelectionAccident();
                                 break;
+                            case 9:
+                                AfficherJoueursSelectionPanneEssence();
+                                break;
                             default:
                                 break;
                         }
@@ -331,6 +343,12 @@ public class Carte : HUD
                                 break;
                             case 8:
                                 ChangerCarteJouee("Reparations");
+                                break;
+                            case 9:
+                                AfficherJoueursSelectionPanneEssence();
+                                break;
+                            case 10:
+                                ChangerCarteJouee("Essence");
                                 break;
                             default:
                                 break;
@@ -363,6 +381,9 @@ public class Carte : HUD
                             case 7:
                                 AfficherJoueursSelectionAccident();
                                 break;
+                            case 9:
+                                AfficherJoueursSelectionPanneEssence();
+                                break;
                             default:
                                 break;
                         }
@@ -382,6 +403,12 @@ public class Carte : HUD
                                 break;
                             case 8:
                                 ChangerCarteJouee("Reparations");
+                                break;
+                            case 9:
+                                AfficherJoueursSelectionPanneEssence();
+                                break;
+                            case 10:
+                                ChangerCarteJouee("Essence");
                                 break;
                             default:
                                 break;
@@ -414,6 +441,9 @@ public class Carte : HUD
                             case 7:
                                 AfficherJoueursSelectionAccident();
                                 break;
+                            case 9:
+                                AfficherJoueursSelectionPanneEssence();
+                                break;
                             default:
                                 break;
                         }
@@ -433,6 +463,12 @@ public class Carte : HUD
                                 break;
                             case 8:
                                 ChangerCarteJouee("Reparations");
+                                break;
+                            case 9:
+                                AfficherJoueursSelectionPanneEssence();
+                                break;
+                            case 10:
+                                ChangerCarteJouee("Essence");
                                 break;
                             default:
                                 break;
@@ -506,6 +542,11 @@ public class Carte : HUD
         GameManager.carteJouée = "Accident";
     }
 
+    public void AfficherJoueursSelectionPanneEssence()
+    {
+        GameManager.selectionJoueursPanel.SetActive(true);
+        GameManager.carteJouée = "PanneEssence";
+    }
 
     public void ChangerCarteJouee(string cartejouee)
     {
