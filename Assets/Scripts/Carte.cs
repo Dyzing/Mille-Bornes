@@ -18,7 +18,7 @@ public class Carte : HUD
     {
         if (PhotonNetwork.isMasterClient)
         {
-            photonView.RPC("InstantiateIds", PhotonTargets.AllBufferedViaServer);
+            photonView.RPC("InstantiateIds", PhotonTargets.AllViaServer);
         }
     }
     void Start()
@@ -26,7 +26,7 @@ public class Carte : HUD
         
         if (PhotonNetwork.isMasterClient)
         {
-            photonView.RPC("InstantiateIds", PhotonTargets.AllBufferedViaServer);
+            photonView.RPC("InstantiateIds", PhotonTargets.AllViaServer);
         }
         ChangerCarte(-1);
         GameManager.tour_joueur_i.text = "Tour au joueur " + 1;
@@ -36,17 +36,17 @@ public class Carte : HUD
     {
         if (!stopIdEquals1)
         {
-            photonView.RPC("InstantiateIds", PhotonTargets.AllBufferedViaServer);
+            photonView.RPC("InstantiateIds", PhotonTargets.AllViaServer);
             stopIdEquals1 = true;
         }
     }
 
     public void ChangerCarte(int effetCarte)
     {
-        effetCarteId = UnityEngine.Random.Range(0, 9);
+        effetCarteId = UnityEngine.Random.Range(2, 9);
         Sprite spriteLoaded = Resources.Load<Sprite>("Cartes/" + GameManager.mapCarte[effetCarteId]);
         carte_i.GetComponent<Image>().sprite = spriteLoaded;
-        photonView.RPC("UpdateSliders", PhotonTargets.AllBufferedViaServer, effetCarte);
+        photonView.RPC("UpdateSliders", PhotonTargets.AllBufferedViaServer,effetCarte);
 
     }
     [PunRPC]
@@ -425,7 +425,7 @@ public class Carte : HUD
                     break;
             }
             ChangerCarte(effetCarteId);
-            photonView.RPC("ChangerIdTour", PhotonTargets.AllBufferedViaServer);
+            photonView.RPC("ChangerIdTour", PhotonTargets.AllViaServer);
         }
     }
 
@@ -519,25 +519,25 @@ public class Carte : HUD
             case 1:
                 if (!GameManager.peutRouler1)
                 {
-                    photonView.RPC("ChangerEtatBonJoueur1", PhotonTargets.AllBufferedViaServer);
+                    photonView.RPC("ChangerEtatBonJoueur1", PhotonTargets.AllViaServer);
                 }
                 break;
             case 2:
                 if (!GameManager.peutRouler2)
                 {
-                    photonView.RPC("ChangerEtatBonJoueur2", PhotonTargets.AllBufferedViaServer);
+                    photonView.RPC("ChangerEtatBonJoueur2", PhotonTargets.AllViaServer);
                 }
                 break;
             case 3:
                 if (!GameManager.peutRouler3)
                 {
-                    photonView.RPC("ChangerEtatBonJoueur3", PhotonTargets.AllBufferedViaServer);
+                    photonView.RPC("ChangerEtatBonJoueur3", PhotonTargets.AllViaServer);
                 }
                 break;
             case 4:
                 if (!GameManager.peutRouler4)
                 {
-                    photonView.RPC("ChangerEtatBonJoueur4", PhotonTargets.AllBufferedViaServer);
+                    photonView.RPC("ChangerEtatBonJoueur4", PhotonTargets.AllViaServer);
                 }
                 break;
             default:
@@ -552,25 +552,25 @@ public class Carte : HUD
             case 1:
                 if (!GameManager.hasNotAccident1)
                 {
-                    photonView.RPC("ChangerEtatBonJoueur1", PhotonTargets.AllBufferedViaServer);
+                    photonView.RPC("ChangerEtatBonJoueur1", PhotonTargets.AllViaServer);
                 }
                 break;
             case 2:
                 if (!GameManager.hasNotAccident2)
                 {
-                    photonView.RPC("ChangerEtatBonJoueur2", PhotonTargets.AllBufferedViaServer);
+                    photonView.RPC("ChangerEtatBonJoueur2", PhotonTargets.AllViaServer);
                 }
                 break;
             case 3:
                 if (!GameManager.hasNotAccident3)
                 {
-                    photonView.RPC("ChangerEtatBonJoueur3", PhotonTargets.AllBufferedViaServer);
+                    photonView.RPC("ChangerEtatBonJoueur3", PhotonTargets.AllViaServer);
                 }
                 break;
             case 4:
                 if (!GameManager.hasNotAccident4)
                 {
-                    photonView.RPC("ChangerEtatBonJoueur4", PhotonTargets.AllBufferedViaServer);
+                    photonView.RPC("ChangerEtatBonJoueur4", PhotonTargets.AllViaServer);
                 }
                 break;
             default:

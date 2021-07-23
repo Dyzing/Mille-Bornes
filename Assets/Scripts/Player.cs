@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
         voiturepos = destination;
         voiturepos.y += 4f;
 
-        photonView.RPC("VoitureNewPos", PhotonTargets.AllBufferedViaServer);
+        photonView.RPC("VoitureNewPos", PhotonTargets.AllBuffered);
 
         if (GameManager.KM_1 <= 38)
         {
