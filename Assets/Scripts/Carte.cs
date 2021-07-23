@@ -44,7 +44,7 @@ public class Carte : HUD
 
     public void ChangerCarte(int effetCarte)
     {
-        effetCarteId = UnityEngine.Random.Range(0, 13);
+        effetCarteId = UnityEngine.Random.Range(0, 15);
         Sprite spriteLoaded = Resources.Load<Sprite>("Cartes/" + GameManager.mapCarte[effetCarteId]);
         carte_i.GetComponent<Image>().sprite = spriteLoaded;
         photonView.RPC("UpdateSliders", PhotonTargets.AllBufferedViaServer, effetCarte);
@@ -247,13 +247,16 @@ public class Carte : HUD
                                 Selection50();
                                 break;
                             case 2:
-                                Selection75();
+                                if(Player.hasNotLimite1)
+                                    Selection75();
                                 break;
                             case 3:
-                                Selection100();
+                                if (Player.hasNotLimite1)
+                                    Selection100();
                                 break;
                             case 4:
-                                Selection200();
+                                if (Player.hasNotLimite1)
+                                    Selection200();
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
@@ -266,6 +269,12 @@ public class Carte : HUD
                                 break;
                             case 12:
                                 AfficherJoueursSelectionCrevaison();
+                                break;
+                            case 13:
+                                AfficherJoueursSelectionLimite();
+                                break;
+                            case 14:
+                                ChangerCarteJouee("Fin limite vitesse");
                                 break;
                             default:
                                 break;
@@ -298,6 +307,12 @@ public class Carte : HUD
                                 break;
                             case 12:
                                 AfficherJoueursSelectionCrevaison();
+                                break;
+                            case 13:
+                                AfficherJoueursSelectionLimite();
+                                break;
+                            case 14:
+                                ChangerCarteJouee("Fin limite vitesse");
                                 break;
                             default:
                                 break;
@@ -316,13 +331,16 @@ public class Carte : HUD
                                 Selection50();
                                 break;
                             case 2:
-                                Selection75();
+                                if (Player.hasNotLimite2)
+                                    Selection75();
                                 break;
                             case 3:
-                                Selection100();
+                                if (Player.hasNotLimite2)
+                                    Selection100();
                                 break;
                             case 4:
-                                Selection200();
+                                if (Player.hasNotLimite2)
+                                    Selection200();
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
@@ -335,6 +353,12 @@ public class Carte : HUD
                                 break;
                             case 12:
                                 AfficherJoueursSelectionCrevaison();
+                                break;
+                            case 13:
+                                AfficherJoueursSelectionLimite();
+                                break;
+                            case 14:
+                                ChangerCarteJouee("Fin limite vitesse");
                                 break;
                             default:
                                 break;
@@ -367,6 +391,12 @@ public class Carte : HUD
                                 break;
                             case 12:
                                 AfficherJoueursSelectionCrevaison();
+                                break;
+                            case 13:
+                                AfficherJoueursSelectionLimite();
+                                break;
+                            case 14:
+                                ChangerCarteJouee("Fin limite vitesse");
                                 break;
                             default:
                                 break;
@@ -385,13 +415,16 @@ public class Carte : HUD
                                 Selection50();
                                 break;
                             case 2:
-                                Selection75();
+                                if (Player.hasNotLimite3)
+                                    Selection75();
                                 break;
                             case 3:
-                                Selection100();
+                                if (Player.hasNotLimite3)
+                                    Selection100();
                                 break;
                             case 4:
-                                Selection200();
+                                if (Player.hasNotLimite3)
+                                    Selection200();
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
@@ -404,6 +437,12 @@ public class Carte : HUD
                                 break;
                             case 12:
                                 AfficherJoueursSelectionCrevaison();
+                                break;
+                            case 13:
+                                AfficherJoueursSelectionLimite();
+                                break;
+                            case 14:
+                                ChangerCarteJouee("Fin limite vitesse");
                                 break;
                             default:
                                 break;
@@ -436,6 +475,12 @@ public class Carte : HUD
                                 break;
                             case 12:
                                 AfficherJoueursSelectionCrevaison();
+                                break;
+                            case 13:
+                                AfficherJoueursSelectionLimite();
+                                break;
+                            case 14:
+                                ChangerCarteJouee("Fin limite vitesse");
                                 break;
                             default:
                                 break;
@@ -454,13 +499,16 @@ public class Carte : HUD
                                 Selection50();
                                 break;
                             case 2:
-                                Selection75();
+                                if (Player.hasNotLimite4)
+                                    Selection75();
                                 break;
                             case 3:
-                                Selection100();
+                                if (Player.hasNotLimite4)
+                                    Selection100();
                                 break;
                             case 4:
-                                Selection200();
+                                if (Player.hasNotLimite4)
+                                    Selection200();
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
@@ -473,6 +521,12 @@ public class Carte : HUD
                                 break;
                             case 12:
                                 AfficherJoueursSelectionCrevaison();
+                                break;
+                            case 13:
+                                AfficherJoueursSelectionLimite();
+                                break;
+                            case 14:
+                                ChangerCarteJouee("Fin limite vitesse");
                                 break;
                             default:
                                 break;
@@ -505,6 +559,12 @@ public class Carte : HUD
                                 break;
                             case 12:
                                 AfficherJoueursSelectionCrevaison();
+                                break;
+                            case 13:
+                                AfficherJoueursSelectionLimite();
+                                break;
+                            case 14:
+                                ChangerCarteJouee("Fin limite vitesse");
                                 break;
                             default:
                                 break;
@@ -588,6 +648,12 @@ public class Carte : HUD
     {
         GameManager.selectionJoueursPanel.SetActive(true);
         GameManager.carteJouée = "Crevaison";
+    }
+
+    public void AfficherJoueursSelectionLimite()
+    {
+        GameManager.selectionJoueursPanel.SetActive(true);
+        GameManager.carteJouée = "LimiteVitesse";
     }
 
     public void ChangerCarteJouee(string cartejouee)
