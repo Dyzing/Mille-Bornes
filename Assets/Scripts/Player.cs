@@ -19,21 +19,25 @@ public class Player : MonoBehaviour
     public static bool peutRouler1;
     public static bool hasNotAccident1;
     public static bool hasEssence1;
+    public static bool hasCrevaison1;
 
     public static bool move_yes_no2;
     public static bool peutRouler2;
     public static bool hasNotAccident2;
     public static bool hasEssence2;
+    public static bool hasCrevaison2;
 
     public static bool move_yes_no3;
     public static bool peutRouler3;
     public static bool hasNotAccident3;
     public static bool hasEssence3;
+    public static bool hasCrevaison3;
 
     public static bool move_yes_no4;
     public static bool peutRouler4;
     public static bool hasNotAccident4;
     public static bool hasEssence4;
+    public static bool hasCrevaison4;
 
     public static int joueurSelectionne;
 
@@ -70,21 +74,25 @@ public class Player : MonoBehaviour
         peutRouler1 = true;
         hasNotAccident1 = true;
         hasEssence1 = true;
+        hasCrevaison1 = true;
 
         move_yes_no2 = true;
         peutRouler2 = true;
         hasNotAccident2 = true;
         hasEssence2 = true;
+        hasCrevaison2 = true;
 
         move_yes_no3 = true;
         peutRouler3 = true;
         hasNotAccident3 = true;
         hasEssence3 = true;
+        hasCrevaison3 = true;
 
         move_yes_no4 = true;
         peutRouler4 = true;
         hasNotAccident4 = true;
         hasEssence4 = true;
+        hasCrevaison4 = true;
 
         photonView.RPC("ResetEtatStart", PhotonTargets.AllBufferedViaServer);
 
@@ -137,6 +145,14 @@ public class Player : MonoBehaviour
                         photonView.RPC("DeselectJoueur", PhotonTargets.AllBuffered);
                     }
                     break;
+                case "Crevaison":
+                    if (joueurSelectionne != 0)
+                    {
+                        Crevaison();
+                        GameManager.carteJouée = "";
+                        photonView.RPC("DeselectJoueur", PhotonTargets.AllBuffered);
+                    }
+                    break;
                 case "Roulez":
                     Roulez();
                     break;
@@ -145,6 +161,9 @@ public class Player : MonoBehaviour
                     break;
                 case "Essence":
                     Essence();
+                    break;
+                case "Roue de secours":
+                    RoueDeSecours();
                     break;
                 default:
                     break;
@@ -413,6 +432,72 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    public void Crevaison()
+    {
+        if (joueurSelectionne <= PhotonNetwork.room.PlayerCount)
+        {
+            switch (joueurSelectionne)
+            {
+                case 1:
+                    if (move_yes_no1)
+                    {
+                        photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Crevaison");
+                    }
+                    break;
+                case 2:
+                    if (move_yes_no2)
+                    {
+                        photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Crevaison");
+                    }
+                    break;
+                case 3:
+                    if (move_yes_no3)
+                    {
+                        photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Crevaison");
+                    }
+                    break;
+                case 4:
+                    if (move_yes_no4)
+                    {
+                        photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Crevaison");
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    [PunRPC]
+    private void ChangeStateCrevaison(int joueur, bool newStatusMalus, bool moveYesNo, string text)
+    {
+        switch (joueur)
+        {
+            case 1:
+                hasCrevaison1 = newStatusMalus;
+                move_yes_no1 = moveYesNo;
+                etatJoueur1.text = text;
+                break;
+            case 2:
+                hasCrevaison2 = newStatusMalus;
+                move_yes_no2 = moveYesNo;
+                etatJoueur2.text = text;
+                break;
+            case 3:
+                hasCrevaison3 = newStatusMalus;
+                move_yes_no3 = moveYesNo;
+                etatJoueur3.text = text;
+                break;
+            case 4:
+                hasCrevaison4 = newStatusMalus;
+                move_yes_no4 = moveYesNo;
+                etatJoueur4.text = text;
+                break;
+
+        }
+    }
+
     [PunRPC]
     private void ChangerEtatBonJoueur1()
     {
@@ -420,6 +505,7 @@ public class Player : MonoBehaviour
         move_yes_no1 = true;
         hasNotAccident1 = true;
         hasEssence1 = true;
+        hasCrevaison1 = true;
         etatJoueur1.text = "Joueur 1 ";
     }
 
@@ -430,6 +516,7 @@ public class Player : MonoBehaviour
         move_yes_no2 = true;
         hasNotAccident2 = true;
         hasEssence2 = true;
+        hasCrevaison2 = true;
         etatJoueur2.text = "Joueur 2 ";
     }
 
@@ -440,6 +527,7 @@ public class Player : MonoBehaviour
         move_yes_no3 = true;
         hasNotAccident3 = true;
         hasEssence3 = true;
+        hasCrevaison3 = true;
         etatJoueur3.text = "Joueur 3 ";
     }
 
@@ -450,6 +538,7 @@ public class Player : MonoBehaviour
         move_yes_no4 = true;
         hasNotAccident4 = true;
         hasEssence4 = true;
+        hasCrevaison4 = true;
         etatJoueur4.text = "Joueur 4 ";
     }
 
@@ -543,6 +632,39 @@ public class Player : MonoBehaviour
                 break;
             case 4:
                 if (!hasEssence4)
+                {
+                    photonView.RPC("ChangerEtatBonJoueur4", PhotonTargets.AllViaServer);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void RoueDeSecours()
+    {
+        switch (PhotonNetwork.player.ID)
+        {
+            case 1:
+                if (!hasCrevaison1)
+                {
+                    photonView.RPC("ChangerEtatBonJoueur1", PhotonTargets.AllViaServer);
+                }
+                break;
+            case 2:
+                if (!hasCrevaison2)
+                {
+                    photonView.RPC("ChangerEtatBonJoueur2", PhotonTargets.AllViaServer);
+                }
+                break;
+            case 3:
+                if (!hasCrevaison3)
+                {
+                    photonView.RPC("ChangerEtatBonJoueur3", PhotonTargets.AllViaServer);
+                }
+                break;
+            case 4:
+                if (!hasCrevaison4)
                 {
                     photonView.RPC("ChangerEtatBonJoueur4", PhotonTargets.AllViaServer);
                 }

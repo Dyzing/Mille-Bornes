@@ -44,7 +44,7 @@ public class Carte : HUD
 
     public void ChangerCarte(int effetCarte)
     {
-        effetCarteId = UnityEngine.Random.Range(0, 11);
+        effetCarteId = UnityEngine.Random.Range(0, 13);
         Sprite spriteLoaded = Resources.Load<Sprite>("Cartes/" + GameManager.mapCarte[effetCarteId]);
         carte_i.GetComponent<Image>().sprite = spriteLoaded;
         photonView.RPC("UpdateSliders", PhotonTargets.AllBufferedViaServer, effetCarte);
@@ -264,6 +264,9 @@ public class Carte : HUD
                             case 9:
                                 AfficherJoueursSelectionPanneEssence();
                                 break;
+                            case 12:
+                                AfficherJoueursSelectionCrevaison();
+                                break;
                             default:
                                 break;
                         }
@@ -289,6 +292,12 @@ public class Carte : HUD
                                 break;
                             case 10:
                                 ChangerCarteJouee("Essence");
+                                break;
+                            case 11:
+                                ChangerCarteJouee("Roue de secours");
+                                break;
+                            case 12:
+                                AfficherJoueursSelectionCrevaison();
                                 break;
                             default:
                                 break;
@@ -324,6 +333,9 @@ public class Carte : HUD
                             case 9:
                                 AfficherJoueursSelectionPanneEssence();
                                 break;
+                            case 12:
+                                AfficherJoueursSelectionCrevaison();
+                                break;
                             default:
                                 break;
                         }
@@ -349,6 +361,12 @@ public class Carte : HUD
                                 break;
                             case 10:
                                 ChangerCarteJouee("Essence");
+                                break;
+                            case 11:
+                                ChangerCarteJouee("Roue de secours");
+                                break;
+                            case 12:
+                                AfficherJoueursSelectionCrevaison();
                                 break;
                             default:
                                 break;
@@ -384,6 +402,9 @@ public class Carte : HUD
                             case 9:
                                 AfficherJoueursSelectionPanneEssence();
                                 break;
+                            case 12:
+                                AfficherJoueursSelectionCrevaison();
+                                break;
                             default:
                                 break;
                         }
@@ -409,6 +430,12 @@ public class Carte : HUD
                                 break;
                             case 10:
                                 ChangerCarteJouee("Essence");
+                                break;
+                            case 11:
+                                ChangerCarteJouee("Roue de secours");
+                                break;
+                            case 12:
+                                AfficherJoueursSelectionCrevaison();
                                 break;
                             default:
                                 break;
@@ -444,6 +471,9 @@ public class Carte : HUD
                             case 9:
                                 AfficherJoueursSelectionPanneEssence();
                                 break;
+                            case 12:
+                                AfficherJoueursSelectionCrevaison();
+                                break;
                             default:
                                 break;
                         }
@@ -469,6 +499,12 @@ public class Carte : HUD
                                 break;
                             case 10:
                                 ChangerCarteJouee("Essence");
+                                break;
+                            case 11:
+                                ChangerCarteJouee("Roue de secours");
+                                break;
+                            case 12:
+                                AfficherJoueursSelectionCrevaison();
                                 break;
                             default:
                                 break;
@@ -546,6 +582,12 @@ public class Carte : HUD
     {
         GameManager.selectionJoueursPanel.SetActive(true);
         GameManager.carteJouée = "PanneEssence";
+    }
+
+    public void AfficherJoueursSelectionCrevaison()
+    {
+        GameManager.selectionJoueursPanel.SetActive(true);
+        GameManager.carteJouée = "Crevaison";
     }
 
     public void ChangerCarteJouee(string cartejouee)

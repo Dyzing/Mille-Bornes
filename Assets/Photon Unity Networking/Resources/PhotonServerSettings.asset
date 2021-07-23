@@ -70,4 +70,5 @@ MonoBehaviour:
   - ChangeStateEssence
   - ChangeStateAccident
   - ChangeStateStop
+  - ChangeStateCrevaison
   DisableAutoOpenWizard: 1
