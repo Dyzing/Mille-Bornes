@@ -65,4 +65,5 @@ MonoBehaviour:
   - ResetEtatStart
   - ChangeStateMasterAccident
   - ChangeStateMasterStop
+  - UpdateSliders
   DisableAutoOpenWizard: 1

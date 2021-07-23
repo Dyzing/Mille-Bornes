@@ -25,6 +25,16 @@ public class GameManager : MonoBehaviour
     public GameObject carte5HUD;
     public GameObject carte6HUD;
 
+    public static TextMeshProUGUI KmPlayerP1;
+    public static TextMeshProUGUI KmPlayerP2;
+    public static TextMeshProUGUI KmPlayerP3;
+    public static TextMeshProUGUI KmPlayerP4;
+
+    public static int KmP1;
+    public static int KmP2;
+    public static int KmP3;
+    public static int KmP4;
+
     public static GameObject selectionJoueursPanel;
 
 
@@ -56,11 +66,19 @@ public class GameManager : MonoBehaviour
     {
         gameCanvas.SetActive(true);
         KM_1 = 0;
+        KmP1 = 0;
+        KmP2 = 0;
+        KmP3 = 0;
+        KmP4 = 0;
         id_tour_actuel = 1;
         carteJouée = "";
         tour_joueur_i = GameObject.Find("TourJoueurText").GetComponent<TextMeshProUGUI>();
         selectionJoueursPanel = GameObject.Find("SelectionJoueursPanel");
         selectionJoueursPanel.SetActive(false);
+        KmPlayerP1 = GameObject.Find("KmtextP1").GetComponent<TextMeshProUGUI>();
+        KmPlayerP2 = GameObject.Find("KmtextP2").GetComponent<TextMeshProUGUI>();
+        KmPlayerP3 = GameObject.Find("KmtextP3").GetComponent<TextMeshProUGUI>();
+        KmPlayerP4 = GameObject.Find("KmtextP4").GetComponent<TextMeshProUGUI>();
     }
 
     void Update()

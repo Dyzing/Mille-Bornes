@@ -29,7 +29,7 @@ public class Carte : HUD
         {
             photonView.RPC("InstantiateIds", PhotonTargets.AllBuffered);
         }
-        ChangerCarte();
+        ChangerCarte(-1);
         GameManager.tour_joueur_i.text = "Tour au joueur " + 1;
     }
 
@@ -42,11 +42,151 @@ public class Carte : HUD
         }
     }
 
-    public void ChangerCarte()
+    public void ChangerCarte(int effetCarte)
     {
         effetCarteId = UnityEngine.Random.Range(2, 9);
         Sprite spriteLoaded = Resources.Load<Sprite>("Cartes/" + GameManager.mapCarte[effetCarteId]);
         carte_i.GetComponent<Image>().sprite = spriteLoaded;
+        photonView.RPC("UpdateSliders", PhotonTargets.AllBufferedViaServer, effetCarte);
+
+    }
+    [PunRPC]
+    private void UpdateSliders(int effetCarte)
+    {
+
+        switch (GameManager.id_tour_actuel)
+        {
+            case 1:
+                if (Player.move_yes_no1)
+                {
+                    switch (effetCarte)
+                    {
+                        case 0:
+                            GameManager.KmP1 += 25;
+                            break;
+                        case 1:
+                            GameManager.KmP1 += 50;
+                            break;
+                        case 2:
+                            GameManager.KmP1 += 75;
+                            break;
+                        case 3:
+                            GameManager.KmP1 += 100;
+                            break;
+                        case 4:
+                            GameManager.KmP1 += 200;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                break;
+
+            case 2:
+                if (Player.move_yes_no2)
+                {
+                    switch (effetCarte)
+                    {
+                        case 0:
+                            GameManager.KmP2 += 25;
+                            break;
+                        case 1:
+                            GameManager.KmP2 += 50;
+                            break;
+                        case 2:
+                            GameManager.KmP2 += 75;
+                            break;
+                        case 3:
+                            GameManager.KmP2 += 100;
+                            break;
+                        case 4:
+                            GameManager.KmP2 += 200;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                break;
+
+            case 3:
+                if (Player.move_yes_no3)
+                {
+                    switch (effetCarte)
+                    {
+                        case 0:
+                            GameManager.KmP3 += 25;
+                            break;
+                        case 1:
+                            GameManager.KmP3 += 50;
+                            break;
+                        case 2:
+                            GameManager.KmP3 += 75;
+                            break;
+                        case 3:
+                            GameManager.KmP3 += 100;
+                            break;
+                        case 4:
+                            GameManager.KmP3 += 200;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                break;
+
+            case 4:
+                if (Player.move_yes_no4)
+                {
+                    switch (effetCarte)
+                    {
+                        case 0:
+                            GameManager.KmP4 += 25;
+                            break;
+                        case 1:
+                            GameManager.KmP4 += 50;
+                            break;
+                        case 2:
+                            GameManager.KmP4 += 75;
+                            break;
+                        case 3:
+                            GameManager.KmP4 += 100;
+                            break;
+                        case 4:
+                            GameManager.KmP4 += 200;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        for (int i = 0; i < PhotonNetwork.room.PlayerCount; i++)
+
+        {
+            if (i == 0)
+            {
+
+                GameManager.KmPlayerP1.text = "P" + (i + 1) + " :" + Math.Min(GameManager.KmP1, 1000) + " Km";
+            }
+            if (i == 1)
+            {
+                GameManager.KmPlayerP2.text = "P" + (i + 1) + " :" + Math.Min(GameManager.KmP2, 1000) + " Km";
+            }
+            if (i == 2)
+            {
+                GameManager.KmPlayerP3.text = "P" + (i + 1) + " :" + Math.Min(GameManager.KmP3, 1000) + " Km";
+            }
+            if (i == 3)
+            {
+                GameManager.KmPlayerP4.text = "P" + (i + 1) + " :" + Math.Min(GameManager.KmP4, 1000) + " Km";
+            }
+
+        }
+
     }
 
     [PunRPC]
@@ -275,8 +415,8 @@ public class Carte : HUD
                 default:
                     break;
             }
+            ChangerCarte(effetCarteId);
             photonView.RPC("ChangerIdTour", PhotonTargets.AllBufferedViaServer);
-            ChangerCarte();
         }
     }
 
@@ -331,6 +471,12 @@ public class Carte : HUD
     {
         GameManager.selectionJoueursPanel.SetActive(true);
         GameManager.carteJouée = "Stop";
+    }
+
+    public void AfficherJoueursSelectionAccident()
+    {
+        GameManager.selectionJoueursPanel.SetActive(true);
+        GameManager.carteJouée = "Accident";
     }
 
 
