@@ -44,22 +44,18 @@ public class GameManager : Photon.MonoBehaviour
     public static bool move_yes_no1;
     public static bool peutRouler1;
     public static bool hasNotAccident1;
-    public static bool hasEssence1;
 
     public static bool move_yes_no2;
     public static bool peutRouler2;
     public static bool hasNotAccident2;
-    public static bool hasEssence2;
 
     public static bool move_yes_no3;
     public static bool peutRouler3;
     public static bool hasNotAccident3;
-    public static bool hasEssence3;
 
     public static bool move_yes_no4;
     public static bool peutRouler4;
     public static bool hasNotAccident4;
-    public static bool hasEssence4;
 
     public static int joueurSelectionne;
 
@@ -82,10 +78,10 @@ public class GameManager : Photon.MonoBehaviour
         { 7, "accident"},
         { 8, "réparations"},
         { 9, "essence"},
-        { 10, "panneessence"},        
+        { 10, "findelimitedevitesse"},
         { 11, "increvable"},
         { 12, "limitedevitesse"},
-        { 13, "findelimitedevitesse"},
+        { 13, "panneessence"},
         { 14, "rouedesecours"},
         { 15, "citerneessence"},
         { 16, "crevé"},
