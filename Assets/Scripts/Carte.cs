@@ -243,6 +243,9 @@ public class Carte : HUD
                             case 6:
                                 AfficherJoueursSelectionStop();
                                 break;
+                            case 7:
+                                AfficherJoueursSelectionAccident();
+                                break;
                             default:
                                 break;
                         }
@@ -290,6 +293,9 @@ public class Carte : HUD
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
+                                break;
+                            case 7:
+                                AfficherJoueursSelectionAccident();
                                 break;
                             default:
                                 break;
@@ -339,6 +345,9 @@ public class Carte : HUD
                             case 6:
                                 AfficherJoueursSelectionStop();
                                 break;
+                            case 7:
+                                AfficherJoueursSelectionAccident();
+                                break;
                             default:
                                 break;
                         }
@@ -386,6 +395,9 @@ public class Carte : HUD
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
+                                break;
+                            case 7:
+                                AfficherJoueursSelectionAccident();
                                 break;
                             default:
                                 break;
