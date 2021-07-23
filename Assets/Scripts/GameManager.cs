@@ -32,28 +32,19 @@ public class GameManager : MonoBehaviour
 
     public static bool move_yes_no1;
     public static bool peutRouler1;
-    public static bool hasNotAccident1;
 
     public static bool move_yes_no2;
     public static bool peutRouler2;
-    public static bool hasNotAccident2;
 
     public static bool move_yes_no3;
     public static bool peutRouler3;
-    public static bool hasNotAccident3;
 
     public static bool move_yes_no4;
     public static bool peutRouler4;
-    public static bool hasNotAccident4;
 
     public static int joueurSelectionne;
 
     public static GameObject selectionJoueursPanel;
-
-    public static Text etatJoueur1;
-    public static Text etatJoueur2;
-    public static Text etatJoueur3;
-    public static Text etatJoueur4;
 
     public static Dictionary<int, string> mapCarte = new Dictionary<int, string>()
     {
@@ -63,17 +54,17 @@ public class GameManager : MonoBehaviour
         { 3, "100km"},
         { 4, "200km"},
         { 5, "roulez"},
-        { 6, "stop"},
-        { 7, "accident"},
-        { 8, "réparations"},
+        { 6, "stop"},    
+        { 7, "citerneessence"},
+        { 8, "crevé"},
         { 9, "essence"},
         { 10, "findelimitedevitesse"},
         { 11, "increvable"},
         { 12, "limitedevitesse"},
         { 13, "panneessence"},
         { 14, "rouedesecours"},
-        { 15, "citerneessence"},
-        { 16, "crevé"},
+        { 15, "accident"},
+        { 16, "réparations"},
         { 17, "asduvolant"},
         { 18, "vehiculeprioritaire"}
     };
@@ -86,27 +77,16 @@ public class GameManager : MonoBehaviour
         carteJouée = "";
         tour_joueur_i = GameObject.Find("TourJoueurText").GetComponent<TextMeshProUGUI>();
         selectionJoueursPanel = GameObject.Find("SelectionJoueursPanel");
-        etatJoueur1 = GameObject.Find("Joueur1Etat").GetComponent<Text>();
-        etatJoueur2 = GameObject.Find("Joueur2Etat").GetComponent<Text>();
-        etatJoueur3 = GameObject.Find("Joueur3Etat").GetComponent<Text>();
-        etatJoueur4 = GameObject.Find("Joueur4Etat").GetComponent<Text>();
         selectionJoueursPanel.SetActive(false);
 
         move_yes_no1 = true;
         peutRouler1 = true;
-        hasNotAccident1 = true;
-
         move_yes_no2 = true;
         peutRouler2 = true;
-        hasNotAccident2 = true;
-
         move_yes_no3 = true;
         peutRouler3 = true;
-        hasNotAccident3 = true;
-
         move_yes_no4 = true;
         peutRouler4 = true;
-        hasNotAccident4 = true;
 
         joueurSelectionne = 0;
     }
