@@ -44,7 +44,7 @@ public class Carte : HUD
 
     public void ChangerCarte(int effetCarte)
     {
-        effetCarteId = UnityEngine.Random.Range(0, 15);
+        effetCarteId = UnityEngine.Random.Range(0, 16);
         Sprite spriteLoaded = Resources.Load<Sprite>("Cartes/" + GameManager.mapCarte[effetCarteId]);
         carte_i.GetComponent<Image>().sprite = spriteLoaded;
         photonView.RPC("UpdateSliders", PhotonTargets.AllBufferedViaServer, effetCarte);
@@ -276,6 +276,10 @@ public class Carte : HUD
                             case 14:
                                 ChangerCarteJouee("Fin limite vitesse");
                                 break;
+                            case 15:
+                                if(Player.hasNotCrevaison1)
+                                    SelectionIncrevable();
+                                break;
                             default:
                                 break;
                         }
@@ -313,6 +317,10 @@ public class Carte : HUD
                                 break;
                             case 14:
                                 ChangerCarteJouee("Fin limite vitesse");
+                                break;
+                            case 15:
+                                if (Player.hasNotCrevaison1)
+                                    SelectionIncrevable();
                                 break;
                             default:
                                 break;
@@ -360,6 +368,10 @@ public class Carte : HUD
                             case 14:
                                 ChangerCarteJouee("Fin limite vitesse");
                                 break;
+                            case 15:
+                                if (Player.hasNotCrevaison2)
+                                    SelectionIncrevable();
+                                break;
                             default:
                                 break;
                         }
@@ -397,6 +409,10 @@ public class Carte : HUD
                                 break;
                             case 14:
                                 ChangerCarteJouee("Fin limite vitesse");
+                                break;
+                            case 15:
+                                if (Player.hasNotCrevaison2)
+                                    SelectionIncrevable();
                                 break;
                             default:
                                 break;
@@ -444,6 +460,10 @@ public class Carte : HUD
                             case 14:
                                 ChangerCarteJouee("Fin limite vitesse");
                                 break;
+                            case 15:
+                                if (Player.hasNotCrevaison3)
+                                    SelectionIncrevable();
+                                break;
                             default:
                                 break;
                         }
@@ -481,6 +501,10 @@ public class Carte : HUD
                                 break;
                             case 14:
                                 ChangerCarteJouee("Fin limite vitesse");
+                                break;
+                            case 15:
+                                if (Player.hasNotCrevaison3)
+                                    SelectionIncrevable();
                                 break;
                             default:
                                 break;
@@ -528,6 +552,10 @@ public class Carte : HUD
                             case 14:
                                 ChangerCarteJouee("Fin limite vitesse");
                                 break;
+                            case 15:
+                                if (Player.hasNotCrevaison4)
+                                    SelectionIncrevable();
+                                break;
                             default:
                                 break;
                         }
@@ -565,6 +593,10 @@ public class Carte : HUD
                                 break;
                             case 14:
                                 ChangerCarteJouee("Fin limite vitesse");
+                                break;
+                            case 15:
+                                if (Player.hasNotCrevaison4)
+                                    SelectionIncrevable();
                                 break;
                             default:
                                 break;
@@ -656,8 +688,15 @@ public class Carte : HUD
         GameManager.carteJouée = "LimiteVitesse";
     }
 
+    public void SelectionIncrevable()
+    {
+        GameManager.carteJouée = "Increvable";
+    }
+
     public void ChangerCarteJouee(string cartejouee)
     {
         GameManager.carteJouée = cartejouee;
     }
+
+
 }

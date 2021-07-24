@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     public static bool hasEssence1;
     public static bool hasNotCrevaison1;
     public static bool hasNotLimite1;
+    public static bool hasNotIncrevable1;
 
     public static bool move_yes_no2;
     public static bool peutRouler2;
@@ -28,6 +29,7 @@ public class Player : MonoBehaviour
     public static bool hasEssence2;
     public static bool hasNotCrevaison2;
     public static bool hasNotLimite2;
+    public static bool hasNotIncrevable2;
 
     public static bool move_yes_no3;
     public static bool peutRouler3;
@@ -35,6 +37,7 @@ public class Player : MonoBehaviour
     public static bool hasEssence3;
     public static bool hasNotCrevaison3;
     public static bool hasNotLimite3;
+    public static bool hasNotIncrevable3;
 
     public static bool move_yes_no4;
     public static bool peutRouler4;
@@ -42,6 +45,7 @@ public class Player : MonoBehaviour
     public static bool hasEssence4;
     public static bool hasNotCrevaison4;
     public static bool hasNotLimite4;
+    public static bool hasNotIncrevable4;
 
     public static int joueurSelectionne;
 
@@ -50,6 +54,11 @@ public class Player : MonoBehaviour
     private Text etatJoueur2;
     private Text etatJoueur3;
     private Text etatJoueur4;
+
+    private Text insensibiliteJoueur1;
+    private Text insensibiliteJoueur2;
+    private Text insensibiliteJoueur3;
+    private Text insensibiliteJoueur4;
 
     private void Awake()
     {
@@ -68,6 +77,11 @@ public class Player : MonoBehaviour
         etatJoueur2 = GameObject.Find("Joueur2Etat").GetComponent<Text>();
         etatJoueur3 = GameObject.Find("Joueur3Etat").GetComponent<Text>();
         etatJoueur4 = GameObject.Find("Joueur4Etat").GetComponent<Text>();
+
+        insensibiliteJoueur1 = GameObject.Find("Joueur1Insensibilite").GetComponent<Text>();
+        insensibiliteJoueur2 = GameObject.Find("Joueur2Insensibilite").GetComponent<Text>();
+        insensibiliteJoueur3 = GameObject.Find("Joueur3Insensibilite").GetComponent<Text>();
+        insensibiliteJoueur4 = GameObject.Find("Joueur4Insensibilite").GetComponent<Text>();
     }
 
     void Start()
@@ -80,6 +94,7 @@ public class Player : MonoBehaviour
         hasEssence1 = true;
         hasNotCrevaison1 = true;
         hasNotLimite1 = true;
+        hasNotIncrevable1 = true;
 
         move_yes_no2 = true;
         peutRouler2 = true;
@@ -87,6 +102,7 @@ public class Player : MonoBehaviour
         hasEssence2 = true;
         hasNotCrevaison2 = true;
         hasNotLimite2 = true;
+        hasNotIncrevable2 = true;
 
         move_yes_no3 = true;
         peutRouler3 = true;
@@ -94,6 +110,7 @@ public class Player : MonoBehaviour
         hasEssence3 = true;
         hasNotCrevaison3 = true;
         hasNotLimite3 = true;
+        hasNotIncrevable3 = true;
 
         move_yes_no4 = true;
         peutRouler4 = true;
@@ -101,6 +118,7 @@ public class Player : MonoBehaviour
         hasEssence4 = true;
         hasNotCrevaison4 = true;
         hasNotLimite4 = true;
+        hasNotIncrevable4 = true;
 
         photonView.RPC("ResetEtatStart", PhotonTargets.AllBufferedViaServer);
 
@@ -168,6 +186,10 @@ public class Player : MonoBehaviour
                         GameManager.carteJouée = "";
                         photonView.RPC("DeselectJoueur", PhotonTargets.AllBuffered);
                     }
+                    break;
+                case "Increvable":
+                    Increvable();
+                    GameManager.carteJouée = "";
                     break;
                 case "Roulez":
                     Roulez();
@@ -461,30 +483,84 @@ public class Player : MonoBehaviour
                 case 1:
                     if (move_yes_no1 && hasNotLimite1)
                     {
-                        photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Crevaison");
+                        if (hasNotIncrevable1)
+                        {
+                            photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Crevaison");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemoveIncrevable", PhotonTargets.AllBuffered, 1, true, "");
+                        }
                     }
                     break;
                 case 2:
                     if (move_yes_no2 && hasNotLimite2)
                     {
-                        photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Crevaison");
+                        if (hasNotIncrevable2)
+                        {
+                            photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Crevaison");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemoveIncrevable", PhotonTargets.AllBuffered, 2, true, "");
+                        }
                     }
                     break;
                 case 3:
                     if (move_yes_no3 && hasNotLimite3)
                     {
-                        photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Crevaison");
+                        if (hasNotIncrevable3)
+                        {
+                            photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Crevaison");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemoveIncrevable", PhotonTargets.AllBuffered, 3, true, "");
+                        }
                     }
                     break;
                 case 4:
                     if (move_yes_no4 && hasNotLimite4)
                     {
-                        photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Crevaison");
+                        if (hasNotIncrevable4)
+                        {
+                            photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Crevaison");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemoveIncrevable", PhotonTargets.AllBuffered, 4, true, "");
+                        }
                     }
                     break;
                 default:
                     break;
             }
+        }
+    }
+
+    [PunRPC]
+    private void RemoveIncrevable(int joueur, bool newStateInsensibilite, string text)
+    {
+        switch(joueur)
+        {
+            case 1:
+                hasNotIncrevable1 = newStateInsensibilite;
+                insensibiliteJoueur1.text = text;
+                break;
+            case 2:
+                hasNotIncrevable2 = newStateInsensibilite;
+                insensibiliteJoueur2.text = text;
+                break;
+            case 3:
+                hasNotIncrevable3 = newStateInsensibilite;
+                insensibiliteJoueur3.text = text;
+                break;
+            case 4:
+                hasNotIncrevable4 = newStateInsensibilite;
+                insensibiliteJoueur4.text = text;
+                break;
+            default:
+                break;
         }
     }
 
@@ -577,6 +653,60 @@ public class Player : MonoBehaviour
                 hasNotLimite4 = newStatusMalus;
                 move_yes_no1 = moveYesNo;
                 etatJoueur4.text = text;
+                break;
+
+        }
+    }
+
+    public void Increvable()
+    {
+        if (joueurSelectionne <= PhotonNetwork.room.PlayerCount)
+        {
+            switch (PhotonNetwork.player.ID)
+            {
+                case 1:
+                    photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 1, false, true, "Increvable");
+                    break;
+                case 2:
+                    photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 2, false, true, "Increvable");
+                    break;
+                case 3:
+                    photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 3, false, true, "Increvable");
+                    break;
+                case 4:
+                    photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 4, false, true, "Increvable");
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    }
+
+    [PunRPC]
+    private void ChangeStateIncrevable(int joueur, bool newStatusMalus, bool moveYesNo, string text)
+    {
+        switch (joueur)
+        {
+            case 1:
+                hasNotIncrevable1 = newStatusMalus;
+                move_yes_no1 = moveYesNo;
+                insensibiliteJoueur1.text = text;
+                break;
+            case 2:
+                hasNotIncrevable2 = newStatusMalus;
+                move_yes_no1 = moveYesNo;
+                insensibiliteJoueur2.text = text;
+                break;
+            case 3:
+                hasNotIncrevable3 = newStatusMalus;
+                move_yes_no1 = moveYesNo;
+                insensibiliteJoueur3.text = text;
+                break;
+            case 4:
+                hasNotIncrevable4 = newStatusMalus;
+                move_yes_no1 = moveYesNo;
+                insensibiliteJoueur4.text = text;
                 break;
 
         }

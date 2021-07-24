@@ -73,4 +73,6 @@ MonoBehaviour:
   - ChangeStateCrevaison
   - ChangeStateLimite
   - ChangeStateLimiteVitesse
+  - ChangeStateIncrevable
+  - RemoveIncrevable
   DisableAutoOpenWizard: 1
