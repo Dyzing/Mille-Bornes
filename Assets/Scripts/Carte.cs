@@ -44,7 +44,7 @@ public class Carte : HUD
 
     public void ChangerCarte(int effetCarte)
     {
-        effetCarteId = UnityEngine.Random.Range(0, 17);
+        effetCarteId = UnityEngine.Random.Range(0, 19);
         Sprite spriteLoaded = Resources.Load<Sprite>("Cartes/" + GameManager.mapCarte[effetCarteId]);
         carte_i.GetComponent<Image>().sprite = spriteLoaded;
         photonView.RPC("UpdateSliders", PhotonTargets.AllBufferedViaServer, effetCarte);
@@ -296,6 +296,14 @@ public class Carte : HUD
                                 if (Player.hasEssence1)
                                     SelectionCiterne();
                                 break;
+                            case 17:
+                                if (Player.hasNotAccident1)
+                                    SelectionAsDuVolant();
+                                break;
+                            case 18:
+                                if (Player.peutRouler1 && Player.hasNotLimite1)
+                                    SelectionPrioritaire();
+                                break;
                             default:
                                 break;
                         }
@@ -341,6 +349,14 @@ public class Carte : HUD
                             case 16:
                                 if (Player.hasEssence1)
                                     SelectionCiterne();
+                                break;
+                            case 17:
+                                if (Player.hasNotAccident1)
+                                    SelectionAsDuVolant();
+                                break;
+                            case 18:
+                                if (Player.peutRouler1 && Player.hasNotLimite1)
+                                    SelectionPrioritaire();
                                 break;
                             default:
                                 break;
@@ -396,6 +412,14 @@ public class Carte : HUD
                                 if (Player.hasEssence2)
                                     SelectionCiterne();
                                 break;
+                            case 17:
+                                if (Player.hasNotAccident2)
+                                    SelectionAsDuVolant();
+                                break;
+                            case 18:
+                                if (Player.peutRouler2 && Player.hasNotLimite2)
+                                    SelectionPrioritaire();
+                                break;
                             default:
                                 break;
                         }
@@ -441,6 +465,14 @@ public class Carte : HUD
                             case 16:
                                 if (Player.hasEssence2)
                                     SelectionCiterne();
+                                break;
+                            case 17:
+                                if (Player.hasNotAccident2)
+                                    SelectionAsDuVolant();
+                                break;
+                            case 18:
+                                if (Player.peutRouler2 && Player.hasNotLimite2)
+                                    SelectionPrioritaire();
                                 break;
                             default:
                                 break;
@@ -496,6 +528,14 @@ public class Carte : HUD
                                 if (Player.hasEssence3)
                                     SelectionCiterne();
                                 break;
+                            case 17:
+                                if (Player.hasNotAccident3)
+                                    SelectionAsDuVolant();
+                                break;
+                            case 18:
+                                if (Player.peutRouler3 && Player.hasNotLimite3)
+                                    SelectionPrioritaire();
+                                break;
                             default:
                                 break;
                         }
@@ -541,6 +581,14 @@ public class Carte : HUD
                             case 16:
                                 if (Player.hasEssence3)
                                     SelectionCiterne();
+                                break;
+                            case 17:
+                                if (Player.hasNotAccident3)
+                                    SelectionAsDuVolant();
+                                break;
+                            case 18:
+                                if (Player.peutRouler3 && Player.hasNotLimite3)
+                                    SelectionPrioritaire();
                                 break;
                             default:
                                 break;
@@ -596,6 +644,14 @@ public class Carte : HUD
                                 if (Player.hasEssence4)
                                     SelectionCiterne();
                                 break;
+                            case 17:
+                                if (Player.hasNotAccident4)
+                                    SelectionAsDuVolant();
+                                break;
+                            case 18:
+                                if (Player.peutRouler4 && Player.hasNotLimite4)
+                                    SelectionPrioritaire();
+                                break;
                             default:
                                 break;
                         }
@@ -641,6 +697,14 @@ public class Carte : HUD
                             case 16:
                                 if (Player.hasEssence4)
                                     SelectionCiterne();
+                                break;
+                            case 17:
+                                if (Player.hasNotAccident4)
+                                    SelectionAsDuVolant();
+                                break;
+                            case 18:
+                                if (Player.peutRouler4 && Player.hasNotLimite4)
+                                    SelectionPrioritaire();
                                 break;
                             default:
                                 break;
@@ -740,6 +804,16 @@ public class Carte : HUD
     public void SelectionCiterne()
     {
         GameManager.carteJouée = "Citerne";
+    }
+
+    public void SelectionAsDuVolant()
+    {
+        GameManager.carteJouée = "AsDuVolant";
+    }
+
+    public void SelectionPrioritaire()
+    {
+        GameManager.carteJouée = "Prioritaire";
     }
 
     public void ChangerCarteJouee(string cartejouee)

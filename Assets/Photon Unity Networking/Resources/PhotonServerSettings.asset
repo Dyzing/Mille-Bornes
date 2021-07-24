@@ -77,4 +77,9 @@ MonoBehaviour:
   - RemoveIncrevable
   - ChangeStateCiterneEssence
   - RemoveCiterne
+  - ChangeStateAsDuVolant
+  - ChangeStatePrioritaire
+  - RemoveAccident
+  - RemoveAsDuVolant
+  - RemovePrioritaire
   DisableAutoOpenWizard: 1

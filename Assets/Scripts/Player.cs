@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     public static bool hasNotLimite1;
     public static bool hasNotIncrevable1;
     public static bool hasNotCiterneEssence1;
+    public static bool hasNotAsDuVolant1;
+    public static bool hasNotPrioritaire1;
 
     public static bool move_yes_no2;
     public static bool peutRouler2;
@@ -32,6 +34,8 @@ public class Player : MonoBehaviour
     public static bool hasNotLimite2;
     public static bool hasNotIncrevable2;
     public static bool hasNotCiterneEssence2;
+    public static bool hasNotAsDuVolant2;
+    public static bool hasNotPrioritaire2;
 
     public static bool move_yes_no3;
     public static bool peutRouler3;
@@ -41,6 +45,8 @@ public class Player : MonoBehaviour
     public static bool hasNotLimite3;
     public static bool hasNotIncrevable3;
     public static bool hasNotCiterneEssence3;
+    public static bool hasNotAsDuVolant3;
+    public static bool hasNotPrioritaire3;
 
     public static bool move_yes_no4;
     public static bool peutRouler4;
@@ -50,6 +56,8 @@ public class Player : MonoBehaviour
     public static bool hasNotLimite4;
     public static bool hasNotIncrevable4;
     public static bool hasNotCiterneEssence4;
+    public static bool hasNotAsDuVolant4;
+    public static bool hasNotPrioritaire4;
 
     public static int joueurSelectionne;
 
@@ -100,6 +108,8 @@ public class Player : MonoBehaviour
         hasNotLimite1 = true;
         hasNotIncrevable1 = true;
         hasNotCiterneEssence1 = true;
+        hasNotAsDuVolant1 = true;
+        hasNotPrioritaire1 = true;
 
         move_yes_no2 = true;
         peutRouler2 = true;
@@ -109,6 +119,8 @@ public class Player : MonoBehaviour
         hasNotLimite2 = true;
         hasNotIncrevable2 = true;
         hasNotCiterneEssence2 = true;
+        hasNotAsDuVolant2 = true;
+        hasNotPrioritaire2 = true;
 
         move_yes_no3 = true;
         peutRouler3 = true;
@@ -118,6 +130,8 @@ public class Player : MonoBehaviour
         hasNotLimite3 = true;
         hasNotIncrevable3 = true;
         hasNotCiterneEssence3 = true;
+        hasNotAsDuVolant3 = true;
+        hasNotPrioritaire3 = true;
 
         move_yes_no4 = true;
         peutRouler4 = true;
@@ -127,6 +141,8 @@ public class Player : MonoBehaviour
         hasNotLimite4 = true;
         hasNotIncrevable4 = true;
         hasNotCiterneEssence4 = true;
+        hasNotAsDuVolant4 = true;
+        hasNotPrioritaire4 = true;
 
         photonView.RPC("ResetEtatStart", PhotonTargets.AllBufferedViaServer);
 
@@ -201,6 +217,14 @@ public class Player : MonoBehaviour
                     break;
                 case "Citerne":
                     CiterneEssence();
+                    GameManager.carteJouée = "";
+                    break;
+                case "AsDuVolant":
+                    AsDuVolant();
+                    GameManager.carteJouée = "";
+                    break;
+                case "Prioritaire":
+                    Prioritaire();
                     GameManager.carteJouée = "";
                     break;
                 case "Roulez":
@@ -295,25 +319,53 @@ public class Player : MonoBehaviour
                 case 1:
                     if (move_yes_no1 && hasNotLimite1)
                     {
-                        photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Stop");
+                        if (hasNotPrioritaire1)
+                        {
+                            photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Stop");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemovePrioritaire", PhotonTargets.AllBuffered, 1, true, "");
+                        }
                     }
                     break;
                 case 2:
                     if (move_yes_no2 && hasNotLimite2)
                     {
-                        photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Stop");
+                        if (hasNotPrioritaire2)
+                        {
+                            photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Stop");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemovePrioritaire", PhotonTargets.AllBuffered, 2, true, "");
+                        }
                     }
                     break;
                 case 3:
                     if (move_yes_no3 && hasNotLimite3)
                     {
-                        photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Stop");
+                        if (hasNotPrioritaire3)
+                        {
+                            photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Stop");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemovePrioritaire", PhotonTargets.AllBuffered, 3, true, "");
+                        }
                     }
                     break;
                 case 4:
                     if (move_yes_no4 && hasNotLimite4)
                     {
-                        photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Stop");
+                        if (hasNotPrioritaire4)
+                        {
+                            photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Stop");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemovePrioritaire", PhotonTargets.AllBuffered, 4, true, "");
+                        }
                     }
                     break;
                 default:
@@ -321,6 +373,32 @@ public class Player : MonoBehaviour
             }
         }
 
+    }
+
+    [PunRPC]
+    private void RemovePrioritaire(int joueur, bool newStateInsensibilite, string text)
+    {
+        switch (joueur)
+        {
+            case 1:
+                hasNotPrioritaire1 = newStateInsensibilite;
+                insensibiliteJoueur1.text = text;
+                break;
+            case 2:
+                hasNotPrioritaire2 = newStateInsensibilite;
+                insensibiliteJoueur2.text = text;
+                break;
+            case 3:
+                hasNotPrioritaire3 = newStateInsensibilite;
+                insensibiliteJoueur3.text = text;
+                break;
+            case 4:
+                hasNotPrioritaire4 = newStateInsensibilite;
+                insensibiliteJoueur4.text = text;
+                break;
+            default:
+                break;
+        }
     }
 
     [PunRPC]
@@ -362,30 +440,84 @@ public class Player : MonoBehaviour
                 case 1:
                     if (move_yes_no1 && hasNotLimite1)
                     {
-                        photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Accident");
+                        if (hasNotAsDuVolant1)
+                        {
+                            photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Accident");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemoveAsDuVolant", PhotonTargets.AllBuffered, 1, true, "");
+                        }
                     }
                     break;
                 case 2:
                     if (move_yes_no2 && hasNotLimite2)
                     {
-                        photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Accident");
+                        if (hasNotAsDuVolant2)
+                        {
+                            photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Accident");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemoveAsDuVolant", PhotonTargets.AllBuffered, 2, true, "");
+                        }
                     }
                     break;
                 case 3:
                     if (move_yes_no3 && hasNotLimite3)
                     {
-                        photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Accident");
+                        if (hasNotAsDuVolant3)
+                        {
+                            photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Accident");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemoveAsDuVolant", PhotonTargets.AllBuffered, 3, true, "");
+                        }
                     }
                     break;
                 case 4:
                     if (move_yes_no4 && hasNotLimite4)
                     {
-                        photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Accident");
+                        if (hasNotAsDuVolant4)
+                        {
+                            photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Accident");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemoveAsDuVolant", PhotonTargets.AllBuffered, 4, true, "");
+                        }
                     }
                     break;
                 default:
                     break;
             }
+        }
+    }
+
+    [PunRPC]
+    private void RemoveAsDuVolant(int joueur, bool newStateInsensibilite, string text)
+    {
+        switch (joueur)
+        {
+            case 1:
+                hasNotAsDuVolant1 = newStateInsensibilite;
+                insensibiliteJoueur1.text = text;
+                break;
+            case 2:
+                hasNotAsDuVolant2 = newStateInsensibilite;
+                insensibiliteJoueur2.text = text;
+                break;
+            case 3:
+                hasNotAsDuVolant3 = newStateInsensibilite;
+                insensibiliteJoueur3.text = text;
+                break;
+            case 4:
+                hasNotAsDuVolant4 = newStateInsensibilite;
+                insensibiliteJoueur4.text = text;
+                break;
+            default:
+                break;
         }
     }
 
@@ -668,25 +800,54 @@ public class Player : MonoBehaviour
                 case 1:
                     if (move_yes_no1)
                     {
-                        photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 1, false, "Joueur 1 Limite vitesse");
+                        if (hasNotPrioritaire1)
+                        {
+                            photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 1, false, "Joueur 1 Limite vitesse");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemovePrioritaire", PhotonTargets.AllBuffered, 1, true, "");
+                        }
                     }
                     break;
                 case 2:
                     if (move_yes_no2)
                     {
-                        photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 2, false, "Joueur 2 Limite vitesse");
+                        if (hasNotPrioritaire2)
+                        {
+                            photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 2, false, "Joueur 2 Limite vitesse");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemovePrioritaire", PhotonTargets.AllBuffered, 2, true, "");
+                        }
+
                     }
                     break;
                 case 3:
                     if (move_yes_no3)
                     {
-                        photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 3, false, "Joueur 3 Limite vitesse");
+                        if (hasNotPrioritaire3)
+                        {
+                            photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 3, false, "Joueur 3 Limite vitesse");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemovePrioritaire", PhotonTargets.AllBuffered, 3, true, "");
+                        }
                     }
                     break;
                 case 4:
                     if (move_yes_no4)
                     {
-                        photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 4, false, "Joueur 4 Limite vitesse");
+                        if (hasNotPrioritaire4)
+                        {
+                            photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 4, false, "Joueur 4 Limite vitesse");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemovePrioritaire", PhotonTargets.AllBuffered, 4, true, "");
+                        }
                     }
                     break;
                 default:
@@ -754,23 +915,30 @@ public class Player : MonoBehaviour
                 hasNotIncrevable1 = newStatusMalus;
                 insensibiliteJoueur1.text = text;
                 hasNotCiterneEssence1 = true;
+                hasNotPrioritaire1 = true;
+                hasNotAsDuVolant1 = true;
                 break;
             case 2:
                 hasNotIncrevable2 = newStatusMalus;
                 insensibiliteJoueur2.text = text;
                 hasNotCiterneEssence2 = true;
+                hasNotPrioritaire2 = true;
+                hasNotAsDuVolant2 = true;
                 break;
             case 3:
                 hasNotIncrevable3 = newStatusMalus;
                 insensibiliteJoueur3.text = text;
                 hasNotCiterneEssence3 = true;
+                hasNotPrioritaire3 = true;
+                hasNotAsDuVolant3 = true;
                 break;
             case 4:
                 hasNotIncrevable4 = newStatusMalus;
                 insensibiliteJoueur4.text = text;
                 hasNotCiterneEssence4 = true;
+                hasNotPrioritaire4 = true;
+                hasNotAsDuVolant4 = true;
                 break;
-
         }
     }
 
@@ -808,27 +976,156 @@ public class Player : MonoBehaviour
                 hasNotCiterneEssence1 = newStatusMalus;
                 insensibiliteJoueur1.text = text;
                 hasNotIncrevable1 = true;
+                hasNotPrioritaire1 = true;
+                hasNotAsDuVolant1 = true;
                 break;
             case 2:
                 hasNotCiterneEssence2 = newStatusMalus;
                 insensibiliteJoueur2.text = text;
                 hasNotIncrevable2 = true;
+                hasNotPrioritaire2 = true;
+                hasNotAsDuVolant2 = true;
                 break;
             case 3:
                 hasNotCiterneEssence3 = newStatusMalus;
                 insensibiliteJoueur3.text = text;
                 hasNotIncrevable3 = true;
+                hasNotPrioritaire3 = true;
+                hasNotAsDuVolant3 = true;
                 break;
             case 4:
                 hasNotCiterneEssence4 = newStatusMalus;
                 insensibiliteJoueur4.text = text;
                 hasNotIncrevable4 = true;
+                hasNotPrioritaire4 = true;
+                hasNotAsDuVolant4 = true;
+                break;
+        }
+    }
+
+    public void AsDuVolant()
+    {
+        if (joueurSelectionne <= PhotonNetwork.room.PlayerCount)
+        {
+            switch (PhotonNetwork.player.ID)
+            {
+                case 1:
+                    photonView.RPC("ChangeStateAsDuVolant", PhotonTargets.AllBuffered, 1, false, "Fast & Furious");
+                    break;
+                case 2:
+                    photonView.RPC("ChangeStateAsDuVolant", PhotonTargets.AllBuffered, 2, false, "Fast & Furious");
+                    break;
+                case 3:
+                    photonView.RPC("ChangeStateAsDuVolant", PhotonTargets.AllBuffered, 3, false, "Fast & Furious");
+                    break;
+                case 4:
+                    photonView.RPC("ChangeStateAsDuVolant", PhotonTargets.AllBuffered, 4, false, "Fast & Furious");
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    }
+
+    [PunRPC]
+    private void ChangeStateAsDuVolant(int joueur, bool newStatusMalus, string text)
+    {
+        switch (joueur)
+        {
+            case 1:
+                hasNotAsDuVolant1 = newStatusMalus;
+                insensibiliteJoueur1.text = text;
+                hasNotIncrevable1 = true;
+                hasNotCiterneEssence1 = true;
+                hasNotPrioritaire1 = true;
+                break;
+            case 2:
+                hasNotAsDuVolant2 = newStatusMalus;
+                insensibiliteJoueur2.text = text;
+                hasNotIncrevable2 = true;
+                hasNotCiterneEssence2 = true;
+                hasNotPrioritaire2 = true;
+                break;
+            case 3:
+                hasNotAsDuVolant3 = newStatusMalus;
+                insensibiliteJoueur3.text = text;
+                hasNotIncrevable3 = true;
+                hasNotCiterneEssence3 = true;
+                hasNotPrioritaire3 = true;
+                break;
+            case 4:
+                hasNotAsDuVolant4 = newStatusMalus;
+                insensibiliteJoueur4.text = text;
+                hasNotIncrevable4 = true;
+                hasNotCiterneEssence4 = true;
+                hasNotPrioritaire4 = true;
                 break;
 
         }
     }
 
+    public void Prioritaire()
+    {
+        if (joueurSelectionne <= PhotonNetwork.room.PlayerCount)
+        {
+            switch (PhotonNetwork.player.ID)
+            {
+                case 1:
+                    photonView.RPC("ChangeStatePrioritaire", PhotonTargets.AllBuffered, 1, false, "Prioritaire");
+                    break;
+                case 2:
+                    photonView.RPC("ChangeStatePrioritaire", PhotonTargets.AllBuffered, 2, false, "Prioritaire");
+                    break;
+                case 3:
+                    photonView.RPC("ChangeStatePrioritaire", PhotonTargets.AllBuffered, 3, false, "Prioritaire");
+                    break;
+                case 4:
+                    photonView.RPC("ChangeStatePrioritaire", PhotonTargets.AllBuffered, 4, false, "Prioritaire");
+                    break;
+                default:
+                    break;
+            }
 
+        }
+    }
+
+    [PunRPC]
+    private void ChangeStatePrioritaire(int joueur, bool newStatusMalus, string text)
+    {
+        switch (joueur)
+        {
+            case 1:
+                hasNotPrioritaire1 = newStatusMalus;
+                insensibiliteJoueur1.text = text;
+                hasNotIncrevable1 = true;
+                hasNotCiterneEssence1 = true;
+                hasNotAsDuVolant1 = true;
+                break;
+            case 2:
+                hasNotPrioritaire2 = newStatusMalus;
+                insensibiliteJoueur2.text = text;
+                hasNotIncrevable2 = true;
+                hasNotCiterneEssence2 = true;
+                hasNotAsDuVolant2 = true;
+                break;
+            case 3:
+                hasNotPrioritaire3 = newStatusMalus;
+                insensibiliteJoueur3.text = text;
+                hasNotIncrevable3 = true;
+                hasNotCiterneEssence3 = true;
+                hasNotAsDuVolant3 = true;
+                break;
+            case 4:
+                hasNotPrioritaire4 = newStatusMalus;
+                insensibiliteJoueur4.text = text;
+                hasNotIncrevable4 = true;
+                hasNotCiterneEssence4 = true;
+                hasNotAsDuVolant4 = true;
+                break;
+
+        }
+    }
 
     [PunRPC]
     private void ChangerEtatBonJoueur1()
