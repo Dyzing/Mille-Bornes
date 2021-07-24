@@ -883,26 +883,23 @@ public class Player : MonoBehaviour
 
     public void Increvable()
     {
-        if (joueurSelectionne <= PhotonNetwork.room.PlayerCount)
+        RoueDeSecours();
+        switch (PhotonNetwork.player.ID)
         {
-            switch (PhotonNetwork.player.ID)
-            {
-                case 1:
-                    photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 1, false, "Increvable");
-                    break;
-                case 2:
-                    photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 2, false, "Increvable");
-                    break;
-                case 3:
-                    photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 3, false, "Increvable");
-                    break;
-                case 4:
-                    photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 4, false, "Increvable");
-                    break;
-                default:
-                    break;
-            }
-
+            case 1:
+                photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 1, false, "Increvable");
+                break;
+            case 2:
+                photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 2, false, "Increvable");
+                break;
+            case 3:
+                photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 3, false, "Increvable");
+                break;
+            case 4:
+                photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 4, false, "Increvable");
+                break;
+            default:
+                break;
         }
     }
 
@@ -944,27 +941,24 @@ public class Player : MonoBehaviour
 
     public void CiterneEssence()
     {
-        if (joueurSelectionne <= PhotonNetwork.room.PlayerCount)
+        Essence();
+        switch (PhotonNetwork.player.ID)
         {
-            switch (PhotonNetwork.player.ID)
-            {
-                case 1:
-                    photonView.RPC("ChangeStateCiterneEssence", PhotonTargets.AllBuffered, 1, false, "Citerne essence");
-                    break;
-                case 2:
-                    photonView.RPC("ChangeStateCiterneEssence", PhotonTargets.AllBuffered, 2, false, "Citerne essence");
-                    break;
-                case 3:
-                    photonView.RPC("ChangeStateCiterneEssence", PhotonTargets.AllBuffered, 3, false, "Citerne essence");
-                    break;
-                case 4:
-                    photonView.RPC("ChangeStateCiterneEssence", PhotonTargets.AllBuffered, 4, false, "Citerne essence");
-                    break;
-                default:
-                    break;
-            }
-
-        }
+            case 1:
+                photonView.RPC("ChangeStateCiterneEssence", PhotonTargets.AllBuffered, 1, false, "Citerne essence");
+                break;
+            case 2:
+                photonView.RPC("ChangeStateCiterneEssence", PhotonTargets.AllBuffered, 2, false, "Citerne essence");
+                break;
+            case 3:
+                photonView.RPC("ChangeStateCiterneEssence", PhotonTargets.AllBuffered, 3, false, "Citerne essence");
+                break;
+            case 4:
+                photonView.RPC("ChangeStateCiterneEssence", PhotonTargets.AllBuffered, 4, false, "Citerne essence");
+                break;
+            default:
+                break;
+        }       
     }
 
     [PunRPC]
@@ -1005,26 +999,23 @@ public class Player : MonoBehaviour
 
     public void AsDuVolant()
     {
-        if (joueurSelectionne <= PhotonNetwork.room.PlayerCount)
+        Reparations();
+        switch (PhotonNetwork.player.ID)
         {
-            switch (PhotonNetwork.player.ID)
-            {
-                case 1:
-                    photonView.RPC("ChangeStateAsDuVolant", PhotonTargets.AllBuffered, 1, false, "Fast & Furious");
-                    break;
-                case 2:
-                    photonView.RPC("ChangeStateAsDuVolant", PhotonTargets.AllBuffered, 2, false, "Fast & Furious");
-                    break;
-                case 3:
-                    photonView.RPC("ChangeStateAsDuVolant", PhotonTargets.AllBuffered, 3, false, "Fast & Furious");
-                    break;
-                case 4:
-                    photonView.RPC("ChangeStateAsDuVolant", PhotonTargets.AllBuffered, 4, false, "Fast & Furious");
-                    break;
-                default:
-                    break;
-            }
-
+            case 1:
+                photonView.RPC("ChangeStateAsDuVolant", PhotonTargets.AllBuffered, 1, false, "Fast & Furious");
+                break;
+            case 2:
+                photonView.RPC("ChangeStateAsDuVolant", PhotonTargets.AllBuffered, 2, false, "Fast & Furious");
+                break;
+            case 3:
+                photonView.RPC("ChangeStateAsDuVolant", PhotonTargets.AllBuffered, 3, false, "Fast & Furious");
+                break;
+            case 4:
+                photonView.RPC("ChangeStateAsDuVolant", PhotonTargets.AllBuffered, 4, false, "Fast & Furious");
+                break;
+            default:
+                break;
         }
     }
 
@@ -1067,26 +1058,24 @@ public class Player : MonoBehaviour
 
     public void Prioritaire()
     {
-        if (joueurSelectionne <= PhotonNetwork.room.PlayerCount)
+        Roulez();
+        FinLimitteVitesse();
+        switch (PhotonNetwork.player.ID)
         {
-            switch (PhotonNetwork.player.ID)
-            {
-                case 1:
-                    photonView.RPC("ChangeStatePrioritaire", PhotonTargets.AllBuffered, 1, false, "Prioritaire");
-                    break;
-                case 2:
-                    photonView.RPC("ChangeStatePrioritaire", PhotonTargets.AllBuffered, 2, false, "Prioritaire");
-                    break;
-                case 3:
-                    photonView.RPC("ChangeStatePrioritaire", PhotonTargets.AllBuffered, 3, false, "Prioritaire");
-                    break;
-                case 4:
-                    photonView.RPC("ChangeStatePrioritaire", PhotonTargets.AllBuffered, 4, false, "Prioritaire");
-                    break;
-                default:
-                    break;
-            }
-
+            case 1:
+                photonView.RPC("ChangeStatePrioritaire", PhotonTargets.AllBuffered, 1, false, "Prioritaire");
+                break;
+            case 2:
+                photonView.RPC("ChangeStatePrioritaire", PhotonTargets.AllBuffered, 2, false, "Prioritaire");
+                break;
+            case 3:
+                photonView.RPC("ChangeStatePrioritaire", PhotonTargets.AllBuffered, 3, false, "Prioritaire");
+                break;
+            case 4:
+                photonView.RPC("ChangeStatePrioritaire", PhotonTargets.AllBuffered, 4, false, "Prioritaire");
+                break;
+            default:
+                break;
         }
     }
 

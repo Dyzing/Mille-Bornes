@@ -289,20 +289,16 @@ public class Carte : HUD
                                 ChangerCarteJouee("Fin limite vitesse");
                                 break;
                             case 15:
-                                if(Player.hasNotCrevaison1)
-                                    SelectionIncrevable();
+                                SelectionIncrevable();
                                 break;
                             case 16:
-                                if (Player.hasEssence1)
-                                    SelectionCiterne();
+                                SelectionCiterne();
                                 break;
                             case 17:
-                                if (Player.hasNotAccident1)
-                                    SelectionAsDuVolant();
+                                SelectionAsDuVolant();
                                 break;
                             case 18:
-                                if (Player.peutRouler1 && Player.hasNotLimite1)
-                                    SelectionPrioritaire();
+                                SelectionPrioritaire();
                                 break;
                             default:
                                 break;
@@ -343,22 +339,16 @@ public class Carte : HUD
                                 ChangerCarteJouee("Fin limite vitesse");
                                 break;
                             case 15:
-                                if (Player.hasNotCrevaison1)
-                                    SelectionIncrevable();
+                                SelectionIncrevable();
                                 break;
                             case 16:
-                                if (Player.hasEssence1)
-                                    SelectionCiterne();
+                                SelectionCiterne();
                                 break;
                             case 17:
-                                if (Player.hasNotAccident1)
-                                    SelectionAsDuVolant();
+                                SelectionAsDuVolant();
                                 break;
                             case 18:
-                                if (Player.peutRouler1 && Player.hasNotLimite1)
-                                    SelectionPrioritaire();
-                                break;
-                            default:
+                                SelectionPrioritaire();
                                 break;
                         }
                     }
@@ -405,20 +395,16 @@ public class Carte : HUD
                                 ChangerCarteJouee("Fin limite vitesse");
                                 break;
                             case 15:
-                                if (Player.hasNotCrevaison2)
-                                    SelectionIncrevable();
+                                SelectionIncrevable();
                                 break;
                             case 16:
-                                if (Player.hasEssence2)
-                                    SelectionCiterne();
+                                SelectionCiterne();
                                 break;
                             case 17:
-                                if (Player.hasNotAccident2)
-                                    SelectionAsDuVolant();
+                                SelectionAsDuVolant();
                                 break;
                             case 18:
-                                if (Player.peutRouler2 && Player.hasNotLimite2)
-                                    SelectionPrioritaire();
+                                SelectionPrioritaire();
                                 break;
                             default:
                                 break;
@@ -459,22 +445,16 @@ public class Carte : HUD
                                 ChangerCarteJouee("Fin limite vitesse");
                                 break;
                             case 15:
-                                if (Player.hasNotCrevaison2)
-                                    SelectionIncrevable();
+                                SelectionIncrevable();
                                 break;
                             case 16:
-                                if (Player.hasEssence2)
-                                    SelectionCiterne();
+                                SelectionCiterne();
                                 break;
                             case 17:
-                                if (Player.hasNotAccident2)
-                                    SelectionAsDuVolant();
+                                SelectionAsDuVolant();
                                 break;
                             case 18:
-                                if (Player.peutRouler2 && Player.hasNotLimite2)
-                                    SelectionPrioritaire();
-                                break;
-                            default:
+                                SelectionPrioritaire();
                                 break;
                         }
                     }
@@ -521,20 +501,16 @@ public class Carte : HUD
                                 ChangerCarteJouee("Fin limite vitesse");
                                 break;
                             case 15:
-                                if (Player.hasNotCrevaison3)
-                                    SelectionIncrevable();
+                                SelectionIncrevable();
                                 break;
                             case 16:
-                                if (Player.hasEssence3)
-                                    SelectionCiterne();
+                                SelectionCiterne();
                                 break;
                             case 17:
-                                if (Player.hasNotAccident3)
-                                    SelectionAsDuVolant();
+                                SelectionAsDuVolant();
                                 break;
                             case 18:
-                                if (Player.peutRouler3 && Player.hasNotLimite3)
-                                    SelectionPrioritaire();
+                                SelectionPrioritaire();
                                 break;
                             default:
                                 break;
@@ -575,22 +551,16 @@ public class Carte : HUD
                                 ChangerCarteJouee("Fin limite vitesse");
                                 break;
                             case 15:
-                                if (Player.hasNotCrevaison3)
-                                    SelectionIncrevable();
+                                SelectionIncrevable();
                                 break;
                             case 16:
-                                if (Player.hasEssence3)
-                                    SelectionCiterne();
+                                SelectionCiterne();
                                 break;
                             case 17:
-                                if (Player.hasNotAccident3)
-                                    SelectionAsDuVolant();
+                                SelectionAsDuVolant();
                                 break;
                             case 18:
-                                if (Player.peutRouler3 && Player.hasNotLimite3)
-                                    SelectionPrioritaire();
-                                break;
-                            default:
+                                SelectionPrioritaire();
                                 break;
                         }
                     }
@@ -637,20 +607,16 @@ public class Carte : HUD
                                 ChangerCarteJouee("Fin limite vitesse");
                                 break;
                             case 15:
-                                if (Player.hasNotCrevaison4)
-                                    SelectionIncrevable();
+                                SelectionIncrevable();
                                 break;
                             case 16:
-                                if (Player.hasEssence4)
-                                    SelectionCiterne();
+                                SelectionCiterne();
                                 break;
                             case 17:
-                                if (Player.hasNotAccident4)
-                                    SelectionAsDuVolant();
+                                SelectionAsDuVolant();
                                 break;
                             case 18:
-                                if (Player.peutRouler4 && Player.hasNotLimite4)
-                                    SelectionPrioritaire();
+                                SelectionPrioritaire();
                                 break;
                             default:
                                 break;
@@ -691,22 +657,16 @@ public class Carte : HUD
                                 ChangerCarteJouee("Fin limite vitesse");
                                 break;
                             case 15:
-                                if (Player.hasNotCrevaison4)
-                                    SelectionIncrevable();
+                                SelectionIncrevable();
                                 break;
                             case 16:
-                                if (Player.hasEssence4)
-                                    SelectionCiterne();
+                                SelectionCiterne();
                                 break;
                             case 17:
-                                if (Player.hasNotAccident4)
-                                    SelectionAsDuVolant();
+                                SelectionAsDuVolant();
                                 break;
                             case 18:
-                                if (Player.peutRouler4 && Player.hasNotLimite4)
-                                    SelectionPrioritaire();
-                                break;
-                            default:
+                                SelectionPrioritaire();
                                 break;
                         }
                     }
