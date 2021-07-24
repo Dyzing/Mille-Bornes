@@ -20,11 +20,6 @@ public class HUD : MonoBehaviour
         victoire_Canvas.SetActive(false);
     }
 
-    void Update()
-    {
-
-    }
-
     public IEnumerator TextChange()
     {
         yield return new WaitForSeconds(1f);       
