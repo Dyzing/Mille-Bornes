@@ -44,7 +44,7 @@ public class Carte : HUD
 
     public void ChangerCarte(int effetCarte)
     {
-        effetCarteId = UnityEngine.Random.Range(0, 16);
+        effetCarteId = UnityEngine.Random.Range(0, 17);
         Sprite spriteLoaded = Resources.Load<Sprite>("Cartes/" + GameManager.mapCarte[effetCarteId]);
         carte_i.GetComponent<Image>().sprite = spriteLoaded;
         photonView.RPC("UpdateSliders", PhotonTargets.AllBufferedViaServer, effetCarte);
@@ -68,13 +68,16 @@ public class Carte : HUD
                             GameManager.KmP1 += 50;
                             break;
                         case 2:
-                            GameManager.KmP1 += 75;
+                            if (Player.hasNotLimite1)
+                                GameManager.KmP1 += 75;
                             break;
                         case 3:
-                            GameManager.KmP1 += 100;
+                            if (Player.hasNotLimite1)
+                                GameManager.KmP1 += 100;
                             break;
                         case 4:
-                            GameManager.KmP1 += 200;
+                            if (Player.hasNotLimite1)
+                                GameManager.KmP1 += 200;
                             break;
                         default:
                             break;
@@ -94,13 +97,16 @@ public class Carte : HUD
                             GameManager.KmP2 += 50;
                             break;
                         case 2:
-                            GameManager.KmP2 += 75;
+                            if (Player.hasNotLimite2)
+                                GameManager.KmP2 += 75;
                             break;
                         case 3:
-                            GameManager.KmP2 += 100;
+                            if (Player.hasNotLimite2)
+                                GameManager.KmP2 += 100;
                             break;
                         case 4:
-                            GameManager.KmP2 += 200;
+                            if (Player.hasNotLimite2)
+                                GameManager.KmP2 += 200;
                             break;
                         default:
                             break;
@@ -120,13 +126,16 @@ public class Carte : HUD
                             GameManager.KmP3 += 50;
                             break;
                         case 2:
-                            GameManager.KmP3 += 75;
+                            if (Player.hasNotLimite3)
+                                GameManager.KmP3 += 75;
                             break;
                         case 3:
-                            GameManager.KmP3 += 100;
+                            if (Player.hasNotLimite3)
+                                GameManager.KmP3 += 100;
                             break;
                         case 4:
-                            GameManager.KmP3 += 200;
+                            if (Player.hasNotLimite3)
+                                GameManager.KmP3 += 200;
                             break;
                         default:
                             break;
@@ -146,13 +155,16 @@ public class Carte : HUD
                             GameManager.KmP4 += 50;
                             break;
                         case 2:
-                            GameManager.KmP4 += 75;
+                            if (Player.hasNotLimite4)
+                                GameManager.KmP4 += 75;
                             break;
                         case 3:
-                            GameManager.KmP4 += 100;
+                            if (Player.hasNotLimite4)
+                                GameManager.KmP4 += 100;
                             break;
                         case 4:
-                            GameManager.KmP4 += 200;
+                            if (Player.hasNotLimite4)
+                                GameManager.KmP4 += 200;
                             break;
                         default:
                             break;
@@ -280,6 +292,10 @@ public class Carte : HUD
                                 if(Player.hasNotCrevaison1)
                                     SelectionIncrevable();
                                 break;
+                            case 16:
+                                if (Player.hasEssence1)
+                                    SelectionCiterne();
+                                break;
                             default:
                                 break;
                         }
@@ -321,6 +337,10 @@ public class Carte : HUD
                             case 15:
                                 if (Player.hasNotCrevaison1)
                                     SelectionIncrevable();
+                                break;
+                            case 16:
+                                if (Player.hasEssence1)
+                                    SelectionCiterne();
                                 break;
                             default:
                                 break;
@@ -372,6 +392,10 @@ public class Carte : HUD
                                 if (Player.hasNotCrevaison2)
                                     SelectionIncrevable();
                                 break;
+                            case 16:
+                                if (Player.hasEssence2)
+                                    SelectionCiterne();
+                                break;
                             default:
                                 break;
                         }
@@ -413,6 +437,10 @@ public class Carte : HUD
                             case 15:
                                 if (Player.hasNotCrevaison2)
                                     SelectionIncrevable();
+                                break;
+                            case 16:
+                                if (Player.hasEssence2)
+                                    SelectionCiterne();
                                 break;
                             default:
                                 break;
@@ -464,6 +492,10 @@ public class Carte : HUD
                                 if (Player.hasNotCrevaison3)
                                     SelectionIncrevable();
                                 break;
+                            case 16:
+                                if (Player.hasEssence3)
+                                    SelectionCiterne();
+                                break;
                             default:
                                 break;
                         }
@@ -505,6 +537,10 @@ public class Carte : HUD
                             case 15:
                                 if (Player.hasNotCrevaison3)
                                     SelectionIncrevable();
+                                break;
+                            case 16:
+                                if (Player.hasEssence3)
+                                    SelectionCiterne();
                                 break;
                             default:
                                 break;
@@ -556,6 +592,10 @@ public class Carte : HUD
                                 if (Player.hasNotCrevaison4)
                                     SelectionIncrevable();
                                 break;
+                            case 16:
+                                if (Player.hasEssence4)
+                                    SelectionCiterne();
+                                break;
                             default:
                                 break;
                         }
@@ -597,6 +637,10 @@ public class Carte : HUD
                             case 15:
                                 if (Player.hasNotCrevaison4)
                                     SelectionIncrevable();
+                                break;
+                            case 16:
+                                if (Player.hasEssence4)
+                                    SelectionCiterne();
                                 break;
                             default:
                                 break;
@@ -691,6 +735,11 @@ public class Carte : HUD
     public void SelectionIncrevable()
     {
         GameManager.carteJouée = "Increvable";
+    }
+
+    public void SelectionCiterne()
+    {
+        GameManager.carteJouée = "Citerne";
     }
 
     public void ChangerCarteJouee(string cartejouee)

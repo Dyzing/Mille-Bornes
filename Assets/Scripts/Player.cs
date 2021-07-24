@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public static bool hasNotCrevaison1;
     public static bool hasNotLimite1;
     public static bool hasNotIncrevable1;
+    public static bool hasNotCiterneEssence1;
 
     public static bool move_yes_no2;
     public static bool peutRouler2;
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
     public static bool hasNotCrevaison2;
     public static bool hasNotLimite2;
     public static bool hasNotIncrevable2;
+    public static bool hasNotCiterneEssence2;
 
     public static bool move_yes_no3;
     public static bool peutRouler3;
@@ -38,6 +40,7 @@ public class Player : MonoBehaviour
     public static bool hasNotCrevaison3;
     public static bool hasNotLimite3;
     public static bool hasNotIncrevable3;
+    public static bool hasNotCiterneEssence3;
 
     public static bool move_yes_no4;
     public static bool peutRouler4;
@@ -46,6 +49,7 @@ public class Player : MonoBehaviour
     public static bool hasNotCrevaison4;
     public static bool hasNotLimite4;
     public static bool hasNotIncrevable4;
+    public static bool hasNotCiterneEssence4;
 
     public static int joueurSelectionne;
 
@@ -95,6 +99,7 @@ public class Player : MonoBehaviour
         hasNotCrevaison1 = true;
         hasNotLimite1 = true;
         hasNotIncrevable1 = true;
+        hasNotCiterneEssence1 = true;
 
         move_yes_no2 = true;
         peutRouler2 = true;
@@ -103,6 +108,7 @@ public class Player : MonoBehaviour
         hasNotCrevaison2 = true;
         hasNotLimite2 = true;
         hasNotIncrevable2 = true;
+        hasNotCiterneEssence2 = true;
 
         move_yes_no3 = true;
         peutRouler3 = true;
@@ -111,6 +117,7 @@ public class Player : MonoBehaviour
         hasNotCrevaison3 = true;
         hasNotLimite3 = true;
         hasNotIncrevable3 = true;
+        hasNotCiterneEssence3 = true;
 
         move_yes_no4 = true;
         peutRouler4 = true;
@@ -119,6 +126,7 @@ public class Player : MonoBehaviour
         hasNotCrevaison4 = true;
         hasNotLimite4 = true;
         hasNotIncrevable4 = true;
+        hasNotCiterneEssence4 = true;
 
         photonView.RPC("ResetEtatStart", PhotonTargets.AllBufferedViaServer);
 
@@ -189,6 +197,10 @@ public class Player : MonoBehaviour
                     break;
                 case "Increvable":
                     Increvable();
+                    GameManager.carteJouée = "";
+                    break;
+                case "Citerne":
+                    CiterneEssence();
                     GameManager.carteJouée = "";
                     break;
                 case "Roulez":
@@ -417,30 +429,84 @@ public class Player : MonoBehaviour
                 case 1:
                     if (move_yes_no1 && hasNotLimite1)
                     {
-                        photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Panne d'essence");
+                        if (hasNotCiterneEssence1)
+                        {
+                            photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Panne d'essence");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemoveCiterne", PhotonTargets.AllBuffered, 1, true, "");
+                        }
                     }
                     break;
                 case 2:
                     if (move_yes_no2 && hasNotLimite2)
                     {
-                        photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Panne d'essence");
+                        if (hasNotCiterneEssence2)
+                        {
+                            photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Panne d'essence");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemoveCiterne", PhotonTargets.AllBuffered, 2, true, "");
+                        }
                     }
                     break;
                 case 3:
                     if (move_yes_no3 && hasNotLimite3)
                     {
-                        photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Panne d'essence");
+                        if (hasNotCiterneEssence3)
+                        {
+                            photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Panne d'essence");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemoveCiterne", PhotonTargets.AllBuffered, 3, true, "");
+                        }
                     }
                     break;
                 case 4:
                     if (move_yes_no4 && hasNotLimite4)
                     {
-                        photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Panne d'essence");
+                        if (hasNotCiterneEssence4)
+                        {
+                            photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Panne d'essence");
+                        }
+                        else
+                        {
+                            photonView.RPC("RemoveCiterne", PhotonTargets.AllBuffered, 4, true, "");
+                        }
                     }
                     break;
                 default:
                     break;
             }
+        }
+    }
+
+    [PunRPC]
+    private void RemoveCiterne(int joueur, bool newStateInsensibilite, string text)
+    {
+        switch (joueur)
+        {
+            case 1:
+                hasNotCiterneEssence1 = newStateInsensibilite;
+                insensibiliteJoueur1.text = text;
+                break;
+            case 2:
+                hasNotCiterneEssence2 = newStateInsensibilite;
+                insensibiliteJoueur2.text = text;
+                break;
+            case 3:
+                hasNotCiterneEssence3 = newStateInsensibilite;
+                insensibiliteJoueur3.text = text;
+                break;
+            case 4:
+                hasNotCiterneEssence4 = newStateInsensibilite;
+                insensibiliteJoueur4.text = text;
+                break;
+            default:
+                break;
         }
     }
 
@@ -602,25 +668,25 @@ public class Player : MonoBehaviour
                 case 1:
                     if (move_yes_no1)
                     {
-                        photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 1, false, true, "Joueur 1 Limite de vitesse");
+                        photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 1, false, "Joueur 1 Limite vitesse");
                     }
                     break;
                 case 2:
                     if (move_yes_no2)
                     {
-                        photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 2, false, true, "Joueur 2 Limite de vitesse");
+                        photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 2, false, "Joueur 2 Limite vitesse");
                     }
                     break;
                 case 3:
                     if (move_yes_no3)
                     {
-                        photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 3, false, true, "Joueur 3 Limite de vitesse");
+                        photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 3, false, "Joueur 3 Limite vitesse");
                     }
                     break;
                 case 4:
                     if (move_yes_no4)
                     {
-                        photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 4, false, true, "Joueur 4 Limite de vitesse");
+                        photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 4, false, "Joueur 4 Limite vitesse");
                     }
                     break;
                 default:
@@ -630,28 +696,24 @@ public class Player : MonoBehaviour
     }
 
     [PunRPC]
-    private void ChangeStateLimiteVitesse(int joueur, bool newStatusMalus, bool moveYesNo, string text)
+    private void ChangeStateLimiteVitesse(int joueur, bool newStatusMalus, string text)
     {
         switch (joueur)
         {
             case 1:
                 hasNotLimite1 = newStatusMalus;
-                move_yes_no1 = moveYesNo;
                 etatJoueur1.text = text;
                 break;
             case 2:
                 hasNotLimite2 = newStatusMalus;
-                move_yes_no1 = moveYesNo;
                 etatJoueur2.text = text;
                 break;
             case 3:
                 hasNotLimite3 = newStatusMalus;
-                move_yes_no1 = moveYesNo;
                 etatJoueur3.text = text;
                 break;
             case 4:
                 hasNotLimite4 = newStatusMalus;
-                move_yes_no1 = moveYesNo;
                 etatJoueur4.text = text;
                 break;
 
@@ -665,16 +727,16 @@ public class Player : MonoBehaviour
             switch (PhotonNetwork.player.ID)
             {
                 case 1:
-                    photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 1, false, true, "Increvable");
+                    photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 1, false, "Increvable");
                     break;
                 case 2:
-                    photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 2, false, true, "Increvable");
+                    photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 2, false, "Increvable");
                     break;
                 case 3:
-                    photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 3, false, true, "Increvable");
+                    photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 3, false, "Increvable");
                     break;
                 case 4:
-                    photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 4, false, true, "Increvable");
+                    photonView.RPC("ChangeStateIncrevable", PhotonTargets.AllBuffered, 4, false, "Increvable");
                     break;
                 default:
                     break;
@@ -684,33 +746,89 @@ public class Player : MonoBehaviour
     }
 
     [PunRPC]
-    private void ChangeStateIncrevable(int joueur, bool newStatusMalus, bool moveYesNo, string text)
+    private void ChangeStateIncrevable(int joueur, bool newStatusMalus, string text)
     {
         switch (joueur)
         {
             case 1:
                 hasNotIncrevable1 = newStatusMalus;
-                move_yes_no1 = moveYesNo;
                 insensibiliteJoueur1.text = text;
+                hasNotCiterneEssence1 = true;
                 break;
             case 2:
                 hasNotIncrevable2 = newStatusMalus;
-                move_yes_no1 = moveYesNo;
                 insensibiliteJoueur2.text = text;
+                hasNotCiterneEssence2 = true;
                 break;
             case 3:
                 hasNotIncrevable3 = newStatusMalus;
-                move_yes_no1 = moveYesNo;
                 insensibiliteJoueur3.text = text;
+                hasNotCiterneEssence3 = true;
                 break;
             case 4:
                 hasNotIncrevable4 = newStatusMalus;
-                move_yes_no1 = moveYesNo;
                 insensibiliteJoueur4.text = text;
+                hasNotCiterneEssence4 = true;
                 break;
 
         }
     }
+
+    public void CiterneEssence()
+    {
+        if (joueurSelectionne <= PhotonNetwork.room.PlayerCount)
+        {
+            switch (PhotonNetwork.player.ID)
+            {
+                case 1:
+                    photonView.RPC("ChangeStateCiterneEssence", PhotonTargets.AllBuffered, 1, false, "Citerne essence");
+                    break;
+                case 2:
+                    photonView.RPC("ChangeStateCiterneEssence", PhotonTargets.AllBuffered, 2, false, "Citerne essence");
+                    break;
+                case 3:
+                    photonView.RPC("ChangeStateCiterneEssence", PhotonTargets.AllBuffered, 3, false, "Citerne essence");
+                    break;
+                case 4:
+                    photonView.RPC("ChangeStateCiterneEssence", PhotonTargets.AllBuffered, 4, false, "Citerne essence");
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    }
+
+    [PunRPC]
+    private void ChangeStateCiterneEssence(int joueur, bool newStatusMalus, string text)
+    {
+        switch (joueur)
+        {
+            case 1:
+                hasNotCiterneEssence1 = newStatusMalus;
+                insensibiliteJoueur1.text = text;
+                hasNotIncrevable1 = true;
+                break;
+            case 2:
+                hasNotCiterneEssence2 = newStatusMalus;
+                insensibiliteJoueur2.text = text;
+                hasNotIncrevable2 = true;
+                break;
+            case 3:
+                hasNotCiterneEssence3 = newStatusMalus;
+                insensibiliteJoueur3.text = text;
+                hasNotIncrevable3 = true;
+                break;
+            case 4:
+                hasNotCiterneEssence4 = newStatusMalus;
+                insensibiliteJoueur4.text = text;
+                hasNotIncrevable4 = true;
+                break;
+
+        }
+    }
+
+
 
     [PunRPC]
     private void ChangerEtatBonJoueur1()
