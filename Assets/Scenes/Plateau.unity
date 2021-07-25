@@ -7527,6 +7527,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7206060796511430145, guid: e7c70fc9ef72f78438c768f89f316bf9,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7206060796511430175, guid: e7c70fc9ef72f78438c768f89f316bf9,
         type: 3}
       propertyPath: m_Name
@@ -9279,6 +9284,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2019017732}
     m_Modifications:
+    - target: {fileID: 1676444877889968624, guid: e22a03615425d4f4f96824cb18fc9b33,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1676444877889968624, guid: e22a03615425d4f4f96824cb18fc9b33,
         type: 3}
       propertyPath: m_FontData.m_MinSize
@@ -14970,6 +14980,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Joueur4Etat
+      objectReference: {fileID: 0}
+    - target: {fileID: 8251851306647211555, guid: 4f8858459b19be848bb6236ade597a30,
+        type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f8858459b19be848bb6236ade597a30, type: 3}
@@ -34466,6 +34481,11 @@ PrefabInstance:
         type: 3}
       propertyPath: instantiationId
       value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1530678250486200909, guid: 9547ee81bf8f3464dbbfa88ffbd7f30f,
+        type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1530678250486200914, guid: 9547ee81bf8f3464dbbfa88ffbd7f30f,
         type: 3}
