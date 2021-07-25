@@ -266,6 +266,7 @@ public class Player : MonoBehaviour
         else
         {
             destination = GameObject.Find("Node40").transform.position;
+            StartCoroutine(CoroutineLeaveOnWin());
         }
         voiturepos = destination;
         voiturepos.y += 4f;
@@ -281,12 +282,26 @@ public class Player : MonoBehaviour
         {
             playerPrefab.transform.eulerAngles = GameObject.Find("Node40").transform.eulerAngles;
         }
+
+    }
+
+    private IEnumerator CoroutineLeaveOnWin()
+    {
+        yield return new WaitForSeconds(1.5f);
+        photonView.RPC("LeaveOnWin", PhotonTargets.AllBuffered);
     }
 
     [PunRPC]
     private void VoitureNewPos()
     {
         playerPrefab.transform.position = voiturepos;
+    }
+
+    [PunRPC]
+    private void LeaveOnWin()
+    {
+        GameManager.disconnectUI.SetActive(true);
+        GameManager.Off = true;
     }
 
 

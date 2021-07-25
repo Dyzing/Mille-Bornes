@@ -82,4 +82,5 @@ MonoBehaviour:
   - RemoveAccident
   - RemoveAsDuVolant
   - RemovePrioritaire
+  - LeaveOnWin
   DisableAutoOpenWizard: 1

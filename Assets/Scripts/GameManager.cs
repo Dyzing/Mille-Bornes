@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public GameObject sceneCamera;
     public GameObject spawn;
     public TextMeshProUGUI pingText;
+    public static bool Off = false;
+    public static GameObject disconnectUI;
+
     public static TextMeshProUGUI tour_joueur_i;
     public static int id_tour_actuel;
 
@@ -106,14 +109,31 @@ public class GameManager : MonoBehaviour
         KmPlayerP4 = GameObject.Find("KmtextP4").GetComponent<TextMeshProUGUI>();
         aToiDeJouerPanel = GameObject.Find("AToideJouerPanel");
         aToiDeJouerPanel.SetActive(false);
+        disconnectUI = GameObject.Find("DisconnectMenu");
+        disconnectUI.SetActive(false);
     }
 
     void Update()
     {
+        CheckInput();
         list_players = PhotonNetwork.playerList;
         
 
         pingText.text = "PING : " + PhotonNetwork.GetPing() + "ms";
+    }
+
+    private void CheckInput()
+    {
+        if (Off && Input.GetKeyDown(KeyCode.Escape))
+        {
+            disconnectUI.SetActive(false);
+            Off = false;
+        }
+        else if(!Off && Input.GetKeyDown(KeyCode.Escape))
+        {
+            disconnectUI.SetActive(true);
+            Off = true;
+        }
     }
 
     public void SpawnPlayer()
@@ -133,6 +153,12 @@ public class GameManager : MonoBehaviour
 
         gameCanvas.SetActive(false);
         sceneCamera.SetActive(false);
+    }
+
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LoadLevel("Menu");
     }
 
 }
