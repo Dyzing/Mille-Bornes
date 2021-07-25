@@ -147,17 +147,64 @@ public class Player : MonoBehaviour
         photonView.RPC("ResetEtatStart", PhotonTargets.AllBufferedViaServer);
 
         joueurSelectionne = 0;
-
+        ChangerNameColor();
     }
 
 
     [PunRPC]
     private void ResetEtatStart()
     {
-        etatJoueur1.text = "Joueur 1";
-        etatJoueur2.text = "Joueur 2";
-        etatJoueur3.text = "Joueur 3";
-        etatJoueur4.text = "Joueur 4";
+        etatJoueur1.text = "";
+        etatJoueur2.text = "";
+        etatJoueur3.text = "";
+        etatJoueur4.text = "";
+
+        int nb_player = PhotonNetwork.room.PlayerCount;
+        int i = 1;
+        etatJoueur1.text = PhotonNetwork.player.Get(i).NickName;
+        if (i < nb_player)
+        {
+            i++;
+            etatJoueur2.text = PhotonNetwork.player.Get(i).NickName;
+        }
+        if (i < nb_player)
+        {
+            i++;
+            etatJoueur3.text = PhotonNetwork.player.Get(i).NickName;
+        }
+        if (i < nb_player)
+        {
+            i++;
+            etatJoueur4.text = PhotonNetwork.player.Get(i).NickName;
+        }
+    }
+
+    public void ChangerNameColor()
+    {
+        if (photonView.isMine)
+        {
+            switch (photonView.owner.ID)
+            {
+                case 1:
+                    etatJoueur1.color = Color.green;
+                    insensibiliteJoueur1.color = Color.green;
+                    break;
+                case 2:
+                    etatJoueur2.color = Color.green;
+                    insensibiliteJoueur2.color = Color.green;
+                    break;
+                case 3:
+                    etatJoueur3.color = Color.green;
+                    insensibiliteJoueur3.color = Color.green;
+                    break;
+                case 4:
+                    etatJoueur4.color = Color.green;
+                    insensibiliteJoueur4.color = Color.green;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
 
@@ -346,7 +393,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotPrioritaire1)
                         {
-                            photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Stop");
+                            photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 1, false, false, " Stop");
                         }
                         else
                         {
@@ -359,7 +406,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotPrioritaire2)
                         {
-                            photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Stop");
+                            photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 2, false, false, " Stop");
                         }
                         else
                         {
@@ -372,7 +419,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotPrioritaire3)
                         {
-                            photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Stop");
+                            photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 3, false, false, " Stop");
                         }
                         else
                         {
@@ -385,7 +432,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotPrioritaire4)
                         {
-                            photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Stop");
+                            photonView.RPC("ChangeStateStop", PhotonTargets.AllBuffered, 4, false, false, " Stop");
                         }
                         else
                         {
@@ -434,22 +481,22 @@ public class Player : MonoBehaviour
             case 1:
                 peutRouler1 = peutRouler;
                 move_yes_no1 = moveYesNo;
-                etatJoueur1.text = text;
+                etatJoueur1.text += System.Environment.NewLine + text;
                 break;
             case 2:
                 peutRouler2 = peutRouler;
                 move_yes_no2 = moveYesNo;
-                etatJoueur2.text = text;
+                etatJoueur2.text += System.Environment.NewLine + text;
                 break;
             case 3:
                 peutRouler3 = peutRouler;
                 move_yes_no3 = moveYesNo;
-                etatJoueur3.text = text;
+                etatJoueur3.text += System.Environment.NewLine + text;
                 break;
             case 4:
                 peutRouler4 = peutRouler;
                 move_yes_no4 = moveYesNo;
-                etatJoueur4.text = text;
+                etatJoueur4.text += System.Environment.NewLine + text;
                 break;
 
         }
@@ -467,7 +514,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotAsDuVolant1)
                         {
-                            photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Accident");
+                            photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 1, false, false, " Accident");
                         }
                         else
                         {
@@ -480,7 +527,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotAsDuVolant2)
                         {
-                            photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Accident");
+                            photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 2, false, false, " Accident");
                         }
                         else
                         {
@@ -493,7 +540,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotAsDuVolant3)
                         {
-                            photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Accident");
+                            photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 3, false, false, " Accident");
                         }
                         else
                         {
@@ -506,7 +553,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotAsDuVolant4)
                         {
-                            photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Accident");
+                            photonView.RPC("ChangeStateAccident", PhotonTargets.AllBuffered, 4, false, false, " Accident");
                         }
                         else
                         {
@@ -555,22 +602,22 @@ public class Player : MonoBehaviour
             case 1:
                 hasNotAccident1 = hasNotAccident;
                 move_yes_no1 = moveYesNo;
-                etatJoueur1.text = text;
+                etatJoueur1.text += System.Environment.NewLine + text;
                 break;
             case 2:
                 hasNotAccident2 = hasNotAccident;
                 move_yes_no2 = moveYesNo;
-                etatJoueur2.text = text;
+                etatJoueur2.text += System.Environment.NewLine + text;
                 break;
             case 3:
                 hasNotAccident3 = hasNotAccident;
                 move_yes_no3 = moveYesNo;
-                etatJoueur3.text = text;
+                etatJoueur3.text += System.Environment.NewLine + text;
                 break;
             case 4:
                 hasNotAccident4 = hasNotAccident;
                 move_yes_no4 = moveYesNo;
-                etatJoueur4.text = text;
+                etatJoueur4.text += System.Environment.NewLine + text;
                 break;
 
         }
@@ -588,7 +635,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotCiterneEssence1)
                         {
-                            photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Panne d'essence");
+                            photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 1, false, false, " Panne d'essence");
                         }
                         else
                         {
@@ -601,7 +648,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotCiterneEssence2)
                         {
-                            photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Panne d'essence");
+                            photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 2, false, false, " Panne d'essence");
                         }
                         else
                         {
@@ -614,7 +661,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotCiterneEssence3)
                         {
-                            photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Panne d'essence");
+                            photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 3, false, false, " Panne d'essence");
                         }
                         else
                         {
@@ -627,7 +674,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotCiterneEssence4)
                         {
-                            photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Panne d'essence");
+                            photonView.RPC("ChangeStateEssence", PhotonTargets.AllBuffered, 4, false, false, " Panne d'essence");
                         }
                         else
                         {
@@ -675,22 +722,22 @@ public class Player : MonoBehaviour
             case 1:
                 hasEssence1 = newStatusMalus;
                 move_yes_no1 = moveYesNo;
-                etatJoueur1.text = text;
+                etatJoueur1.text += System.Environment.NewLine + text;
                 break;
             case 2:
                 hasEssence2 = newStatusMalus;
                 move_yes_no2 = moveYesNo;
-                etatJoueur2.text = text;
+                etatJoueur2.text += System.Environment.NewLine + text;
                 break;
             case 3:
                 hasEssence3 = newStatusMalus;
                 move_yes_no3 = moveYesNo;
-                etatJoueur3.text = text;
+                etatJoueur3.text += System.Environment.NewLine + text;
                 break;
             case 4:
                 hasEssence4 = newStatusMalus;
                 move_yes_no4 = moveYesNo;
-                etatJoueur4.text = text;
+                etatJoueur4.text += System.Environment.NewLine + text;
                 break;
 
         }
@@ -708,7 +755,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotIncrevable1)
                         {
-                            photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 1, false, false, "Joueur 1 Crevaison");
+                            photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 1, false, false, " Crevaison");
                         }
                         else
                         {
@@ -721,7 +768,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotIncrevable2)
                         {
-                            photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 2, false, false, "Joueur 2 Crevaison");
+                            photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 2, false, false, " Crevaison");
                         }
                         else
                         {
@@ -734,7 +781,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotIncrevable3)
                         {
-                            photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 3, false, false, "Joueur 3 Crevaison");
+                            photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 3, false, false, " Crevaison");
                         }
                         else
                         {
@@ -747,7 +794,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotIncrevable4)
                         {
-                            photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 4, false, false, "Joueur 4 Crevaison");
+                            photonView.RPC("ChangeStateCrevaison", PhotonTargets.AllBuffered, 4, false, false, " Crevaison");
                         }
                         else
                         {
@@ -795,22 +842,22 @@ public class Player : MonoBehaviour
             case 1:
                 hasNotCrevaison1 = newStatusMalus;
                 move_yes_no1 = moveYesNo;
-                etatJoueur1.text = text;
+                etatJoueur1.text += System.Environment.NewLine + text;
                 break;
             case 2:
                 hasNotCrevaison2 = newStatusMalus;
                 move_yes_no2 = moveYesNo;
-                etatJoueur2.text = text;
+                etatJoueur2.text += System.Environment.NewLine + text;
                 break;
             case 3:
                 hasNotCrevaison3 = newStatusMalus;
                 move_yes_no3 = moveYesNo;
-                etatJoueur3.text = text;
+                etatJoueur3.text += System.Environment.NewLine + text;
                 break;
             case 4:
                 hasNotCrevaison4 = newStatusMalus;
                 move_yes_no4 = moveYesNo;
-                etatJoueur4.text = text;
+                etatJoueur4.text += System.Environment.NewLine + text;
                 break;
 
         }
@@ -827,7 +874,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotPrioritaire1)
                         {
-                            photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 1, false, "Joueur 1 Limite vitesse");
+                            photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 1, false, " Limite vitesse");
                         }
                         else
                         {
@@ -840,7 +887,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotPrioritaire2)
                         {
-                            photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 2, false, "Joueur 2 Limite vitesse");
+                            photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 2, false, " Limite vitesse");
                         }
                         else
                         {
@@ -854,7 +901,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotPrioritaire3)
                         {
-                            photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 3, false, "Joueur 3 Limite vitesse");
+                            photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 3, false, " Limite vitesse");
                         }
                         else
                         {
@@ -867,7 +914,7 @@ public class Player : MonoBehaviour
                     {
                         if (hasNotPrioritaire4)
                         {
-                            photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 4, false, "Joueur 4 Limite vitesse");
+                            photonView.RPC("ChangeStateLimiteVitesse", PhotonTargets.AllBuffered, 4, false, " Limite vitesse");
                         }
                         else
                         {
@@ -888,19 +935,19 @@ public class Player : MonoBehaviour
         {
             case 1:
                 hasNotLimite1 = newStatusMalus;
-                etatJoueur1.text = text;
+                etatJoueur1.text += System.Environment.NewLine + text;
                 break;
             case 2:
                 hasNotLimite2 = newStatusMalus;
-                etatJoueur2.text = text;
+                etatJoueur2.text += System.Environment.NewLine + text;
                 break;
             case 3:
                 hasNotLimite3 = newStatusMalus;
-                etatJoueur3.text = text;
+                etatJoueur3.text += System.Environment.NewLine + text;
                 break;
             case 4:
                 hasNotLimite4 = newStatusMalus;
-                etatJoueur4.text = text;
+                etatJoueur4.text += System.Environment.NewLine + text;
                 break;
 
         }
@@ -1150,7 +1197,7 @@ public class Player : MonoBehaviour
         hasEssence1 = true;
         hasNotCrevaison1 = true;
         hasNotLimite1 = true;
-        etatJoueur1.text = "Joueur 1 ";
+        etatJoueur1.text = PhotonNetwork.player.Get(1).NickName;
     }
 
     [PunRPC]
@@ -1162,7 +1209,7 @@ public class Player : MonoBehaviour
         hasEssence2 = true;
         hasNotCrevaison2 = true;
         hasNotLimite2 = true;
-        etatJoueur2.text = "Joueur 2 ";
+        etatJoueur2.text = PhotonNetwork.player.Get(2).NickName;
     }
 
     [PunRPC]
@@ -1174,7 +1221,7 @@ public class Player : MonoBehaviour
         hasEssence3 = true;
         hasNotCrevaison3 = true;
         hasNotLimite3 = true;
-        etatJoueur3.text = "Joueur 3 ";
+        etatJoueur3.text = PhotonNetwork.player.Get(3).NickName;
     }
 
     [PunRPC]
@@ -1186,7 +1233,7 @@ public class Player : MonoBehaviour
         hasEssence4 = true;
         hasNotCrevaison4 = true;
         hasNotLimite4 = true;
-        etatJoueur4.text = "Joueur 4 ";
+        etatJoueur4.text = PhotonNetwork.player.Get(4).NickName;
     }
 
     public void Roulez()
