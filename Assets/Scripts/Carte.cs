@@ -206,19 +206,14 @@ public class Carte : HUD
     [PunRPC]
     private void InstantiateIds()
     {
-        //Debug.Log("***** AVANT id_tour_actuel : " + GameManager.id_tour_actuel);
         GameManager.id_tour_actuel = 1;
-        //Debug.Log("***** APRES id_tour_actuel : " + GameManager.id_tour_actuel);
     }
 
     [PunRPC]
     private void ChangerIdTour()
     {
         nb_players = PhotonNetwork.playerList.Length;
-        //Debug.Log("id_tour_actuel : " + GameManager.id_tour_actuel);
-        GameManager.id_tour_actuel++;
-        GameManager.id_tour_actuel = GameManager.id_tour_actuel % (nb_players + 1);
-        //Debug.Log("id_tour_actuel : " + GameManager.id_tour_actuel);
+        GameManager.id_tour_actuel = PhotonNetwork.player.GetNextFor(GameManager.id_tour_actuel).ID;
         if(GameManager.id_tour_actuel == 0)
         {
             GameManager.id_tour_actuel = 1;
