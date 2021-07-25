@@ -183,20 +183,19 @@ public class Carte : HUD
         {
             if (i == 0)
             {
-
-                GameManager.KmPlayerP1.text = "P" + (i + 1) + " :" + Math.Min(GameManager.KmP1, 1000) + " Km";
+                GameManager.KmPlayerP1.text = PhotonNetwork.player.Get(i+1).NickName + " : " + Math.Min(GameManager.KmP1, 1000) + " Km";
             }
             if (i == 1)
             {
-                GameManager.KmPlayerP2.text = "P" + (i + 1) + " :" + Math.Min(GameManager.KmP2, 1000) + " Km";
+                GameManager.KmPlayerP2.text = PhotonNetwork.player.Get(i+1).NickName + " : " + Math.Min(GameManager.KmP2, 1000) + " Km";
             }
             if (i == 2)
             {
-                GameManager.KmPlayerP3.text = "P" + (i + 1) + " :" + Math.Min(GameManager.KmP3, 1000) + " Km";
+                GameManager.KmPlayerP3.text = PhotonNetwork.player.Get(i+1).NickName + " : " + Math.Min(GameManager.KmP3, 1000) + " Km";
             }
             if (i == 3)
             {
-                GameManager.KmPlayerP4.text = "P" + (i + 1) + " :" + Math.Min(GameManager.KmP4, 1000) + " Km";
+                GameManager.KmPlayerP4.text = PhotonNetwork.player.Get(i+1).NickName + " : " + Math.Min(GameManager.KmP4, 1000) + " Km";
             }
 
         }
