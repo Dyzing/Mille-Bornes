@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI pingText;
     public static bool Off = false;
     public static GameObject disconnectUI;
+    public GameObject playerFeed;
+    public GameObject feedGrid;
 
     public static TextMeshProUGUI tour_joueur_i;
     public static int id_tour_actuel;
@@ -159,6 +161,22 @@ public class GameManager : MonoBehaviour
     {
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.LoadLevel("Menu");
+    }
+
+    private void OnPhotonPlayerConnected(PhotonPlayer player)
+    {
+        GameObject obj = Instantiate(playerFeed, new Vector2(0, 0), Quaternion.identity);
+        obj.transform.SetParent(feedGrid.transform, false);
+        obj.GetComponent<Text>().text = player.name + " joined the game";
+        obj.GetComponent<Text>().color = Color.green;
+    }
+
+    private void OnPhotonPlayerDisconnected(PhotonPlayer player)
+    {
+        GameObject obj = Instantiate(playerFeed, new Vector2(0, 0), Quaternion.identity);
+        obj.transform.SetParent(feedGrid.transform, false);
+        obj.GetComponent<Text>().text = player.name + " left the game";
+        obj.GetComponent<Text>().color = Color.red;
     }
 
 }
