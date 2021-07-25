@@ -213,7 +213,15 @@ public class Carte : HUD
     private void ChangerIdTour()
     {
         nb_players = PhotonNetwork.playerList.Length;
-        GameManager.id_tour_actuel = PhotonNetwork.player.GetNextFor(GameManager.id_tour_actuel).ID;
+        if (nb_players == 1)
+        {
+            GameManager.id_tour_actuel++;
+            GameManager.id_tour_actuel = GameManager.id_tour_actuel % (nb_players + 1);
+        }
+        else
+        {
+            GameManager.id_tour_actuel = PhotonNetwork.player.GetNextFor(GameManager.id_tour_actuel).ID;
+        }
         if(GameManager.id_tour_actuel == 0)
         {
             GameManager.id_tour_actuel = 1;

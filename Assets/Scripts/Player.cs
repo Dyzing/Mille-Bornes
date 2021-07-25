@@ -169,13 +169,13 @@ public class Player : MonoBehaviour
             {
                 case "KM":
                     MoveVoiture();
-                    GameManager.carteJouée = "";
+                    CleanCarteJouee();
                     break;
                 case "Stop":
                     if (joueurSelectionne != 0)
                     {
                         Stop();
-                        GameManager.carteJouée = "";
+                        CleanCarteJouee();
                         photonView.RPC("DeselectJoueur", PhotonTargets.AllBuffered);
                     }
                     break;
@@ -183,7 +183,7 @@ public class Player : MonoBehaviour
                     if (joueurSelectionne != 0)
                     {
                         Accident();
-                        GameManager.carteJouée = "";
+                        CleanCarteJouee();
                         photonView.RPC("DeselectJoueur", PhotonTargets.AllBuffered);
                     }
                     break;
@@ -191,7 +191,7 @@ public class Player : MonoBehaviour
                     if (joueurSelectionne != 0)
                     {
                         PanneEssence();
-                        GameManager.carteJouée = "";
+                        CleanCarteJouee();
                         photonView.RPC("DeselectJoueur", PhotonTargets.AllBuffered);
                     }
                     break;
@@ -199,7 +199,7 @@ public class Player : MonoBehaviour
                     if (joueurSelectionne != 0)
                     {
                         Crevaison();
-                        GameManager.carteJouée = "";
+                        CleanCarteJouee();
                         photonView.RPC("DeselectJoueur", PhotonTargets.AllBuffered);
                     }
                     break;
@@ -207,45 +207,55 @@ public class Player : MonoBehaviour
                     if (joueurSelectionne != 0)
                     {
                         LimiteVitesse();
-                        GameManager.carteJouée = "";
+                        CleanCarteJouee();
                         photonView.RPC("DeselectJoueur", PhotonTargets.AllBuffered);
                     }
                     break;
                 case "Increvable":
                     Increvable();
-                    GameManager.carteJouée = "";
+                    CleanCarteJouee();
                     break;
                 case "Citerne":
                     CiterneEssence();
-                    GameManager.carteJouée = "";
+                    CleanCarteJouee();
                     break;
                 case "AsDuVolant":
                     AsDuVolant();
-                    GameManager.carteJouée = "";
+                    CleanCarteJouee();
                     break;
                 case "Prioritaire":
                     Prioritaire();
-                    GameManager.carteJouée = "";
+                    CleanCarteJouee();
                     break;
                 case "Roulez":
                     Roulez();
+                    CleanCarteJouee();
                     break;
                 case "Reparations":
                     Reparations();
+                    CleanCarteJouee();
                     break;
                 case "Essence":
                     Essence();
+                    CleanCarteJouee();
                     break;
                 case "Roue de secours":
                     RoueDeSecours();
+                    CleanCarteJouee();
                     break;
                 case "Fin limite vitesse":
                     FinLimitteVitesse();
+                    CleanCarteJouee();
                     break;
                 default:
                     break;
             }
         }
+    }
+
+    public void CleanCarteJouee()
+    {
+        GameManager.carteJouée = "";
     }
 
 

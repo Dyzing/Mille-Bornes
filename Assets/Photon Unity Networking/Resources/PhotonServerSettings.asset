@@ -83,4 +83,5 @@ MonoBehaviour:
   - RemoveAsDuVolant
   - RemovePrioritaire
   - LeaveOnWin
+  - SendMessage
   DisableAutoOpenWizard: 1
