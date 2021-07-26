@@ -207,25 +207,28 @@ public class Carte : HUD
     {
         if (photonView.isMine)
         {
-            switch (photonView.owner.ID)
+            if (photonView.owner != null)
             {
-                case 1:
-                    GameManager.KmPlayerP1.color = Color.green;
-                    break;
-                case 2:
-                    GameManager.KmPlayerP2.color = Color.green;
+                switch (photonView.owner.ID)
+                {
+                    case 1:
+                        GameManager.KmPlayerP1.color = Color.green;
+                        break;
+                    case 2:
+                        GameManager.KmPlayerP2.color = Color.green;
 
-                    break;
-                case 3:
-                    GameManager.KmPlayerP3.color = Color.green;
+                        break;
+                    case 3:
+                        GameManager.KmPlayerP3.color = Color.green;
 
-                    break;
-                case 4:
-                    GameManager.KmPlayerP4.color = Color.green;
+                        break;
+                    case 4:
+                        GameManager.KmPlayerP4.color = Color.green;
 
-                    break;
-                default:
-                    break;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
