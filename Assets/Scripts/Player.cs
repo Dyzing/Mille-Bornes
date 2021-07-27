@@ -358,7 +358,7 @@ public class Player : MonoBehaviour
         voiturepos = destination;
         /*float coeffdir = (destination.z - playerPrefab.transform.position.z) / (destination.x - playerPrefab.transform.position.x);
         float newZ = coeffdir * (playerPrefab.transform.forward.x) + (playerPrefab.transform.position.z * playerPrefab.transform.position.x);*/
-        playerPrefab.transform.position = Vector3.MoveTowards(playerPrefab.transform.position, destination, 50 * Time.deltaTime); 
+        playerPrefab.transform.position = Vector3.MoveTowards(playerPrefab.transform.position, voiturepos, 50 * Time.deltaTime); 
         //playerPrefab.transform.position += playerPrefab.transform.forward * Time.deltaTime * 10 ;
         //playerPrefab.transform.position = new Vector3(playerPrefab.transform.forward.x, destination.y, newZ);
         //voiturepos.y += 4f;
