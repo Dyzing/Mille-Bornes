@@ -24,5 +24,6 @@ public class CarteSetSibling : MonoBehaviour
 
         carte = GameObject.Find(carte_active_name);
         carte.transform.SetAsLastSibling();
+        carte.transform.position = new Vector3(carte.transform.position.x, carte.transform.position.y + 40, carte.transform.position.z);
     }
 }

@@ -7,8 +7,11 @@ public class ChatManager : MonoBehaviour
 {
     public Player plMove;
     public PhotonView photonView;
-    private GameObject BubbleSpeechObject;
-    private Text UpdatedText;
+    //private GameObject BubbleSpeechObject;
+    //private Text UpdatedText;
+
+    public GameObject chatFeed;
+    private GameObject messageFeedGrid;
 
     private InputField ChatInputField;
     private bool disableSend;
@@ -16,8 +19,9 @@ public class ChatManager : MonoBehaviour
     private void Awake()
     {
         ChatInputField = GameObject.Find("ChatInputField").GetComponent<InputField>();
-        BubbleSpeechObject = GameObject.Find("FondDeMessage");
-        UpdatedText = GameObject.Find("MessageText").GetComponent<Text>();
+        //BubbleSpeechObject = GameObject.Find("FondDeMessage");
+        //UpdatedText = GameObject.Find("MessageText").GetComponent<Text>();
+        messageFeedGrid = GameObject.Find("MessageGrid");
     }
 
     private void Update()
@@ -28,7 +32,7 @@ public class ChatManager : MonoBehaviour
             {
                 ChatInputField.text = photonView.owner.NickName + " : " + ChatInputField.text;
                 photonView.RPC("SendMessage", PhotonTargets.AllBuffered, ChatInputField.text);
-                BubbleSpeechObject.SetActive(true);
+                //BubbleSpeechObject.SetActive(true);
 
                 ChatInputField.text = "";
                 disableSend = true;
@@ -39,7 +43,10 @@ public class ChatManager : MonoBehaviour
     [PunRPC]
     private void SendMessage(string message)
     {
-        UpdatedText.text = message;
+        GameObject obj = Instantiate(chatFeed, new Vector2(0, 0), Quaternion.identity);
+        obj.transform.SetParent(messageFeedGrid.transform, false);
+        //UpdatedText.text = message;
+        obj.GetComponent<Text>().text = message;
 
         StartCoroutine("Remove");
     }
@@ -47,7 +54,7 @@ public class ChatManager : MonoBehaviour
     IEnumerator Remove()
     {
         yield return new WaitForSeconds(4f);
-        BubbleSpeechObject.SetActive(false);
+        //BubbleSpeechObject.SetActive(false);
         disableSend = false;
     }
 
@@ -55,12 +62,12 @@ public class ChatManager : MonoBehaviour
     {
         if(stream.isWriting)
         {
-            stream.SendNext(BubbleSpeechObject.active);
+            //stream.SendNext(BubbleSpeechObject.active);
 
         }
         else if (stream.isReading)
         {
-            BubbleSpeechObject.SetActive((bool)stream.ReceiveNext()); 
+            //BubbleSpeechObject.SetActive((bool)stream.ReceiveNext()); 
         }
     }
 

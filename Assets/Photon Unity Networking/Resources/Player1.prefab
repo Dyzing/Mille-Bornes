@@ -494,6 +494,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plMove: {fileID: 0}
   photonView: {fileID: 7037350684973322829}
+  chatFeed: {fileID: 7434829595737860602, guid: 6be9a7b1ef19c934884a20efa9245266,
+    type: 3}
+  messageFeedGrid: {fileID: 0}
 --- !u!1 &6205560605159518557
 GameObject:
   m_ObjectHideFlags: 0
