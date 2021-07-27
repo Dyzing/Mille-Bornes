@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     public static GameObject aToiDeJouerPanel;
 
-
+    public static int KM_restant;
 
     public static Dictionary<int, string> mapCarte = new Dictionary<int, string>()
     {
@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
         aToiDeJouerPanel.SetActive(false);
         disconnectUI = GameObject.Find("DisconnectMenu");
         disconnectUI.SetActive(false);
+        KM_restant = 0;
     }
 
     void Update()

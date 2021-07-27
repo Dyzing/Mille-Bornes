@@ -72,6 +72,8 @@ public class Player : MonoBehaviour
     private Text insensibiliteJoueur3;
     private Text insensibiliteJoueur4;
 
+    private bool estArrive;
+
     private void Awake()
     {
         if(photonView.isMine)
@@ -148,6 +150,9 @@ public class Player : MonoBehaviour
 
         joueurSelectionne = 0;
         ChangerNameColor();
+
+        estArrive = true;
+        playerPrefab.transform.eulerAngles = new Vector3(playerPrefab.transform.eulerAngles.x, playerPrefab.transform.eulerAngles.y -90f, playerPrefab.transform.eulerAngles.z);
     }
 
 
@@ -215,8 +220,32 @@ public class Player : MonoBehaviour
             switch (GameManager.carteJouée)
             {
                 case "KM":
-                    MoveVoiture();
-                    CleanCarteJouee();
+                    Vector3 destination;
+                    if (GameManager.KM_1 - GameManager.KM_restant <= 39)
+                    {
+                        destination = GameObject.Find("Node" + (GameManager.KM_1 - GameManager.KM_restant)).transform.position;
+                    }
+                    else
+                    {
+                        destination = GameObject.Find("Node40").transform.position;
+                        StartCoroutine(CoroutineLeaveOnWin());
+                    }
+                    if (playerPrefab.transform.position != destination)//(!(playerPrefab.transform.position.x > destination.x - 10 && playerPrefab.transform.position.x < destination.x + 10) || !(playerPrefab.transform.position.z > destination.z - 10 && playerPrefab.transform.position.z < destination.z + 10))
+                    {
+                        estArrive = false;
+                        MoveVoiture();
+                    }
+                    else
+                    {
+                        if (GameManager.KM_restant > 0)
+                        {
+                            GameManager.KM_restant--;
+                        }
+                        else
+                        {
+                            CleanCarteJouee();
+                        }
+                    }
                     break;
                 case "Stop":
                     if (joueurSelectionne != 0)
@@ -316,24 +345,31 @@ public class Player : MonoBehaviour
     {
         voiturepos = playerPrefab.transform.position;
         Vector3 destination;
-        if (GameManager.KM_1 <= 39)
+        if (GameManager.KM_1 - GameManager.KM_restant <= 39)
         {
-            destination = GameObject.Find("Node" + GameManager.KM_1).transform.position;
+            destination = GameObject.Find("Node" + (GameManager.KM_1 - GameManager.KM_restant)).transform.position;
         }
         else
         {
             destination = GameObject.Find("Node40").transform.position;
             StartCoroutine(CoroutineLeaveOnWin());
         }
+
         voiturepos = destination;
-        voiturepos.y += 4f;
+        /*float coeffdir = (destination.z - playerPrefab.transform.position.z) / (destination.x - playerPrefab.transform.position.x);
+        float newZ = coeffdir * (playerPrefab.transform.forward.x) + (playerPrefab.transform.position.z * playerPrefab.transform.position.x);*/
+        playerPrefab.transform.position = Vector3.MoveTowards(playerPrefab.transform.position, destination, 50 * Time.deltaTime); 
+        //playerPrefab.transform.position += playerPrefab.transform.forward * Time.deltaTime * 10 ;
+        //playerPrefab.transform.position = new Vector3(playerPrefab.transform.forward.x, destination.y, newZ);
+        //voiturepos.y += 4f;
 
         photonView.RPC("VoitureNewPos", PhotonTargets.AllBuffered);
+        
 
-        if (GameManager.KM_1 <= 38)
+        if (GameManager.KM_1 - GameManager.KM_restant <= 38)
         {
-            GameObject nextNode = GameObject.Find("Node" + (GameManager.KM_1 + 1));
-            playerPrefab.transform.eulerAngles = new Vector3(nextNode.transform.eulerAngles.x, nextNode.transform.eulerAngles.y + 90f, nextNode.transform.eulerAngles.z);
+            GameObject nextNode = GameObject.Find("Node" + (GameManager.KM_1 - GameManager.KM_restant));
+            playerPrefab.transform.eulerAngles = new Vector3(nextNode.transform.eulerAngles.x, nextNode.transform.eulerAngles.y, nextNode.transform.eulerAngles.z);
         }
         else
         {
@@ -351,7 +387,9 @@ public class Player : MonoBehaviour
     [PunRPC]
     private void VoitureNewPos()
     {
-        playerPrefab.transform.position = voiturepos;
+        //playerPrefab.transform.position = voiturepos;
+        //playerPrefab.transform.position += Time.deltaTime * GameObject.Find("Node" + GameManager.KM_1).transform.forward;
+        playerPrefab.transform.position = Vector3.MoveTowards(playerPrefab.transform.position, voiturepos, 50 * Time.deltaTime); 
     }
 
     [PunRPC]

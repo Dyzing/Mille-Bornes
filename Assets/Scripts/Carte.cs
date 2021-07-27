@@ -723,6 +723,7 @@ public class Carte : HUD
         if (GameManager.KM_1 > 40)
             GameManager.KM_1 = 40;
         GameManager.carteJouée = "KM";
+        GameManager.KM_restant = 0;
         UpdateEachRound();
     }
 
@@ -732,6 +733,7 @@ public class Carte : HUD
         if (GameManager.KM_1 > 40)
             GameManager.KM_1 = 40;
         GameManager.carteJouée = "KM";
+        GameManager.KM_restant = 1;
         UpdateEachRound();
     }
 
@@ -741,6 +743,7 @@ public class Carte : HUD
         if (GameManager.KM_1 > 40)
             GameManager.KM_1 = 40;
         GameManager.carteJouée = "KM";
+        GameManager.KM_restant = 2;
         UpdateEachRound();
     }
 
@@ -750,6 +753,7 @@ public class Carte : HUD
         if (GameManager.KM_1 > 40)
             GameManager.KM_1 = 40;
         GameManager.carteJouée = "KM";
+        GameManager.KM_restant = 3;
         UpdateEachRound();
     }
 
@@ -759,6 +763,7 @@ public class Carte : HUD
         if (GameManager.KM_1 > 40)
             GameManager.KM_1 = 40;
         GameManager.carteJouée = "KM";
+        GameManager.KM_restant = 7;
         UpdateEachRound();
     }
 

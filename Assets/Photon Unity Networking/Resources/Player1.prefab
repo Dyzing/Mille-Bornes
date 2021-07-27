@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 8005509048071453297}
   m_Layer: 0
   m_Name: Player1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -494,8 +494,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   plMove: {fileID: 0}
   photonView: {fileID: 7037350684973322829}
-  BubbleSpeechObject: {fileID: 0}
-  UpdatedText: {fileID: 0}
 --- !u!1 &6205560605159518557
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,19 +630,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4476237092564900, guid: 90e108cbfc66c414fb4f2c46d36eaa89, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.69485945
+      value: 0.9971832
       objectReference: {fileID: 0}
     - target: {fileID: 4476237092564900, guid: 90e108cbfc66c414fb4f2c46d36eaa89, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.05226622
+      value: -0.07500485
       objectReference: {fileID: 0}
     - target: {fileID: 4476237092564900, guid: 90e108cbfc66c414fb4f2c46d36eaa89, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.7152234
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4476237092564900, guid: 90e108cbfc66c414fb4f2c46d36eaa89, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.05379798
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4476237092564900, guid: 90e108cbfc66c414fb4f2c46d36eaa89, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -652,7 +650,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4476237092564900, guid: 90e108cbfc66c414fb4f2c46d36eaa89, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -91.65501
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4476237092564900, guid: 90e108cbfc66c414fb4f2c46d36eaa89, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
