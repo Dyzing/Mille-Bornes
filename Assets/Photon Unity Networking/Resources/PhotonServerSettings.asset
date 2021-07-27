@@ -87,4 +87,5 @@ MonoBehaviour:
   - ChangeIdLeft
   - ChangeIdRight
   - RotationZtoZero
+  - StandbyIdTour
   DisableAutoOpenWizard: 1

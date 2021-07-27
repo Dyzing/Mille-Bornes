@@ -712,7 +712,10 @@ public class Carte : HUD
                     break;
             }
             ChangerCarte(effetCarteId);
-            photonView.RPC("ChangerIdTour", PhotonTargets.AllBufferedViaServer);
+            if (GameManager.carteJouée != "KM")
+            {
+                photonView.RPC("ChangerIdTour", PhotonTargets.AllBufferedViaServer);
+            }
         }
     }
 

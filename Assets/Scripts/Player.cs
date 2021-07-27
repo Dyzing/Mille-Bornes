@@ -242,6 +242,7 @@ public class Player : MonoBehaviour
                         {
                             photonView.RPC("RotationZtoZero", PhotonTargets.AllBuffered);
                             CleanCarteJouee();
+                            photonView.RPC("ChangerIdTour", PhotonTargets.AllBufferedViaServer);
                         }
                     }
                     break;
@@ -1441,6 +1442,44 @@ public class Player : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    [PunRPC]
+    private void ChangerIdTour()
+    {
+        int nb_players = PhotonNetwork.playerList.Length;
+        if (nb_players == 1)
+        {
+            GameManager.id_tour_actuel++;
+            GameManager.id_tour_actuel = GameManager.id_tour_actuel % (nb_players + 1);
+            GameManager.tour_joueur_i.text = "Tour a " + PhotonNetwork.player.NickName;
+        }
+        else
+        {
+            GameManager.tour_joueur_i.text = "Tour a " + PhotonNetwork.player.GetNextFor(GameManager.id_tour_actuel).NickName;
+            GameManager.id_tour_actuel = PhotonNetwork.player.GetNextFor(GameManager.id_tour_actuel).ID;
+        }
+        if (GameManager.id_tour_actuel == 0)
+        {
+            GameManager.id_tour_actuel = 1;
+        }
+        //GameManager.tour_joueur_i.text = "Tour au joueur " + GameManager.id_tour_actuel;
+        AfficherPanelAToiDeJouer();
+    }
+
+    public void AfficherPanelAToiDeJouer()
+    {
+        if (PhotonNetwork.player.ID == GameManager.id_tour_actuel)
+        {
+            StartCoroutine(CoroutineAToiDeJouer());
+        }
+    }
+
+    private IEnumerator CoroutineAToiDeJouer()
+    {
+        GameManager.aToiDeJouerPanel.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        GameManager.aToiDeJouerPanel.SetActive(false);
     }
 
 
