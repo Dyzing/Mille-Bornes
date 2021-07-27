@@ -65,4 +65,14 @@ public class MenuController : MonoBehaviour
         PhotonNetwork.LoadLevel("Plateau");
     }
 
+    public void Quitter()
+    {
+        Application.Quit();
+    }
+
+    public void RetourUsername()
+    {
+        PhotonNetwork.LoadLevel("Menu");
+    }
+
 }
