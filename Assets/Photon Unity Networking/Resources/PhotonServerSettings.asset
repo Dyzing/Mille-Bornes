@@ -84,4 +84,7 @@ MonoBehaviour:
   - RemovePrioritaire
   - LeaveOnWin
   - SendMessage
+  - ChangeIdLeft
+  - ChangeIdRight
+  - RotationZtoZero
   DisableAutoOpenWizard: 1

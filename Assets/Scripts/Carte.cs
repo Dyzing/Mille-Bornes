@@ -30,7 +30,7 @@ public class Carte : HUD
             photonView.RPC("InstantiateIds", PhotonTargets.AllBuffered);
         }
         ChangerCarte(-1);
-        GameManager.tour_joueur_i.text = "Tour au joueur " + 1;
+        GameManager.tour_joueur_i.text = "Tour a " + PhotonNetwork.player.NickName;
         ChangerKMColor();
     }
 
@@ -247,7 +247,7 @@ public class Carte : HUD
         {
             GameManager.id_tour_actuel++;
             GameManager.id_tour_actuel = GameManager.id_tour_actuel % (nb_players + 1);
-            GameManager.tour_joueur_i.text = "Tour au joueur " + GameManager.id_tour_actuel;
+            GameManager.tour_joueur_i.text = "Tour a " + PhotonNetwork.player.NickName;
         }
         else
         {

@@ -62,7 +62,7 @@ public class MenuController : MonoBehaviour
 
     private void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("Plateau");
+        Application.LoadLevel("Plateau");
     }
 
     public void Quitter()

@@ -23340,6 +23340,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 6205560603325259223, guid: 112292f319d617948ac349533359763a,
     type: 3}
+  playerPrefab1: {fileID: 6205560603325259223, guid: 112292f319d617948ac349533359763a,
+    type: 3}
+  playerPrefab2: {fileID: 6205560603325259223, guid: f3bfc0dcc7c886749916e0a4e2022413,
+    type: 3}
+  playerPrefab3: {fileID: 6205560603325259223, guid: 53140052f9b3aa44698b342a0860c58e,
+    type: 3}
+  playerPrefab4: {fileID: 6205560603325259223, guid: 6f031d04a3fbb184da070a7317cbdd39,
+    type: 3}
   gameCanvas: {fileID: 924271342}
   sceneCamera: {fileID: 963194225}
   spawn: {fileID: 1065385370}
@@ -50120,7 +50128,7 @@ GameObject:
   - component: {fileID: 1719802468}
   - component: {fileID: 1719802467}
   m_Layer: 5
-  m_Name: Button
+  m_Name: LeaveGameButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

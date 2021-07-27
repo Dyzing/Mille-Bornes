@@ -72,7 +72,6 @@ public class Player : MonoBehaviour
     private Text insensibiliteJoueur3;
     private Text insensibiliteJoueur4;
 
-    private bool estArrive;
 
     private void Awake()
     {
@@ -151,7 +150,6 @@ public class Player : MonoBehaviour
         joueurSelectionne = 0;
         ChangerNameColor();
 
-        estArrive = true;
         playerPrefab.transform.eulerAngles = new Vector3(playerPrefab.transform.eulerAngles.x, playerPrefab.transform.eulerAngles.y -90f, playerPrefab.transform.eulerAngles.z);
     }
 
@@ -232,7 +230,6 @@ public class Player : MonoBehaviour
                     }
                     if (playerPrefab.transform.position != destination)//(!(playerPrefab.transform.position.x > destination.x - 10 && playerPrefab.transform.position.x < destination.x + 10) || !(playerPrefab.transform.position.z > destination.z - 10 && playerPrefab.transform.position.z < destination.z + 10))
                     {
-                        estArrive = false;
                         MoveVoiture();
                     }
                     else
@@ -243,6 +240,7 @@ public class Player : MonoBehaviour
                         }
                         else
                         {
+                            photonView.RPC("RotationZtoZero", PhotonTargets.AllBuffered);
                             CleanCarteJouee();
                         }
                     }
@@ -327,6 +325,12 @@ public class Player : MonoBehaviour
                     break;
             }
         }
+    }
+
+    [PunRPC]
+    private void RotationZtoZero()
+    {
+        playerPrefab.transform.GetChild(0).rotation = Quaternion.Euler(playerPrefab.transform.GetChild(0).rotation.x, playerPrefab.transform.GetChild(0).rotation.y, 0);
     }
 
     public void CleanCarteJouee()

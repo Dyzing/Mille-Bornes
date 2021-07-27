@@ -7,6 +7,10 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public GameObject playerPrefab;
+    public GameObject playerPrefab1;
+    public GameObject playerPrefab2;
+    public GameObject playerPrefab3;
+    public GameObject playerPrefab4;
     public GameObject gameCanvas;
     public GameObject sceneCamera;
     public GameObject spawn;
@@ -45,6 +49,7 @@ public class GameManager : MonoBehaviour
     public static GameObject aToiDeJouerPanel;
 
     public static int KM_restant;
+
 
     public static Dictionary<int, string> mapCarte = new Dictionary<int, string>()
     {
@@ -143,6 +148,21 @@ public class GameManager : MonoBehaviour
     {
         //float randomValue = Random.Range(-1f, 1f);
         int randVal = Random.Range(-10, 10);
+        switch (GarageManager.id_voiture)
+        {
+            case 1:
+                playerPrefab = playerPrefab1;
+                break;
+            case 2:
+                playerPrefab = playerPrefab2;
+                break;
+            case 3:
+                playerPrefab = playerPrefab3;
+                break;
+            case 4:
+                playerPrefab = playerPrefab4;
+                break;
+        }
         PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z + randVal), Quaternion.identity, 0);
 
         PhotonNetwork.Instantiate(carte1HUD.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);
@@ -161,7 +181,7 @@ public class GameManager : MonoBehaviour
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
-        PhotonNetwork.LoadLevel("Menu");
+        PhotonNetwork.LoadLevel("Garage");
     }
 
     private void OnPhotonPlayerConnected(PhotonPlayer player)

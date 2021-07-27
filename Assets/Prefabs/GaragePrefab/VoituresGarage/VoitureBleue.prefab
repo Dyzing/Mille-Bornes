@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: -2925113398032199211}
   - component: {fileID: 8266228031032096369}
   m_Layer: 0
-  m_Name: vz04_ blue
+  m_Name: VoitureBleue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,11 +377,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908306620942388}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.51, y: 1.43, z: 3.55}
-  m_Center: {x: 0, y: 0.31, z: 0}
+  m_Size: {x: 1.51, y: 1.84, z: 3.55}
+  m_Center: {x: 0, y: 0.17, z: 0}
 --- !u!1 &1964639264274042
 GameObject:
   m_ObjectHideFlags: 0
