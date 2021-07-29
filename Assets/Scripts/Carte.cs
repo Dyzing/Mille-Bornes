@@ -312,6 +312,7 @@ public class Carte : HUD
                                 break;
                             case 7:
                                 AfficherJoueursSelectionAccident();
+                                //SoundManager.PlaySoound("accident");
                                 break;
                             case 9:
                                 AfficherJoueursSelectionPanneEssence();
@@ -324,6 +325,7 @@ public class Carte : HUD
                                 break;
                             case 14:
                                 ChangerCarteJouee("Fin limite vitesse");
+                                SoundManager.PlaySoound("finlimite");
                                 break;
                             case 15:
                                 SelectionIncrevable();
@@ -347,6 +349,7 @@ public class Carte : HUD
                         {
                             case 5:
                                 ChangerCarteJouee("Roulez");
+                                SoundManager.PlaySoound("roulez");
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
@@ -356,15 +359,18 @@ public class Carte : HUD
                                 break;
                             case 8:
                                 ChangerCarteJouee("Reparations");
+                                SoundManager.PlaySoound("pub-carglass-1");
                                 break;
                             case 9:
                                 AfficherJoueursSelectionPanneEssence();
                                 break;
                             case 10:
                                 ChangerCarteJouee("Essence");
+                                SoundManager.PlaySoound("essence");
                                 break;
                             case 11:
                                 ChangerCarteJouee("Roue de secours");
+                                SoundManager.PlaySoound("feu-vert");
                                 break;
                             case 12:
                                 AfficherJoueursSelectionCrevaison();
@@ -374,6 +380,7 @@ public class Carte : HUD
                                 break;
                             case 14:
                                 ChangerCarteJouee("Fin limite vitesse");
+                                SoundManager.PlaySoound("finlimite");
                                 break;
                             case 15:
                                 SelectionIncrevable();
@@ -402,15 +409,15 @@ public class Carte : HUD
                                 Selection50();
                                 break;
                             case 2:
-                                if (Player.hasNotLimite2)
+                                if (Player.hasNotLimite1)
                                     Selection75();
                                 break;
                             case 3:
-                                if (Player.hasNotLimite2)
+                                if (Player.hasNotLimite1)
                                     Selection100();
                                 break;
                             case 4:
-                                if (Player.hasNotLimite2)
+                                if (Player.hasNotLimite1)
                                     Selection200();
                                 break;
                             case 6:
@@ -418,6 +425,7 @@ public class Carte : HUD
                                 break;
                             case 7:
                                 AfficherJoueursSelectionAccident();
+                                //SoundManager.PlaySoound("accident");
                                 break;
                             case 9:
                                 AfficherJoueursSelectionPanneEssence();
@@ -430,6 +438,7 @@ public class Carte : HUD
                                 break;
                             case 14:
                                 ChangerCarteJouee("Fin limite vitesse");
+                                SoundManager.PlaySoound("finlimite");
                                 break;
                             case 15:
                                 SelectionIncrevable();
@@ -453,6 +462,7 @@ public class Carte : HUD
                         {
                             case 5:
                                 ChangerCarteJouee("Roulez");
+                                SoundManager.PlaySoound("roulez");
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
@@ -462,15 +472,18 @@ public class Carte : HUD
                                 break;
                             case 8:
                                 ChangerCarteJouee("Reparations");
+                                SoundManager.PlaySoound("pub-carglass-1");
                                 break;
                             case 9:
                                 AfficherJoueursSelectionPanneEssence();
                                 break;
                             case 10:
                                 ChangerCarteJouee("Essence");
+                                SoundManager.PlaySoound("essence");
                                 break;
                             case 11:
                                 ChangerCarteJouee("Roue de secours");
+                                SoundManager.PlaySoound("feu-vert");
                                 break;
                             case 12:
                                 AfficherJoueursSelectionCrevaison();
@@ -480,6 +493,7 @@ public class Carte : HUD
                                 break;
                             case 14:
                                 ChangerCarteJouee("Fin limite vitesse");
+                                SoundManager.PlaySoound("finlimite");
                                 break;
                             case 15:
                                 SelectionIncrevable();
@@ -508,15 +522,15 @@ public class Carte : HUD
                                 Selection50();
                                 break;
                             case 2:
-                                if (Player.hasNotLimite3)
+                                if (Player.hasNotLimite1)
                                     Selection75();
                                 break;
                             case 3:
-                                if (Player.hasNotLimite3)
+                                if (Player.hasNotLimite1)
                                     Selection100();
                                 break;
                             case 4:
-                                if (Player.hasNotLimite3)
+                                if (Player.hasNotLimite1)
                                     Selection200();
                                 break;
                             case 6:
@@ -524,6 +538,7 @@ public class Carte : HUD
                                 break;
                             case 7:
                                 AfficherJoueursSelectionAccident();
+                                //SoundManager.PlaySoound("accident");
                                 break;
                             case 9:
                                 AfficherJoueursSelectionPanneEssence();
@@ -536,6 +551,7 @@ public class Carte : HUD
                                 break;
                             case 14:
                                 ChangerCarteJouee("Fin limite vitesse");
+                                SoundManager.PlaySoound("finlimite");
                                 break;
                             case 15:
                                 SelectionIncrevable();
@@ -559,6 +575,7 @@ public class Carte : HUD
                         {
                             case 5:
                                 ChangerCarteJouee("Roulez");
+                                SoundManager.PlaySoound("roulez");
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
@@ -568,15 +585,18 @@ public class Carte : HUD
                                 break;
                             case 8:
                                 ChangerCarteJouee("Reparations");
+                                SoundManager.PlaySoound("pub-carglass-1");
                                 break;
                             case 9:
                                 AfficherJoueursSelectionPanneEssence();
                                 break;
                             case 10:
                                 ChangerCarteJouee("Essence");
+                                SoundManager.PlaySoound("essence");
                                 break;
                             case 11:
                                 ChangerCarteJouee("Roue de secours");
+                                SoundManager.PlaySoound("feu-vert");
                                 break;
                             case 12:
                                 AfficherJoueursSelectionCrevaison();
@@ -586,6 +606,7 @@ public class Carte : HUD
                                 break;
                             case 14:
                                 ChangerCarteJouee("Fin limite vitesse");
+                                SoundManager.PlaySoound("finlimite");
                                 break;
                             case 15:
                                 SelectionIncrevable();
@@ -614,15 +635,15 @@ public class Carte : HUD
                                 Selection50();
                                 break;
                             case 2:
-                                if (Player.hasNotLimite4)
+                                if (Player.hasNotLimite1)
                                     Selection75();
                                 break;
                             case 3:
-                                if (Player.hasNotLimite4)
+                                if (Player.hasNotLimite1)
                                     Selection100();
                                 break;
                             case 4:
-                                if (Player.hasNotLimite4)
+                                if (Player.hasNotLimite1)
                                     Selection200();
                                 break;
                             case 6:
@@ -630,6 +651,7 @@ public class Carte : HUD
                                 break;
                             case 7:
                                 AfficherJoueursSelectionAccident();
+                                //SoundManager.PlaySoound("accident");
                                 break;
                             case 9:
                                 AfficherJoueursSelectionPanneEssence();
@@ -642,6 +664,7 @@ public class Carte : HUD
                                 break;
                             case 14:
                                 ChangerCarteJouee("Fin limite vitesse");
+                                SoundManager.PlaySoound("finlimite");
                                 break;
                             case 15:
                                 SelectionIncrevable();
@@ -665,6 +688,7 @@ public class Carte : HUD
                         {
                             case 5:
                                 ChangerCarteJouee("Roulez");
+                                SoundManager.PlaySoound("roulez");
                                 break;
                             case 6:
                                 AfficherJoueursSelectionStop();
@@ -674,15 +698,18 @@ public class Carte : HUD
                                 break;
                             case 8:
                                 ChangerCarteJouee("Reparations");
+                                SoundManager.PlaySoound("pub-carglass-1");
                                 break;
                             case 9:
                                 AfficherJoueursSelectionPanneEssence();
                                 break;
                             case 10:
                                 ChangerCarteJouee("Essence");
+                                SoundManager.PlaySoound("essence");
                                 break;
                             case 11:
                                 ChangerCarteJouee("Roue de secours");
+                                SoundManager.PlaySoound("feu-vert");
                                 break;
                             case 12:
                                 AfficherJoueursSelectionCrevaison();
@@ -692,6 +719,7 @@ public class Carte : HUD
                                 break;
                             case 14:
                                 ChangerCarteJouee("Fin limite vitesse");
+                                SoundManager.PlaySoound("finlimite");
                                 break;
                             case 15:
                                 SelectionIncrevable();
@@ -727,6 +755,7 @@ public class Carte : HUD
             GameManager.KM_1 = 40;
         GameManager.carteJouée = "KM";
         GameManager.KM_restant = 0;
+        SoundManager.PlaySoound("25km");
         UpdateEachRound();
     }
 
@@ -737,6 +766,7 @@ public class Carte : HUD
             GameManager.KM_1 = 40;
         GameManager.carteJouée = "KM";
         GameManager.KM_restant = 1;
+        SoundManager.PlaySoound("50km");
         UpdateEachRound();
     }
 
@@ -747,6 +777,7 @@ public class Carte : HUD
             GameManager.KM_1 = 40;
         GameManager.carteJouée = "KM";
         GameManager.KM_restant = 2;
+        SoundManager.PlaySoound("75km");
         UpdateEachRound();
     }
 
@@ -757,6 +788,7 @@ public class Carte : HUD
             GameManager.KM_1 = 40;
         GameManager.carteJouée = "KM";
         GameManager.KM_restant = 3;
+        SoundManager.PlaySoound("100km");
         UpdateEachRound();
     }
 
@@ -767,6 +799,7 @@ public class Carte : HUD
             GameManager.KM_1 = 40;
         GameManager.carteJouée = "KM";
         GameManager.KM_restant = 7;
+        SoundManager.PlaySoound("deja-vu");
         UpdateEachRound();
     }
 
@@ -775,50 +808,59 @@ public class Carte : HUD
     {
         GameManager.selectionJoueursPanel.SetActive(true);
         GameManager.carteJouée = "Stop";
+        SoundManager.PlaySoound("stop");
     }
 
     public void AfficherJoueursSelectionAccident()
     {
         GameManager.selectionJoueursPanel.SetActive(true);
         GameManager.carteJouée = "Accident";
+        //SoundManager.PlaySoound("accident");
     }
 
     public void AfficherJoueursSelectionPanneEssence()
     {
         GameManager.selectionJoueursPanel.SetActive(true);
         GameManager.carteJouée = "PanneEssence";
+        SoundManager.PlaySoound("panne");
     }
 
     public void AfficherJoueursSelectionCrevaison()
     {
         GameManager.selectionJoueursPanel.SetActive(true);
         GameManager.carteJouée = "Crevaison";
+        SoundManager.PlaySoound("creve");
     }
 
     public void AfficherJoueursSelectionLimite()
     {
         GameManager.selectionJoueursPanel.SetActive(true);
         GameManager.carteJouée = "LimiteVitesse";
+        SoundManager.PlaySoound("limite");
     }
 
     public void SelectionIncrevable()
     {
         GameManager.carteJouée = "Increvable";
+        SoundManager.PlaySoound("increvable");
     }
 
     public void SelectionCiterne()
     {
         GameManager.carteJouée = "Citerne";
+        SoundManager.PlaySoound("citerne");
     }
 
     public void SelectionAsDuVolant()
     {
         GameManager.carteJouée = "AsDuVolant";
+        SoundManager.PlaySoound("fastfurious");
     }
 
     public void SelectionPrioritaire()
     {
         GameManager.carteJouée = "Prioritaire";
+        SoundManager.PlaySoound("prioritaire");
     }
 
     public void ChangerCarteJouee(string cartejouee)

@@ -172,7 +172,7 @@ public class GameManager : MonoBehaviour
         PhotonNetwork.Instantiate(carte5HUD.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);
         PhotonNetwork.Instantiate(carte6HUD.name, new Vector3(spawn.transform.position.x, spawn.transform.position.y + 1, spawn.transform.position.z), Quaternion.identity, 0);
 
-
+        SoundManager.PlaySoound("zeeeparti");
 
         gameCanvas.SetActive(false);
         sceneCamera.SetActive(false);
