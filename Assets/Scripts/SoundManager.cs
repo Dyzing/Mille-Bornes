@@ -8,7 +8,7 @@ public class SoundManager : MonoBehaviour
     public static AudioClip _25kmSound, _50kmSound, _75kmSound, _100kmSound, _200kmSound, citerneSound, creveSound, 
         essenceSound, fastfuriousSound, feuvertSound, finlimiteSound, increvableSound, 
         limiteSound, panneSound, piouSound, prioritaireSound, carglassSound, roulezSound, seeyouagainSound,
-        stopSound, victoireSound, zeepartiSound, vroumSound;
+        stopSound, victoireSound, zeepartiSound, vroumSound, accidenSound;
 
     static AudioSource audioSrc;
 
@@ -37,6 +37,7 @@ public class SoundManager : MonoBehaviour
         victoireSound = Resources.Load<AudioClip>("victoire");
         zeepartiSound = Resources.Load<AudioClip>("vroum");
         vroumSound = Resources.Load<AudioClip>("zeeeparti");
+        accidenSound = Resources.Load<AudioClip>("crash");
 
         audioSrc = GetComponent<AudioSource>();
     }
@@ -118,6 +119,9 @@ public class SoundManager : MonoBehaviour
                 break;
             case "zeeeparti":
                 audioSrc.PlayOneShot(vroumSound);
+                break;
+            case "crash":
+                audioSrc.PlayOneShot(accidenSound);
                 break;
             default:
                 break;

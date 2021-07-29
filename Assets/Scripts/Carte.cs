@@ -312,7 +312,6 @@ public class Carte : HUD
                                 break;
                             case 7:
                                 AfficherJoueursSelectionAccident();
-                                //SoundManager.PlaySoound("accident");
                                 break;
                             case 9:
                                 AfficherJoueursSelectionPanneEssence();
@@ -425,7 +424,6 @@ public class Carte : HUD
                                 break;
                             case 7:
                                 AfficherJoueursSelectionAccident();
-                                //SoundManager.PlaySoound("accident");
                                 break;
                             case 9:
                                 AfficherJoueursSelectionPanneEssence();
@@ -538,7 +536,6 @@ public class Carte : HUD
                                 break;
                             case 7:
                                 AfficherJoueursSelectionAccident();
-                                //SoundManager.PlaySoound("accident");
                                 break;
                             case 9:
                                 AfficherJoueursSelectionPanneEssence();
@@ -651,7 +648,6 @@ public class Carte : HUD
                                 break;
                             case 7:
                                 AfficherJoueursSelectionAccident();
-                                //SoundManager.PlaySoound("accident");
                                 break;
                             case 9:
                                 AfficherJoueursSelectionPanneEssence();
@@ -815,7 +811,7 @@ public class Carte : HUD
     {
         GameManager.selectionJoueursPanel.SetActive(true);
         GameManager.carteJouée = "Accident";
-        //SoundManager.PlaySoound("accident");
+        SoundManager.PlaySoound("crash");
     }
 
     public void AfficherJoueursSelectionPanneEssence()
